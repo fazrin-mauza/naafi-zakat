@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pembayaran" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df013db5-f76e-44d3-b0df-bcbc46d93160">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="pembayaran_laporan"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT id,
+	nama_keluarga,
+	jumlah_anggota,
+	jenis_zakat,
+	jenis_pembayaran,
+	total_pembayaran,
+	amil,
+	date,
+	time
+FROM pembayaran]]>
+	</queryString>
+	<field name="nama_keluarga" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nama_keluarga"/>
+		<property name="com.jaspersoft.studio.field.label" value="nama_keluarga"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="jumlah_anggota" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="jumlah_anggota"/>
+		<property name="com.jaspersoft.studio.field.label" value="jumlah_anggota"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="jenis_zakat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="jenis_zakat"/>
+		<property name="com.jaspersoft.studio.field.label" value="jenis_zakat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="jenis_pembayaran" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="jenis_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.label" value="jenis_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="total_pembayaran" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="total_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_pembayaran"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="amil" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="amil"/>
+		<property name="com.jaspersoft.studio.field.label" value="amil"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="date" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<field name="time" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="time"/>
+		<property name="com.jaspersoft.studio.field.label" value="time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
+	</field>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{jumlah_anggota}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<frame>
+					<reportElement mode="Opaque" x="-21" y="7" width="843" height="18" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="ff649bda-bbd1-4c2d-bd67-21f69ad64bbf">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textField>
+						<reportElement x="20" y="0" width="141" height="18" uuid="0ba9437a-1436-4367-a973-2d1908f2359d">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{nama_keluarga}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="161" y="0" width="80" height="18" uuid="6a8305df-04b5-4e35-931a-2395e701dfbe">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{jumlah_anggota}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="241" y="0" width="83" height="18" uuid="030e6527-0f0e-4e6a-9b2d-fe5c5b0f7c5c">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{jenis_zakat}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="324" y="0" width="100" height="18" uuid="00231d32-5f5e-4ac6-b326-ece03c2d07f2">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="424" y="0" width="86" height="18" uuid="8af24b7e-c456-4530-a70b-e19ce6aefe02">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{total_pembayaran}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="510" y="0" width="86" height="18" uuid="1a7fd0ee-5028-4258-a8ee-e3f11950db0f">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{amil}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="596" y="0" width="95" height="18" uuid="96fddadb-5fb9-4abc-a389-2f789ae84997">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="691" y="0" width="152" height="18" uuid="b7973a1f-8c62-435b-828c-98811560b3c1">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement textAlignment="Center">
+							<font size="12"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="jenis_zakat">
+		<groupExpression><![CDATA[$F{jenis_zakat}]]></groupExpression>
+	</group>
+	<group name="jenis_pembayaran">
+		<groupExpression><![CDATA[$F{jenis_pembayaran}]]></groupExpression>
+	</group>
+	<group name="total_pembayaran">
+		<groupExpression><![CDATA[$F{total_pembayaran}]]></groupExpression>
+	</group>
+	<group name="amil">
+		<groupExpression><![CDATA[$F{amil}]]></groupExpression>
+	</group>
+	<group name="date">
+		<groupExpression><![CDATA[$F{date}]]></groupExpression>
+	</group>
+	<group name="time">
+		<groupExpression><![CDATA[$F{time}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="-10" width="164" height="126" uuid="1c003177-754c-448f-8ce1-16868856f545"/>
+				<imageExpression><![CDATA["Naaafii.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="230" y="-12" width="315" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Laporan Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="329" y="50" width="110" height="20" uuid="f6a78448-8260-4445-a9e0-e3fb53b080d9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Copyright @2025 Naafi']]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="80" width="429" height="42" uuid="8240065e-64b6-4170-b5d9-6341598e7b35"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Naafi’ adalah aplikasi digital zakat yang didesain khusus untuk memudahkan umat Muslim dalam menunaikan zakat fitrah secara cepat, aman, dan tepat sasaran. Terinspirasi dari kata dalam bahasa Arab Naafi’ (نافع) yang berarti “yang memberi manfaat”, aplikasi ini hadir untuk menghidupkan semangat berbagi di bulan suci Ramadan.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="633" y="-73" width="219" height="189" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-20" y="122" width="843" height="5" uuid="e9d2002a-c8ee-4649-a258-640dad29110c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="-21" y="0" width="160" height="19" uuid="d89c2b2a-a577-43cb-86f5-2cb8ccb6cf3b"/>
+				<box bottomPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[NAMA KELUARGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="80" height="19" uuid="76edbef7-91e8-46d5-8e06-0e16ec53e825"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[JUMLAH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="83" height="19" uuid="2855e44a-e8c3-46d1-ab3e-45eed5649ed0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[JENIS ZAKAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="0" width="100" height="19" uuid="013119a2-fcd9-4962-b5c9-c06b5b6d1832"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[PEMBAYARAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="0" width="86" height="19" uuid="720cbe5a-5391-4029-98dd-013a5cc0c8ff"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="0" width="86" height="19" uuid="2f2582ba-de4d-402e-9087-75f7a697d310"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[AMIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="575" y="0" width="95" height="19" uuid="be39cc72-c16c-4add-b79c-9b40d117e945"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="152" height="19" uuid="15b9dc76-0f7c-48ca-8bdf-e0431ef35fb1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Rockwell" size="12"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="20" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="5d8169bd-4a75-48c8-8a68-6d3ad5ba9402">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</frame>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="e5e27efa-b599-499b-9ca3-848cb511cb7b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="18cfe1ca-f7d6-48b0-9827-28578b42a5e0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="20" y="-1" width="112" height="20" forecolor="#736343" uuid="fbce24bb-3cb1-44a3-8eec-8c067ddbe5b5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

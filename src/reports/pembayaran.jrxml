@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="463984c5-5973-4517-bf18-f841f54a94e7">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="9"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select * from pembayaran]]>
+	</queryString>
+	<field name="nama_keluarga" class="java.lang.String"/>
+	<field name="jumlah_anggota" class="java.lang.String"/>
+	<field name="jenis_zakat" class="java.lang.String"/>
+	<field name="jenis_pembayaran" class="java.lang.String"/>
+	<field name="total_pembayaran" class="java.lang.String"/>
+	<field name="amil" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="time" class="java.lang.String"/>
+	<group name="nama_keluarga">
+		<groupExpression><![CDATA[$F{nama_keluarga}]]></groupExpression>
+		<groupHeader>
+			<band height="11">
+				<frame>
+					<reportElement mode="Opaque" x="-21" y="7" width="843" height="0" forecolor="#B89F7D" backcolor="#F2EBDF" uuid="87deffb8-7388-4b94-93c5-3ca2eacc54cd"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="21" y="0" width="36" height="0" backcolor="#736343" uuid="6480957d-ce03-4274-b615-746ec66a41f3"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="jumlah_anggota">
+		<groupExpression><![CDATA[$F{jumlah_anggota}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<group name="jenis_zakat">
+		<groupExpression><![CDATA[$F{jenis_zakat}]]></groupExpression>
+	</group>
+	<group name="jenis_pembayaran">
+		<groupExpression><![CDATA[$F{jenis_pembayaran}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="146" height="126" uuid="cb4feeee-f625-4898-92a6-0024dd233acb"/>
+				<imageExpression><![CDATA["Naaafii.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="217" y="0" width="338" height="62" uuid="2dd603c7-46b7-42a0-87c9-c286d69cc1d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Rockwell Condensed" size="35" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Laporan Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="315" y="62" width="128" height="22" uuid="e515c72e-4182-4b40-81c2-5977bb808e9a"/>
+				<textElement>
+					<font fontName="Serif" size="11" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Copyright @2025 Naafi']]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="84" width="469" height="52" uuid="46e6f039-c294-4168-b709-4f9e51a5caac"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Naafi’ adalah aplikasi digital zakat yang didesain khusus untuk memudahkan umat Muslim dalam menunaikan zakat fitrah secara cepat, aman, dan tepat sasaran. Terinspirasi dari kata dalam bahasa Arab Naafi’ (نافع) yang berarti “yang memberi manfaat”, aplikasi ini hadir untuk menghidupkan semangat berbagi di bulan suci Ramadan.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="633" y="-73" width="219" height="209" uuid="86987777-038c-4ca1-b97b-abf04e63b0f7"/>
+				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1" uuid="d578c2b6-d8ad-4222-9cc3-8c5c90ffc422"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="443" y="1" width="112" height="15" forecolor="#736343" uuid="e38d180b-ec5d-4fb0-a935-e45976330a74"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Amil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="555" y="0" width="127" height="15" forecolor="#736343" uuid="ddc3777c-5c8a-4074-9736-b24334d0e19a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="682" y="0" width="118" height="15" forecolor="#736343" uuid="2810c9ea-85aa-4b82-94ca-2e8a4d7ec256"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="115" y="1" width="49" height="15" forecolor="#736343" uuid="5eff213d-6fd6-4e35-ae58-c2f3a8825ace"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="1" y="0" width="114" height="15" forecolor="#736343" uuid="926a0226-0ae8-43d8-a37e-c0e04cce8eed"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama Keluarga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="164" y="1" width="94" height="15" forecolor="#736343" uuid="d517a827-4678-4f14-bceb-61d6ab0bcaca"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Jenis Zakat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="258" y="0" width="107" height="15" forecolor="#736343" uuid="0ed03dff-706b-49f4-8d62-c156d7bf81a2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="365" y="1" width="78" height="15" forecolor="#736343" uuid="61822f81-6f24-48af-902a-4b6267328370"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="802" height="15" uuid="6621ec58-4b1a-4dca-bd4d-0833763c500f"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="0" width="115" height="15" uuid="6ddebd5d-f950-465c-921f-bc72d2833c37"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{nama_keluarga}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="443" y="0" width="112" height="15" uuid="02a0cc8a-892a-48bf-be59-bda95825b2ec"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{amil}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="555" y="0" width="127" height="15" uuid="0de2a54b-c9b4-406e-b5fa-77f2a13c3bd9"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="682" y="0" width="118" height="15" uuid="bbf5b91f-9811-4ff1-aa6d-8d694bf65f7b"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="115" y="0" width="49" height="15" uuid="69d9da08-b975-46df-a7de-c3d828bcce44"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{jumlah_anggota}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="164" y="0" width="94" height="15" uuid="08eb7a9c-637a-48b4-99ff-845c3c15e1aa"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{jenis_zakat}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="258" y="0" width="107" height="15" uuid="ca0eedfb-6f58-4d69-90cd-54573e5d6c5e"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="365" y="0" width="78" height="15" uuid="e1e9068b-ab69-4004-892f-166986bd7d41"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{total_pembayaran}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="80a164a7-ad1c-416d-be73-2efabdcb8e77"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="843" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="3f31fd8a-71fd-4a2a-947a-6d22aab74e6f"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="783" y="1" width="40" height="20" forecolor="#736343" uuid="bce84109-3184-41ce-9865-99adadb313e4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="703" y="1" width="80" height="20" forecolor="#736343" uuid="9e132650-53a6-4736-8c75-7d83993e076d"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="8b3da488-02ae-48bd-baf8-ebda05921c5e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
