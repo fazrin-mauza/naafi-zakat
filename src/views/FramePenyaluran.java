@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import java.sql.ResultSet;
 import java.util.List;
+import services.PembayaranService;
 
  
 public class FramePenyaluran extends javax.swing.JFrame {
@@ -499,28 +500,21 @@ private void loadDataMustahiq() {
     String golongan = (String) boxGolongan.getSelectedItem();
     int umur = (int) spinerUmur.getValue();
     String alamat = (String) textAlamat.getText();
-    double jumlah_disalurkan = Double.parseDouble((String) jumlahDisalurkan.getText());
+    String jumlah_disalurkan = (String) jumlahDisalurkan.getText();
     String amil = (String) boxAmil.getSelectedItem();
-// validasi umur & jumlah
-try {
-    if (umur < 0 || jumlah_disalurkan < 0) {
-        throw new NumberFormatException();  // Jika umur atau jumlah negatif
-    }
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(this, "Umur atau Jumlah tidak valid!", "Error", JOptionPane.ERROR_MESSAGE);
-    return;  // berhenti jika error
-}
 
-    // Panggil method
-  //  boolean berhasil = buatPenyaluran(nama_mustahiq, golongan, umur, jumlah_disalurkan, amil, "", "");
-PenyaluranService penyaluranService = new PenyaluranService();
-boolean berhasil = penyaluranService.buatPenyaluran(nama_mustahiq, golongan, umur, jumlah_disalurkan, amil, "", "");
-
-    if (berhasil) {
-        JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
+    // Panggil service
+    PenyaluranService penyaluranService = new PenyaluranService();
+    String result = penyaluranService.buatPenyaluran(
+       nama_mustahiq, golongan, umur, jumlah_disalurkan, amil, "", "");
+  
+    // Tampilkan hasil
+    if (result.equals("success")) {
+        JOptionPane.showMessageDialog(this, "Data penyaluran berhasil disimpan!");
     } else {
-        JOptionPane.showMessageDialog(this, "Gagal menyimpan data!", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, result);
     }
+    
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void namaMustahiqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMustahiqActionPerformed

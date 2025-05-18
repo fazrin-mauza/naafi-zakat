@@ -96,6 +96,11 @@ private void loadDataKeluarga() {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, -1));
 
         jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
 
         jButton3.setText("Hapus");
@@ -285,7 +290,33 @@ private void loadDataKeluarga() {
     }//GEN-LAST:event_jButton1ActionPerformed
     int x = 170; 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+     int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih salah satu data yang ingin diedit!");
+        return;
+    }
+
+    // Ambil data dari tabel
+    String namaData = jTable1.getValueAt(selectedRow, 0).toString();
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Apakah yakin ingin menghapus data keluarga dan semua anggotanya?\n" + namaData,
+        "Konfirmasi Hapus",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        
+       // MuzakkiService service = new MuzakkiService();
+        boolean sukses = MuzakkiService.deleteKeluargaDanAnggota(namaData);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus.");
+            loadDataKeluarga(); // panggil kembali fungsi untuk reload isi tabel
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus data. Silakan coba lagi.");
+        }
+    }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -407,6 +438,32 @@ private void loadDataKeluarga() {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih salah satu data yang ingin diedit!");
+        return;
+    }
+
+    // Ambil data dari tabel
+    String namaData = jTable1.getValueAt(selectedRow, 0).toString();
+        String jumlahData = jTable1.getValueAt(selectedRow, 1).toString();
+            String alamatData = jTable1.getValueAt(selectedRow, 2).toString();
+                String handphoneData = jTable1.getValueAt(selectedRow, 3).toString();
+
+    // Buka form edit dan isi dengan data tersebut
+    FrameMuzakkiCreate formEdit = new FrameMuzakkiCreate();
+    formEdit.setFormData(namaData, jumlahData, alamatData, handphoneData);
+    formEdit.setVisible(true);
+    formEdit.pack();
+    formEdit.setLocationRelativeTo(null);
+    formEdit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // Tutup frame sekarang
+    this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

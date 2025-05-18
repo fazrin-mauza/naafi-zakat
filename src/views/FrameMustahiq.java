@@ -4,16 +4,31 @@ import services.MustahiqService;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import services.MuzakkiService;
+
+
 
 public class FrameMustahiq extends javax.swing.JFrame {
 
     /**
      * Creates new form FrameMuzakki
      */
+    
     public FrameMustahiq() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataMustahiq();
+    }  
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
+        return (Connection) DriverManager.getConnection(url);
+
     }
 
  private void loadDataMustahiq() {
@@ -28,10 +43,10 @@ public class FrameMustahiq extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btn_tambah = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
+        btn_hapus = new javax.swing.JButton();
+        field_cari = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,28 +93,51 @@ public class FrameMustahiq extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
 
-        jButton1.setText("Tambah");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_tambah.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_tambah.setText("Tambah");
+        btn_tambah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_tambahActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, -1));
+        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
 
-        jButton2.setText("Edit");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
-
-        jButton3.setText("Hapus");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_edit.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_edit.setText("Edit");
+        btn_edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_editActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, -1));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, 30));
 
+        btn_hapus.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_hapus.setText("Hapus");
+        btn_hapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, 30));
+
+        field_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_cariActionPerformed(evt);
+            }
+        });
+        field_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_cariKeyTyped(evt);
+            }
+        });
+        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, 30));
+
+        jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel1.setText("Cari");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel2.setText("Data Mustahiq");
@@ -266,18 +304,44 @@ public class FrameMustahiq extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
         FrameMustahiqCreate rgf = new FrameMustahiqCreate();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_tambahActionPerformed
     int x = 170; 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+     int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih salah satu data yang ingin dihapus!");
+        return;
+    }
+
+    // Ambil data dari tabel
+    String namaData = jTable1.getValueAt(selectedRow, 0).toString();
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Apakah yakin ingin menghapus data mustahiq?\n" + namaData,
+        "Konfirmasi Hapus",
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        
+       // MuzakkiService service = new MuzakkiService();
+        boolean sukses = MustahiqService.deleteMustahiq(namaData);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Data berhasil dihapus.");
+            loadDataMustahiq(); // panggil kembali fungsi untuk reload isi tabel
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus data. Silakan coba lagi.");
+        }
+    }
+    }//GEN-LAST:event_btn_hapusActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int pilihan = JOptionPane.showConfirmDialog(
@@ -395,6 +459,73 @@ public class FrameMustahiq extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel20MouseClicked
 
+    private void field_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_cariKeyTyped
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        String cari = field_cari.getText();
+
+        try {
+            String sql = "Select * From mustahiq WHERE nama LIKE ? OR handphone LIKE ? OR alamat LIKE ?";
+            Connection conn = (Connection) getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, "%" + cari + "%");
+            st.setString(2, "%" + cari + "%");
+            st.setString(3, "%" + cari + "%");
+
+            ResultSet rs = st.executeQuery();
+
+            while(rs.next()) {
+                String nama = rs.getString("nama");
+                String golongan = rs.getString("golongan");
+                int umur = rs.getInt("umur");
+                String alamat = rs.getString("alamat");
+                String handphone = rs.getString("handphone");
+
+                Object[] rowData = {nama, golongan, umur, alamat, handphone };
+                model.addRow(rowData);
+            }
+
+            rs.close();
+            st.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }//GEN-LAST:event_field_cariKeyTyped
+
+    private void field_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_cariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_field_cariActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        int selectedRow = jTable1.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih salah satu data yang ingin diedit!");
+        return;
+    }
+
+    // Ambil data dari tabel
+    String namaData = jTable1.getValueAt(selectedRow, 0).toString();
+    String golonganData = jTable1.getValueAt(selectedRow, 1).toString();
+    int umurData = Integer.parseInt(jTable1.getValueAt(selectedRow, 2).toString());
+    String alamatData = jTable1.getValueAt(selectedRow, 3).toString();
+    String hpData = jTable1.getValueAt(selectedRow, 4).toString();
+
+    // Buka form edit dan isi dengan data tersebut
+    FrameMustahiqCreate formEdit = new FrameMustahiqCreate();
+    formEdit.setFormData(namaData, golonganData, umurData, alamatData, hpData);
+    formEdit.setVisible(true);
+    formEdit.pack();
+    formEdit.setLocationRelativeTo(null);
+    formEdit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    // Tutup frame sekarang
+    this.dispose();
+
+    }//GEN-LAST:event_btn_editActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,9 +563,10 @@ public class FrameMustahiq extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_hapus;
+    private javax.swing.JButton btn_tambah;
+    private javax.swing.JTextField field_cari;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -464,6 +596,5 @@ public class FrameMustahiq extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

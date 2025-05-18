@@ -78,20 +78,22 @@ public class PenyaluranService {
         }
     }
     
-    public boolean buatPenyaluran(String nama_mustahiq, String golongan, int umur, double jumlah_disalurkan, String amil, String toString, String toString1) {
-    if (nama_mustahiq.isEmpty() || golongan.isEmpty() || umur < 0 || jumlah_disalurkan < 0|| amil.isEmpty()) {
-        return false;
+    public String buatPenyaluran(String nama_mustahiq, String golongan, int umur, String jumlah_disalurkan, String amil, String toString, String toString1) {
+    jumlah_disalurkan = jumlah_disalurkan.replaceAll("[^0-9.]", "");
+    if (nama_mustahiq.isEmpty() || golongan.isEmpty() || jumlah_disalurkan.isEmpty()|| amil.isEmpty()) {
+       return "Semua field wajib diisi!";
     }
-
-    if (jumlah_disalurkan <= 0) {
-        return false;
+    double double_jumlahDisalurkan = Double.parseDouble((String) jumlah_disalurkan);
+    if (umur < 1 || double_jumlahDisalurkan < 1) {
+       return "Umur atau jumlah total disalurkan tidak boleh kurang dari 1!";
     }
-
+   
     String date = java.time.LocalDate.now().toString();
     String time = java.time.LocalTime.now().toString();
 
-    return createPenyaluran(nama_mustahiq, golongan, umur,
-                            jumlah_disalurkan, amil, date, time);
+     boolean success = createPenyaluran(nama_mustahiq, golongan, umur,
+                                        double_jumlahDisalurkan, amil, date, time);
+     return success ? "success" : "Gagal menyimpan data penyaluran. Silakan coba lagi.";
 }
 
 private boolean createPenyaluran(String nama_mustahiq, String golongan, int umur,

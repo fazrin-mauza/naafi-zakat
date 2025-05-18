@@ -18,7 +18,6 @@ public class MustahiqCreateService {
         nama = nama.toUpperCase();
         kategori = kategori.toUpperCase();
         alamat = alamat.toUpperCase();
-        nomorhandphone = nomorhandphone.toUpperCase();
 
         // Cek apakah mustahiq dengan nama dan nomor HP sudah terdaftar
         if (isMustahiqExist(nama, nomorhandphone)) {
@@ -47,6 +46,58 @@ public class MustahiqCreateService {
             return false;
         }
     }
+    
+    
+     public String mustahiqUpdate(String nama, String golongan, int umur, String alamat, String handphone, String namaLama) {
+        // Validasi input
+        if (nama.isEmpty() || golongan.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
+            return "Semua field wajib diisi!";
+        }
+
+        nama = nama.toUpperCase();
+        golongan = golongan.toUpperCase();
+        alamat = alamat.toUpperCase();
+
+
+        boolean success = updateMustahiq(nama, golongan, umur, alamat, handphone, namaLama);
+        return success ? "success" : "Gagal mengupdate data mustahiq. Silakan coba lagi.";
+    }
+
+    private boolean updateMustahiq(String nama, String golongan, int umur, String alamat, String handphone, String namaLama) {
+        Connection conn = DBConnection.getConnection();
+       String sql = "UPDATE mustahiq SET nama=?, golongan=?, umur=?, alamat=?, handphone=? WHERE nama=?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, nama);
+                stmt.setString(2, golongan);
+                stmt.setInt(3, umur);
+                stmt.setString(4, alamat);
+                stmt.setString(5, handphone);
+                stmt.setString(6, namaLama);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error insert mustahiq: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     private boolean isMustahiqExist(String nama, String handphone) {
         Connection conn = DBConnection.getConnection();

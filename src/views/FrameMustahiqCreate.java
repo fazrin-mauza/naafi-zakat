@@ -7,17 +7,29 @@ import javax.swing.JOptionPane;
 import services.MustahiqCreateService;
 
 
- 
+
 public class FrameMustahiqCreate extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrameMuzakkiCreate
-     */
+    
+    private boolean isEditMode = false;
+    private String namaLama = null; 
     public FrameMustahiqCreate() {
         initComponents();
         this.setLocationRelativeTo(null);
+    
     }
-
+    public void setFormData(String namaData, String golonganData, int umurData, String alamatData, String hpData) {
+        nama.setText(namaData);
+        kategori.setSelectedItem(golonganData);
+        umur.setValue(umurData);
+        alamat.setText(alamatData);
+        handphone.setText(hpData);
+        
+        isEditMode = true;
+        namaLama = namaData;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -321,27 +333,54 @@ public class FrameMustahiqCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- String namaInput = nama.getText();
+    String namaInput = nama.getText();
     String golonganInput = (String) kategori.getSelectedItem();
     int umurInput = (int) umur.getValue();
     String alamatInput = alamat.getText();
     String handphoneInput = handphone.getText();
-
-    // Panggil service
-    MustahiqCreateService service = new MustahiqCreateService();
-    String result = service.mustahiqCreate(namaInput, golonganInput, umurInput, alamatInput, handphoneInput);
-
-    // Tampilkan hasil
-    if (result.equals("success")) {
-        JOptionPane.showMessageDialog(this, "Data mustahiq berhasil disimpan.");
-        // Reset form jika perlu
-        nama.setText("");
-        kategori.setSelectedIndex(0);
-        umur.setValue(0);
-        alamat.setText("");
-        handphone.setText("");
+ 
+    String confirm1;
+    if (isEditMode) {
+      confirm1 = "Apakah ingin menyimpan perubahan?";
     } else {
-        JOptionPane.showMessageDialog(this, result);
+      confirm1 = "Apakah ingin menyimpan data mustahiq?";
+    }
+    // Konfirmasi
+        int confirm = JOptionPane.showConfirmDialog(this,
+        confirm1,
+        "Konfirmasi",
+        JOptionPane.YES_NO_OPTION
+    ); 
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String result;
+            if (isEditMode) {
+                // UPDATE
+                MustahiqCreateService service = new MustahiqCreateService();
+                result = service.mustahiqUpdate(namaInput, golonganInput, umurInput, alamatInput, handphoneInput, namaLama);
+            } else {
+                // INSERT
+                MustahiqCreateService service = new MustahiqCreateService();
+                result = service.mustahiqCreate(namaInput, golonganInput, umurInput, alamatInput, handphoneInput);
+            }
+                if (result.equals("success")) {
+                    JOptionPane.showMessageDialog(this, "Data mustahiq berhasil disimpan.");
+                } else {
+                    JOptionPane.showMessageDialog(this, result);
+                }
+
+            // Kembali ke form utama
+            new FrameMustahiq().setVisible(true);
+            this.dispose();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan perubahan.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Gagal menyimpan perubahan!");
     }
     }//GEN-LAST:event_jButton2ActionPerformed
 

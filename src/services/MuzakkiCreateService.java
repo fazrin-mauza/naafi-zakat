@@ -5,6 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MuzakkiCreateService {
 
@@ -77,7 +81,7 @@ private boolean createAnggota(String namaKeluarga, String namaAnggota, String st
         int rowsAffected = stmt.executeUpdate();
 
         if (rowsAffected > 0) {
-            updateJumlahAnggota(namaKeluarga);
+            updateJumlahAnggota(namaKeluarga.toUpperCase());
             return true;
         } else {
             return false;
@@ -148,4 +152,108 @@ private void updateJumlahAnggota(String namaKeluarga) {
         }
         return false;
     }
+    
+    public static List<Object[]> getAnggotaKeluarga(String namaKepala) {
+    List<Object[]> anggota = new ArrayList<>();
+    try {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT * FROM anggota_keluarga WHERE keluarga = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, namaKepala); // bisa diganti ke ID jika sudah pakai foreign key
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            anggota.add(new Object[]{
+                rs.getString("nama"),
+                rs.getString("status"),
+                rs.getString("jenis_kelamin")
+            });
+        }
+
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    return anggota;
+}
+
+    public String keluargaUpdate(String namaBaru, String status, String alamat, String handphone, int jumlah, String namaLama) {
+    if (namaBaru.isEmpty() || status.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
+        return "Semua field wajib diisi!";
+    }
+
+    // UPPERCASE semua inputan sebelum diproses
+    namaBaru = namaBaru.toUpperCase();
+    status = status.toUpperCase();
+    alamat = alamat.toUpperCase();
+    handphone = handphone.toUpperCase();
+
+    boolean success = updateKeluarga(namaBaru, status, alamat, handphone, jumlah, namaLama);
+    return success ? "success" : "Gagal mengubah data keluarga. Silakan coba lagi.";
+}
+public boolean updateKeluarga(String namaBaru, String status, String alamat, String handphone, int jumlah, String namaLama) {
+    Connection conn = DBConnection.getConnection();
+    String sql = "UPDATE keluarga SET nama = ?, status = ?, alamat = ?, handphone = ?, jumlah = ? WHERE nama = ?";
+
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, namaBaru);
+        stmt.setString(2, status);
+        stmt.setString(3, alamat);
+        stmt.setString(4, handphone);
+        stmt.setInt(5, jumlah);
+        stmt.setString(6, namaLama);
+
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        System.err.println("Error update keluarga: " + e.getMessage());
+        return false;
+    }
+}
+    
+    public boolean updateSemuaAnggotaDariTabel(String namaKeluarga, JTable tabel) {
+    Connection conn = DBConnection.getConnection();
+    try {
+        // Hapus semua anggota lama
+        String deleteSQL = "DELETE FROM anggota_keluarga WHERE keluarga = ?";
+        try (PreparedStatement psDelete = conn.prepareStatement(deleteSQL)) {
+            psDelete.setString(1, namaKeluarga.toUpperCase());
+            psDelete.executeUpdate();
+        }
+
+        // Insert ulang semua dari jTable
+        String insertSQL = "INSERT INTO anggota_keluarga (keluarga, nama, status, jenis_kelamin) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement psInsert = conn.prepareStatement(insertSQL)) {
+            DefaultTableModel model = (DefaultTableModel) tabel.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String nama = model.getValueAt(i, 0).toString().toUpperCase();
+                String status = model.getValueAt(i, 1).toString().toUpperCase();
+                String jenisKelamin = model.getValueAt(i, 2).toString().toUpperCase();
+
+                if (nama.isEmpty() || status.isEmpty() || jenisKelamin.isEmpty()){
+                  // salah satu data kosong
+                } else {
+                    psInsert.setString(1, namaKeluarga.toUpperCase());
+                    psInsert.setString(2, nama);
+                    psInsert.setString(3, status);
+                    psInsert.setString(4, jenisKelamin);
+                    psInsert.addBatch();  
+                }
+            
+            }
+            psInsert.executeBatch();
+        }
+
+        // Update jumlah anggota
+        updateJumlahAnggota(namaKeluarga.toUpperCase());
+
+        return true;
+    } catch (SQLException e) {
+        System.err.println("Gagal update anggota: " + e.getMessage());
+        return false;
+    }
+}
+
 }

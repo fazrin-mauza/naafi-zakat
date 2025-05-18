@@ -32,4 +32,37 @@ public class MuzakkiService {
             e.printStackTrace();
         }
     }
+    
+    public static boolean deleteKeluargaDanAnggota(String namaKeluarga) {
+    Connection conn = DBConnection.getConnection();
+    try {
+        conn.setAutoCommit(false); // Mulai transaksi
+
+        // Hapus semua anggota keluarga berdasarkan nama keluarga
+        String sqlAnggota = "DELETE FROM anggota_keluarga WHERE keluarga = ?";
+        try (PreparedStatement ps1 = conn.prepareStatement(sqlAnggota)) {
+            ps1.setString(1, namaKeluarga.toUpperCase());
+            ps1.executeUpdate();
+        }
+
+        // Hapus keluarga berdasarkan nama
+        String sqlKeluarga = "DELETE FROM keluarga WHERE nama = ?";
+        try (PreparedStatement ps2 = conn.prepareStatement(sqlKeluarga)) {
+            ps2.setString(1, namaKeluarga.toUpperCase());
+            ps2.executeUpdate();
+        }
+
+        conn.commit(); // Sukses semua, simpan perubahan
+        return true;
+    } catch (SQLException e) {
+        System.err.println("Error saat menghapus keluarga dan anggota: " + e.getMessage());
+        try { conn.rollback(); } catch (SQLException rollbackError) {
+            System.err.println("Gagal rollback: " + rollbackError.getMessage());
+        }
+        return false;
+    } finally {
+        try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
+    }
+}
+
 }

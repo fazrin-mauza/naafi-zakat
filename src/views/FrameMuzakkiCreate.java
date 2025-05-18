@@ -12,18 +12,46 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import services.MustahiqCreateService;
 import services.MuzakkiCreateService;
 
  
 public class FrameMuzakkiCreate extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrameMuzakkiCreate
-     */
+    private String namaLama = null; 
     public FrameMuzakkiCreate() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    private boolean isEditMode = false;
+
+    public void setFormData(String namaData, String jumlahData, String alamatData, String handphoneData) {
+        namaKepalaKeluarga.setText(namaData);
+        alamatKeluarga.setText(alamatData);
+        handphoneKeluarga.setText(handphoneData);
+        
+        isEditMode = true;
+        namaLama = namaData;
+        // Tampilkan data anggota keluarga ke tabel
+        tampilkanAnggotaKeluarga(namaData);
+    }
+    private void tampilkanAnggotaKeluarga(String namaKepala) {
+    try {
+        List<Object[]> anggota = MuzakkiCreateService.getAnggotaKeluarga(namaKepala);
+
+        // Bersihkan tabel dulu
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        // Tambahkan baris satu per satu
+        for (Object[] row : anggota) {
+            model.addRow(row);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Gagal menampilkan anggota keluarga: " + e.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,10 +99,10 @@ public class FrameMuzakkiCreate extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        handphoneKeluarga = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField5 = new javax.swing.JTextField();
+        alamatKeluarga = new javax.swing.JTextArea();
+        namaKepalaKeluarga = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -330,25 +358,25 @@ public class FrameMuzakkiCreate extends javax.swing.JFrame {
         jLabel3.setText("Nama Keluarga");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 100, 30));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        handphoneKeluarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                handphoneKeluargaActionPerformed(evt);
             }
         });
-        jPanel9.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 170, 30));
+        jPanel9.add(handphoneKeluarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 170, 30));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        alamatKeluarga.setColumns(20);
+        alamatKeluarga.setRows(5);
+        jScrollPane2.setViewportView(alamatKeluarga);
 
         jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 170, 60));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        namaKepalaKeluarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                namaKepalaKeluargaActionPerformed(evt);
             }
         });
-        jPanel9.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 170, 30));
+        jPanel9.add(namaKepalaKeluarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 170, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel4.setText("jLabel2");
@@ -366,12 +394,113 @@ public class FrameMuzakkiCreate extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
    MuzakkiCreateService MuzakkiCreateService = new MuzakkiCreateService();
    Connection conn = DBConnection.getConnection();
-    String namaKeluarga = jTextField5.getText().trim();
-    String alamat = jTextArea1.getText().trim();
-    String handphone = jTextField4.getText().trim();
+    String namaKeluarga = namaKepalaKeluarga.getText().trim();
+    String alamat = alamatKeluarga.getText().trim();
+    String handphone = handphoneKeluarga.getText().trim();
     String statusKeluarga = (String) jComboBox3.getSelectedItem();
     int jumlah = 1;
     
+    
+    
+       String confirm1;
+    if (isEditMode) {
+      confirm1 = "Apakah ingin menyimpan perubahan?";
+    } else {
+      confirm1 = "Apakah ingin menyimpan data muzakki?";
+    }
+    // Konfirmasi
+        int confirm = JOptionPane.showConfirmDialog(this,
+        confirm1,
+        "Konfirmasi",
+        JOptionPane.YES_NO_OPTION
+    ); 
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        try {
+            
+            String result;
+            if (isEditMode) {
+                // UPDATE
+    String hasil = MuzakkiCreateService.keluargaUpdate(
+    namaKeluarga, statusKeluarga, alamat, handphone, jumlah, namaLama
+);
+if (hasil.equals("success")) {
+    JOptionPane.showMessageDialog(this, "Data keluarga berhasil diperbarui.");
+} else {
+    JOptionPane.showMessageDialog(this, hasil);
+}
+   boolean anggotaUpdated = MuzakkiCreateService.updateSemuaAnggotaDariTabel(namaKeluarga, jTable1);
+if (anggotaUpdated) {
+    JOptionPane.showMessageDialog(this, "Data anggota keluarga berhasil diperbarui.");
+} else {
+    JOptionPane.showMessageDialog(this, "Gagal memperbarui data anggota keluarga.");
+}
+         // Kembali ke form utama
+            new FrameMuzakki().setVisible(true);
+            this.dispose();
+               } else {
+                     // Simpan keluarga     
+   result = MuzakkiCreateService.keluargaCreate(namaKeluarga, statusKeluarga, alamat, handphone, jumlah);
+    if (result.equals("success")) {
+        JOptionPane.showMessageDialog(this, "Keluarga Muzakki " + namaKeluarga + " berhasil disimpan!");
+        this.dispose(); 
+        FrameMuzakki mzk = new FrameMuzakki();
+        mzk.setVisible(true);
+        
+    } else {
+        JOptionPane.showMessageDialog(this, result);
+    }
+        
+// Simpan anggota keluarga
+DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+String hasilInsert = "";
+for (int i = 0; i < model.getRowCount(); i++) {
+    Object namaObj = model.getValueAt(i, 0);
+    Object statusObj = model.getValueAt(i, 1);
+    Object jenisKelaminObj = model.getValueAt(i, 2);
+    if (namaObj != null && statusObj != null && jenisKelaminObj != null) {
+        String namaAnggota = namaObj.toString().trim();
+        String status = statusObj.toString();
+        String jenisKelamin = jenisKelaminObj.toString();
+        if (!namaAnggota.isEmpty() && !status.isEmpty() && !jenisKelamin.isEmpty()) {
+            String result2 = MuzakkiCreateService.anggotaCreate(namaKeluarga, namaAnggota, status, jenisKelamin);
+            if (result2.equals("success")) {
+                hasilInsert += "Anggota keluarga " + (i + 1) + " " + namaAnggota + " berhasil disimpan.\n";
+            } else {
+                hasilInsert += "Anggota keluarga " + (i + 1) + " " + namaAnggota + " gagal: " + result2 + "\n";
+            }
+        }
+    }
+}
+if (!hasilInsert.isEmpty()) {
+    JOptionPane.showMessageDialog(this, hasilInsert);
+    resetFormAndTable();
+}
+          // Kembali ke form utama
+            new FrameMuzakki().setVisible(true);
+            this.dispose();
+            }
+           } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan perubahan.");
+           }
+     } else {
+        JOptionPane.showMessageDialog(this, "Gagal menyimpan perubahan!");
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   /** 
      // Simpan keluarga     
   String result = MuzakkiCreateService.keluargaCreate(namaKeluarga, statusKeluarga, alamat, handphone, jumlah);
     if (result.equals("success")) {
@@ -409,14 +538,14 @@ if (!hasilInsert.isEmpty()) {
     JOptionPane.showMessageDialog(this, hasilInsert);
     resetFormAndTable();
 }
-          
+ */         
     }//GEN-LAST:event_jButton2ActionPerformed
 // Fungsi untuk mereset form dan tabel
 private void resetFormAndTable() {
     // Reset JTextField dan JTextArea
-    jTextField4.setText("");  // Reset input nomor handphone
-    jTextField5.setText("");  // Reset input nama keluarga
-    jTextArea1.setText("");    // Reset input alamat
+    handphoneKeluarga.setText("");  // Reset input nomor handphone
+    namaKepalaKeluarga.setText("");  // Reset input nama keluarga
+    alamatKeluarga.setText("");    // Reset input alamat
     jComboBox3.setSelectedIndex(0);  // Mengatur combo box ke index pertama, misalnya
 
     // Reset tabel anggota keluarga
@@ -545,9 +674,9 @@ private void resetFormAndTable() {
     model.addRow(new Object[]{"", ""}); // atau "" kosong
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void handphoneKeluargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handphoneKeluargaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_handphoneKeluargaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Buat isi combo box untuk kolom status
@@ -566,9 +695,9 @@ jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void namaKepalaKeluargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaKepalaKeluargaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_namaKepalaKeluargaActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -617,6 +746,8 @@ jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea alamatKeluarga;
+    private javax.swing.JTextField handphoneKeluarga;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -656,8 +787,6 @@ jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField namaKepalaKeluarga;
     // End of variables declaration//GEN-END:variables
 }

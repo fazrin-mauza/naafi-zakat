@@ -34,4 +34,29 @@ public class MustahiqService {
             e.printStackTrace();
         }
     }
+    
+    public static boolean deleteMustahiq(String namaMustahiq) {
+    Connection conn = DBConnection.getConnection();
+    try {
+        conn.setAutoCommit(false); // Mulai transaksi
+
+        // Hapus semua anggota keluarga berdasarkan nama keluarga
+        String sqlMustahiq = "DELETE FROM mustahiq WHERE nama = ?";
+        try (PreparedStatement ps1 = conn.prepareStatement(sqlMustahiq)) {
+            ps1.setString(1, namaMustahiq.toUpperCase());
+            ps1.executeUpdate();
+        }
+
+        conn.commit(); // Sukses semua, simpan perubahan
+        return true;
+    } catch (SQLException e) {
+        System.err.println("Error saat menghapus mustahiq: " + e.getMessage());
+        try { conn.rollback(); } catch (SQLException rollbackError) {
+            System.err.println("Gagal rollback: " + rollbackError.getMessage());
+        }
+        return false;
+    } finally {
+        try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
+    }
+}
 }
