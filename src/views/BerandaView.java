@@ -1,8 +1,8 @@
 package views;
 
 import auth.Login;
-import forms1.PembayaranForm;
-import forms1.PenyaluranForm;
+import forms.PembayaranForm;
+import forms.PenyaluranForm;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.JFrame;

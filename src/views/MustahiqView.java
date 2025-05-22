@@ -1,9 +1,9 @@
 package views;
 
 import auth.Login;
-import forms1.PembayaranForm;
-import forms1.PenyaluranForm;
-import forms1.MustahiqCreateForm;
+import forms.PembayaranForm;
+import forms.PenyaluranForm;
+import forms.MustahiqCreateForm;
 import services.MustahiqService; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

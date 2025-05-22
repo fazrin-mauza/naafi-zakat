@@ -4,8 +4,8 @@ package views;
 //import static db.DBConnection.getConnection;
 
 import auth.Login;
-import forms1.PembayaranForm;
-import forms1.PenyaluranForm;
+import forms.PembayaranForm;
+import forms.PenyaluranForm;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
