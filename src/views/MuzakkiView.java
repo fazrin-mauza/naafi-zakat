@@ -1,9 +1,9 @@
 package views;
 
 import auth.Login;
-import forms.MuzakkiCreateForm;
-import forms.PembayaranForm;
-import forms.PenyaluranForm;
+import forms1.MuzakkiCreateForm;
+import forms1.PembayaranForm;
+import forms1.PenyaluranForm;
 import services.MuzakkiService; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
