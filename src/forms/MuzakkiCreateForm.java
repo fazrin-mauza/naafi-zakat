@@ -1,4 +1,4 @@
-package views;
+package forms;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,12 +15,17 @@ import java.sql.SQLException;
 import java.util.List;
 import services.MustahiqCreateService;
 import services.MuzakkiCreateService;
+import views.BerandaView;
+import views.LaporanView;
+import auth.Login;
+import views.MustahiqView;
+import views.MuzakkiView;
 
  
-public class MuzakkiCreateView extends javax.swing.JFrame {
+public class MuzakkiCreateForm extends javax.swing.JFrame {
 
     private String namaLama = null; 
-    public MuzakkiCreateView() {
+    public MuzakkiCreateForm() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -564,7 +569,7 @@ private void resetFormAndTable() {
 
         if (pilihan == JOptionPane.YES_OPTION) {
             this.dispose(); // Tutup form sekarang
-            new LoginView().setVisible(true); // Tampilkan form login
+            new Login().setVisible(true); // Tampilkan form login
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     int x = 170;
@@ -601,7 +606,7 @@ private void resetFormAndTable() {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranView lrn = new PenyaluranView();
+        PenyaluranForm lrn = new PenyaluranForm();
         lrn.setVisible(true);
         lrn.pack();
         lrn.setLocationRelativeTo(null);
@@ -610,7 +615,7 @@ private void resetFormAndTable() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        MuzakkiCreateView rgf = new MuzakkiCreateView();
+        MuzakkiCreateForm rgf = new MuzakkiCreateForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -724,14 +729,22 @@ jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -744,7 +757,7 @@ jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MuzakkiCreateView().setVisible(true);
+                new MuzakkiCreateForm().setVisible(true);
             }
         });
     }

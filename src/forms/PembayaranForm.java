@@ -1,4 +1,4 @@
-package views;
+package forms;
 
 import services.PembayaranService;
 import services.UserService;
@@ -21,14 +21,19 @@ import java.util.Locale;
 import java.util.Map;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import views.BerandaView;
+import views.LaporanView;
+import auth.Login;
+import views.MustahiqView;
+import views.MuzakkiView;
 
 
-public class PembayaranView extends javax.swing.JFrame {
+public class PembayaranForm extends javax.swing.JFrame {
   private List<String> originalItems = new ArrayList<>();
 
 
 
-    public PembayaranView() {
+    public PembayaranForm() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataKepalaKeluarga();
@@ -472,7 +477,7 @@ private void loadDataKepalaKeluarga() {
 
         if (pilihan == JOptionPane.YES_OPTION) {
             this.dispose(); // Tutup form sekarang
-            new LoginView().setVisible(true); // Tampilkan form login
+            new Login().setVisible(true); // Tampilkan form login
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     int x = 170;
@@ -509,7 +514,7 @@ private void loadDataKepalaKeluarga() {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranView lrn = new PenyaluranView();
+        PenyaluranForm lrn = new PenyaluranForm();
         lrn.setVisible(true);
         lrn.pack();
         lrn.setLocationRelativeTo(null);
@@ -518,7 +523,7 @@ private void loadDataKepalaKeluarga() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -737,13 +742,13 @@ String selectedPembayaran = (String) jComboBox5.getSelectedItem();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MuzakkiCreateView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MuzakkiCreateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -753,7 +758,7 @@ String selectedPembayaran = (String) jComboBox5.getSelectedItem();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PembayaranView().setVisible(true);
+                new PembayaranForm().setVisible(true);
             }
         });
     }

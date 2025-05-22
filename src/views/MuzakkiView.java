@@ -1,5 +1,9 @@
 package views;
 
+import auth.Login;
+import forms.MuzakkiCreateForm;
+import forms.PembayaranForm;
+import forms.PenyaluranForm;
 import services.MuzakkiService; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -307,7 +311,7 @@ private void loadDataKeluarga() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MuzakkiCreateView rgf = new MuzakkiCreateView();
+        MuzakkiCreateForm rgf = new MuzakkiCreateForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -356,7 +360,7 @@ private void loadDataKeluarga() {
 
         if (pilihan == JOptionPane.YES_OPTION) {
             this.dispose(); // Tutup form sekarang
-            new LoginView().setVisible(true); // Tampilkan form login
+            new Login().setVisible(true); // Tampilkan form login
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -393,7 +397,7 @@ private void loadDataKeluarga() {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranView lrn = new PenyaluranView();
+        PenyaluranForm lrn = new PenyaluranForm();
         lrn.setVisible(true);
         lrn.pack();
         lrn.setLocationRelativeTo(null);
@@ -402,7 +406,7 @@ private void loadDataKeluarga() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -480,7 +484,7 @@ private void loadDataKeluarga() {
                 String handphoneData = jTable1.getValueAt(selectedRow, 3).toString();
 
     // Buka form edit dan isi dengan data tersebut
-    MuzakkiCreateView formEdit = new MuzakkiCreateView();
+    MuzakkiCreateForm formEdit = new MuzakkiCreateForm();
     formEdit.setFormData(namaData, jumlahData, alamatData, handphoneData);
     formEdit.setVisible(true);
     formEdit.pack();

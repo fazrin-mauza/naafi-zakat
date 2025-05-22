@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package views;
+package main;
+
+import auth.Login;
 
 /**
  *
@@ -114,7 +116,7 @@ public class Main extends javax.swing.JFrame {
             load.dispose();
 
             java.awt.EventQueue.invokeLater(() -> {
-                new LoginView().setVisible(true);
+                new Login().setVisible(true);
             });
         }).start();
     });

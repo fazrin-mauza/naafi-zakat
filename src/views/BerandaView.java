@@ -1,5 +1,8 @@
 package views;
 
+import auth.Login;
+import forms.PembayaranForm;
+import forms.PenyaluranForm;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -386,7 +389,7 @@ if (data != null) {
 
     if (pilihan == JOptionPane.YES_OPTION) {
         this.dispose(); // Tutup form sekarang
-        new LoginView().setVisible(true); // Tampilkan form login
+        new Login().setVisible(true); // Tampilkan form login
     }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -416,7 +419,7 @@ if (data != null) {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -434,7 +437,7 @@ if (data != null) {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranView lrn = new PenyaluranView();
+        PenyaluranForm lrn = new PenyaluranForm();
         lrn.setVisible(true);
         lrn.pack();
         lrn.setLocationRelativeTo(null);

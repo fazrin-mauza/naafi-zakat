@@ -1,4 +1,4 @@
-package views;
+package auth;
 
 import javax.swing.JFrame;
 import services.UserService;
@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
  *
  * @author LENOVO
  */
-public class RegisterView extends javax.swing.JFrame {
+public class Register extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginView
+     * Creates new form Login
      */
-    public RegisterView() {
+    public Register() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -252,7 +252,7 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
     if (result.equals("success")) {
         JOptionPane.showMessageDialog(this, "Akun berhasil dibuat!");
         this.dispose(); 
-        LoginView lgf = new LoginView();
+        Login lgf = new Login();
         lgf.setVisible(true);
         
     } else {
@@ -284,7 +284,7 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
     }//GEN-LAST:event_createsignMouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        LoginView lgf = new LoginView();
+        Login lgf = new Login();
         lgf.setVisible(true);
         lgf.pack();
         lgf.setLocationRelativeTo(null);
@@ -309,14 +309,22 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -329,7 +337,7 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterView().setVisible(true);
+                new Register().setVisible(true);
             }
         });
     }
