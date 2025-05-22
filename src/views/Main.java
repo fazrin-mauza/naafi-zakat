@@ -114,7 +114,7 @@ public class Main extends javax.swing.JFrame {
             load.dispose();
 
             java.awt.EventQueue.invokeLater(() -> {
-                new LoginForm().setVisible(true);
+                new LoginView().setVisible(true);
             });
         }).start();
     });

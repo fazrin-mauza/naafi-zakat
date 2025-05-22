@@ -12,12 +12,12 @@ import services.UserService;
  *
  * @author LENOVO
  */
-public class LoginForm extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginForm
      */
-    public LoginForm() {
+    public LoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -186,7 +186,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menjadi Manfaat_word.png"))); // NOI18N
         jLabel7.setText("jLabel7");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, 0, 1789, 1240);
+        jLabel7.setBounds(0, 0, 1790, 1240);
 
         edtCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menjadi Manfaat_FIXX.png"))); // NOI18N
         edtCover.setText("jLabel7");
@@ -232,7 +232,7 @@ public class LoginForm extends javax.swing.JFrame {
     if (result.equals("success")) {
         // Jika login berhasil, arahkan ke halaman berikutnya (misalnya, Dashboard)
         JOptionPane.showMessageDialog(this, "Login berhasil!");
-        FrameBeranda rgf = new FrameBeranda();
+        BerandaView rgf = new BerandaView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -252,7 +252,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SignUp rgf = new SignUp();
+        RegisterView rgf = new RegisterView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -261,7 +261,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        SignUp rgf = new SignUp();
+        RegisterView rgf = new RegisterView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -286,21 +286,23 @@ public class LoginForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginForm().setVisible(true);
+                new LoginView().setVisible(true);
             }
         });
     }

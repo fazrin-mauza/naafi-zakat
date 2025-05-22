@@ -195,7 +195,7 @@ public class FrameMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        FrameMuzakki rgf = new FrameMuzakki();
+        MuzakkiView rgf = new MuzakkiView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -204,7 +204,7 @@ public class FrameMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        FrameBeranda rgf = new FrameBeranda();
+        BerandaView rgf = new BerandaView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -213,7 +213,7 @@ public class FrameMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        FrameMustahiq rgf = new FrameMustahiq();
+        MustahiqView rgf = new MustahiqView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

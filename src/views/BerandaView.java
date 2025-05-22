@@ -16,12 +16,12 @@ import services.BerandaService;
  *
  * @author LENOVO
  */
-public class FrameBeranda extends javax.swing.JFrame {
+public class BerandaView extends javax.swing.JFrame {
 
     /**
      * Creates new form FrameBeranda
      */
-    public FrameBeranda() {
+    public BerandaView() {
         initComponents();
         this.setLocationRelativeTo(null);
         user.setText(BerandaService.getSession());
@@ -349,7 +349,7 @@ if (data != null) {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        FrameMuzakki rgf = new FrameMuzakki();
+        MuzakkiView rgf = new MuzakkiView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -358,7 +358,7 @@ if (data != null) {
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        FrameMustahiq rgf = new FrameMustahiq();
+        MustahiqView rgf = new MustahiqView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -367,7 +367,7 @@ if (data != null) {
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        FrameBeranda rgf = new FrameBeranda();
+        BerandaView rgf = new BerandaView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -386,7 +386,7 @@ if (data != null) {
 
     if (pilihan == JOptionPane.YES_OPTION) {
         this.dispose(); // Tutup form sekarang
-        new LoginForm().setVisible(true); // Tampilkan form login
+        new LoginView().setVisible(true); // Tampilkan form login
     }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -416,7 +416,7 @@ if (data != null) {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        FramePembayaran rgf = new FramePembayaran();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -425,7 +425,7 @@ if (data != null) {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        FrameLaporan rgf = new FrameLaporan();
+        LaporanView rgf = new LaporanView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -434,7 +434,7 @@ if (data != null) {
     }//GEN-LAST:event_jPanel7MouseClicked
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        FramePenyaluran lrn = new FramePenyaluran();
+        PenyaluranView lrn = new PenyaluranView();
         lrn.setVisible(true);
         lrn.pack();
         lrn.setLocationRelativeTo(null);
@@ -463,20 +463,21 @@ if (data != null) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameBeranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BerandaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameBeranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BerandaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameBeranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BerandaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameBeranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BerandaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameBeranda().setVisible(true);
+                new BerandaView().setVisible(true);
             }
         });
     }
