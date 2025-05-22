@@ -175,7 +175,7 @@ FROM pembayaran]]>
 		<band height="136" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="-10" width="164" height="126" uuid="1c003177-754c-448f-8ce1-16868856f545"/>
-				<imageExpression><![CDATA["Naaafii.png"]]></imageExpression>
+				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="230" y="-12" width="315" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
@@ -199,8 +199,8 @@ FROM pembayaran]]>
 				<text><![CDATA[Naafi’ adalah aplikasi digital zakat yang didesain khusus untuk memudahkan umat Muslim dalam menunaikan zakat fitrah secara cepat, aman, dan tepat sasaran. Terinspirasi dari kata dalam bahasa Arab Naafi’ (نافع) yang berarti “yang memberi manfaat”, aplikasi ini hadir untuk menghidupkan semangat berbagi di bulan suci Ramadan.]]></text>
 			</staticText>
 			<image>
-				<reportElement x="633" y="-73" width="219" height="189" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+				<reportElement x="633" y="-10" width="164" height="126" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
+				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="-20" y="122" width="843" height="5" uuid="e9d2002a-c8ee-4649-a258-640dad29110c"/>
