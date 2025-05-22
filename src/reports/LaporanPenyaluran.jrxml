@@ -30,7 +30,7 @@ FROM penyaluran]]>
 	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="penyaluran"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="id"/>
 	</field>
 	<field name="nama_mustahiq" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nama_mustahiq"/>
@@ -74,7 +74,7 @@ FROM penyaluran]]>
 		</groupFooter>
 	</group>
 	<group name="Group2">
-		<groupExpression><![CDATA[$F{golongan}]]></groupExpression>
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
 		<groupHeader>
 			<band height="25">
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -161,7 +161,7 @@ FROM penyaluran]]>
 		<band height="136" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="164" height="126" uuid="1c003177-754c-448f-8ce1-16868856f545"/>
-				<imageExpression><![CDATA["coffee.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="250" y="0" width="300" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
@@ -185,8 +185,8 @@ FROM penyaluran]]>
 				<text><![CDATA[Naafi’ adalah aplikasi digital zakat yang didesain khusus untuk memudahkan umat Muslim dalam menunaikan zakat fitrah secara cepat, aman, dan tepat sasaran. Terinspirasi dari kata dalam bahasa Arab Naafi’ (نافع) yang berarti “yang memberi manfaat”, aplikasi ini hadir untuk menghidupkan semangat berbagi di bulan suci Ramadan.]]></text>
 			</staticText>
 			<image>
-				<reportElement x="633" y="-73" width="219" height="209" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
-				<imageExpression><![CDATA["coffee_stain.png"]]></imageExpression>
+				<reportElement x="633" y="0" width="164" height="126" uuid="4aa6f4d1-27dc-4b34-9227-59e19ce2c959"/>
+				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

@@ -71,37 +71,6 @@ public class PembayaranService {
     }
 
 
-   
-   public boolean insertPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat, 
-                                    String jenisPembayaran, double totalPembayaran, String amil, 
-                                    String tanggal, String waktu) {
-        String sql = "INSERT INTO pembayaran (nama_keluarga, jumlah_anggota, jenis_zakat, jenis_pembayaran, total_pembayaran, amil, date, time) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, namaKeluarga);
-            stmt.setInt(2, jumlahAnggota);
-            stmt.setString(3, jenisZakat);
-            stmt.setString(4, jenisPembayaran);
-            stmt.setDouble(5, totalPembayaran);
-            stmt.setString(6, amil);
-            stmt.setString(7, tanggal); // Format: yyyy-MM-dd
-            stmt.setString(8, waktu);   // Format: HH:mm:ss
-
-            int rows = stmt.executeUpdate();
-            stmt.close();
-            conn.close();
-            return rows > 0;
-            
-        } catch (SQLException e) {
-            System.err.println("Error insert pembayaran: " + e.getMessage());
-            return false;
-        }
-    } 
-
-
 public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat, String jenisPembayaran, double totalPembayaran, String amil, String toString, String toString1) {
     if (namaKeluarga.isEmpty() || jenisZakat.isEmpty() || jenisPembayaran.isEmpty() || amil.isEmpty()) {
         return false;
@@ -135,6 +104,24 @@ private boolean createPembayaran(String namaKeluarga, int jumlahAnggota, String 
         stmt.setString(8, waktu);
 
         int rowsAffected = stmt.executeUpdate();
+        
+       // Jika insert berhasil, lakukan update ke tabel total
+        if (rowsAffected > 0) {
+            String updateSql = "";
+
+            if (jenisPembayaran.equalsIgnoreCase("Beras")) {
+                updateSql = "UPDATE total SET beras = beras + ?";
+            } else if (jenisPembayaran.equalsIgnoreCase("Uang Tunai")) {
+                updateSql = "UPDATE total SET tunai = tunai + ?";
+            }
+
+            if (!updateSql.isEmpty()) {
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                    updateStmt.setDouble(1, totalPembayaran);
+                    updateStmt.executeUpdate();
+                }
+            }
+        }
         return rowsAffected > 0;
     } catch (SQLException e) {
         System.err.println("Error creating pembayaran: " + e.getMessage());

@@ -285,7 +285,7 @@ public static Connection getConnection() throws SQLException {
             // Pastikan koneksi SQLite menggunakan java.sql.Connection
             Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
 
-            String reportPath = "src/reports/penyalurannew.jasper";
+            String reportPath = "src/reports/LaporanPenyaluran.jasper";
             HashMap<String, Object> parameters = new HashMap<>();
             JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
             JasperViewer viewer = new JasperViewer(print, false);
@@ -419,7 +419,7 @@ public static Connection getConnection() throws SQLException {
             // Pastikan koneksi SQLite menggunakan java.sql.Connection
             Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
 
-            String reportPath = "src/reports/laporanpembayaran.jasper";
+            String reportPath = "src/reports/LaporanPembayaran.jasper";
             HashMap<String, Object> parameters = new HashMap<>();
             JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
             JasperViewer viewer = new JasperViewer(print, false);
