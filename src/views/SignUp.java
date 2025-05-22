@@ -31,37 +31,40 @@ public class SignUp extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Usersign = new javax.swing.JLabel();
         nama = new javax.swing.JTextField();
-        pwsign2 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         username = new javax.swing.JTextField();
         phonesign = new javax.swing.JLabel();
-        ulangipw = new javax.swing.JPasswordField();
         pwsign1 = new javax.swing.JLabel();
-        buatpw = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         emailsign = new javax.swing.JLabel();
-        reset = new javax.swing.JButton();
-        createsign = new javax.swing.JButton();
-        backtologin = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         nomorhandphone = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         pwsign3 = new javax.swing.JLabel();
+        buatpw = new javax.swing.JPasswordField();
+        pwsign2 = new javax.swing.JLabel();
+        ulangipw = new javax.swing.JPasswordField();
+        createsign = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        gamber = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 102));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(450, 700));
+        jPanel1.setPreferredSize(new java.awt.Dimension(820, 494));
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setLayout(null);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Usersign.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        Usersign.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         Usersign.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         Usersign.setText("Username");
-        jPanel2.add(Usersign);
-        Usersign.setBounds(30, 80, 77, 24);
+        jPanel2.add(Usersign, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 56, -1, -1));
 
         nama.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         nama.addActionListener(new java.awt.event.ActionListener() {
@@ -69,13 +72,7 @@ public class SignUp extends javax.swing.JFrame {
                 namaActionPerformed(evt);
             }
         });
-        jPanel2.add(nama);
-        nama.setBounds(30, 180, 190, 30);
-
-        pwsign2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        pwsign2.setText("Ulangi Password");
-        jPanel2.add(pwsign2);
-        pwsign2.setBounds(30, 430, 140, 24);
+        jPanel2.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 132, 209, 30));
 
         email.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         email.addActionListener(new java.awt.event.ActionListener() {
@@ -83,8 +80,7 @@ public class SignUp extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
-        jPanel2.add(email);
-        email.setBounds(30, 320, 190, 30);
+        jPanel2.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 248, 209, 30));
 
         username.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -92,22 +88,15 @@ public class SignUp extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel2.add(username);
-        username.setBounds(30, 110, 190, 30);
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 78, 209, 30));
 
-        phonesign.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        phonesign.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         phonesign.setText("Nama");
-        jPanel2.add(phonesign);
-        phonesign.setBounds(30, 150, 46, 24);
-        jPanel2.add(ulangipw);
-        ulangipw.setBounds(30, 460, 190, 30);
+        jPanel2.add(phonesign, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 112, -1, -1));
 
-        pwsign1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        pwsign1.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         pwsign1.setText("Email");
-        jPanel2.add(pwsign1);
-        pwsign1.setBounds(30, 290, 41, 24);
-        jPanel2.add(buatpw);
-        buatpw.setBounds(30, 390, 190, 30);
+        jPanel2.add(pwsign1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 226, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("X");
@@ -117,30 +106,35 @@ public class SignUp extends javax.swing.JFrame {
                 jLabel7MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(300, 10, 12, 22);
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
 
-        emailsign.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        emailsign.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         emailsign.setText("Nomor Handphone");
-        jPanel2.add(emailsign);
-        emailsign.setBounds(30, 220, 150, 24);
+        jPanel2.add(emailsign, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 168, 150, -1));
 
-        reset.setBackground(new java.awt.Color(255, 0, 0));
-        reset.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        reset.setText("Reset");
-        reset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        reset.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                resetMouseClicked(evt);
-            }
-        });
-        reset.addActionListener(new java.awt.event.ActionListener() {
+        nomorhandphone.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        nomorhandphone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetActionPerformed(evt);
+                nomorhandphoneActionPerformed(evt);
             }
         });
-        jPanel2.add(reset);
-        reset.setBounds(30, 530, 80, 30);
+        jPanel2.add(nomorhandphone, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 209, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("SIGN UP");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 10, 160, 40));
+
+        pwsign3.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        pwsign3.setText("Buat Password");
+        jPanel2.add(pwsign3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 284, 120, -1));
+        jPanel2.add(buatpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 306, 209, 30));
+
+        pwsign2.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        pwsign2.setText("Ulangi Password");
+        jPanel2.add(pwsign2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 342, 140, -1));
+        jPanel2.add(ulangipw, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 364, 209, 30));
 
         createsign.setBackground(new java.awt.Color(0, 255, 0));
         createsign.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -156,53 +150,72 @@ public class SignUp extends javax.swing.JFrame {
                 createsignActionPerformed(evt);
             }
         });
-        jPanel2.add(createsign);
-        createsign.setBounds(140, 530, 80, 30);
+        jPanel2.add(createsign, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 80, 30));
 
-        backtologin.setFont(new java.awt.Font("sansserif", 0, 11)); // NOI18N
-        backtologin.setForeground(new java.awt.Color(51, 51, 255));
-        backtologin.setText("I Have an account, Login");
-        backtologin.addMouseListener(new java.awt.event.MouseAdapter() {
+        reset.setBackground(new java.awt.Color(255, 0, 0));
+        reset.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        reset.setText("Reset");
+        reset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backtologinMouseClicked(evt);
+                resetMouseClicked(evt);
             }
         });
-        jPanel2.add(backtologin);
-        backtologin.setBounds(30, 560, 119, 20);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SIGN UP");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(60, 10, 160, 40);
-
-        nomorhandphone.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        nomorhandphone.addActionListener(new java.awt.event.ActionListener() {
+        reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomorhandphoneActionPerformed(evt);
+                resetActionPerformed(evt);
             }
         });
-        jPanel2.add(nomorhandphone);
-        nomorhandphone.setBounds(30, 250, 190, 30);
-
-        pwsign3.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        pwsign3.setText("Buat Password");
-        jPanel2.add(pwsign3);
-        pwsign3.setBounds(30, 360, 120, 24);
+        jPanel2.add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 80, 30));
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(60, 50, 290, 590);
+        jPanel2.setBounds(460, 30, 290, 450);
+
+        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("SAATNYA BERBAGI");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(110, 410, 200, 20);
+
+        jLabel3.setFont(new java.awt.Font("Rockwell", 1, 10)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText(" DI MULAI DARI SINI");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(130, 430, 160, 20);
+
+        jLabel4.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("SAATNYA PEDULI");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(110, 390, 200, 20);
+
+        gamber.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        gamber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Login-amico (1) (1) (1) (2).png"))); // NOI18N
+        jPanel1.add(gamber);
+        gamber.setBounds(80, 70, 280, 290);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.png"))); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(30, 30, 40, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
         );
 
         pack();
@@ -257,15 +270,6 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
         
     }//GEN-LAST:event_resetActionPerformed
 
-    private void backtologinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backtologinMouseClicked
-        LoginForm lgf = new LoginForm();
-        lgf.setVisible(true);
-        lgf.pack();
-        lgf.setLocationRelativeTo(null);
-        lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_backtologinMouseClicked
-
     private void nomorhandphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomorhandphoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomorhandphoneActionPerformed
@@ -278,6 +282,15 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
     private void createsignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createsignMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_createsignMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        LoginForm lgf = new LoginForm();
+        lgf.setVisible(true);
+        lgf.pack();
+        lgf.setLocationRelativeTo(null);
+        lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -319,12 +332,16 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Usersign;
-    private javax.swing.JLabel backtologin;
     private javax.swing.JPasswordField buatpw;
     private javax.swing.JButton createsign;
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailsign;
+    private javax.swing.JLabel gamber;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

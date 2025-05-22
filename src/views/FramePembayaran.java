@@ -1,6 +1,7 @@
 package views;
 
-import services.PembayaranService; 
+import services.PembayaranService;
+import services.UserService;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -31,6 +32,10 @@ public class FramePembayaran extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataKepalaKeluarga();
+        String sessionUser = UserService.getSession(); // Ambil session
+         amil.removeAllItems(); // Hapus semua item lama
+         amil.addItem(sessionUser); // Tambahkan hanya satu item
+         amil.setSelectedItem(sessionUser); // Pilih secara default
         
     }
 
@@ -162,7 +167,6 @@ private void loadDataKepalaKeluarga() {
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
 
         amil.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        amil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fata", "Farrell", "Fazrin" }));
         amil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 amilActionPerformed(evt);

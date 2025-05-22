@@ -11,38 +11,21 @@ import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.List;
 import services.PembayaranService;
+import services.UserService;
 
  
 public class FramePenyaluran extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrameMuzakkiCreate
-     */
     public FramePenyaluran() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataMustahiq();
+        String sessionUser = UserService.getSession(); // Ambil session
+         boxAmil.removeAllItems(); // Hapus semua item lama
+         boxAmil.addItem(sessionUser); // Tambahkan hanya satu item
+         boxAmil.setSelectedItem(sessionUser); // Pilih secara default
     }
-/**
-private void loadDataMustahiq() {
-        try {
-            java.sql.Connection con = DBConnection.getConnection();
-            String sql = "SELECT nama FROM mustahiq";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
 
-            jComboBox5.removeAllItems();
-            jComboBox5.addItem("--Pilih Mustahiq--");
-            while (rs.next()) {
-                jComboBox5.addItem(rs.getString("nama"));
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal memuat data keluarga: " + e.getMessage());
-        }
-    }
-    */
     private PenyaluranService penyaluranService = new PenyaluranService();
 
 private void loadDataMustahiq() {
@@ -129,7 +112,6 @@ private void loadDataMustahiq() {
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
 
         boxAmil.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        boxAmil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fata", "Farrell", "Fazrin" }));
         jPanel9.add(boxAmil, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 170, 30));
 
         jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -422,7 +404,7 @@ private void loadDataMustahiq() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        FramePenyaluran rgf = new FramePenyaluran();
+        FramePembayaran rgf = new FramePembayaran();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

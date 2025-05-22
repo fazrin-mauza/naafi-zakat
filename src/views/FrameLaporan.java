@@ -60,6 +60,8 @@ public static Connection getConnection() throws SQLException {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -243,7 +245,25 @@ public static Connection getConnection() throws SQLException {
         });
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
+        jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton2.setText("Reset Pembayaran");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 140, 40));
+
+        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton1.setText("Reset Penyaluran");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 140, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FIXX.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
@@ -410,6 +430,14 @@ public static Connection getConnection() throws SQLException {
     }
     }//GEN-LAST:event_laporanpembayaranActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,6 +475,8 @@ public static Connection getConnection() throws SQLException {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

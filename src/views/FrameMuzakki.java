@@ -5,12 +5,23 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
 public class FrameMuzakki extends javax.swing.JFrame {
 
     public FrameMuzakki() {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataKeluarga(); // << tampilkan data Muzakki
+    }  
+    public static Connection getConnection() throws SQLException {
+        String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
+        return (Connection) DriverManager.getConnection(url);
     }
     
 private void loadDataKeluarga() {
@@ -35,7 +46,7 @@ private void loadDataKeluarga() {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        field_cari = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -87,33 +98,48 @@ private void loadDataKeluarga() {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
 
+        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton1.setText("Tambah");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
 
+        jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton2.setText("Edit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, 30));
 
+        jButton3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton3.setText("Hapus");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 150, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, -1, 30));
 
+        field_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_cariActionPerformed(evt);
+            }
+        });
+        field_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_cariKeyTyped(evt);
+            }
+        });
+        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, 30));
+
+        jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel1.setText("Cari");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 30, 30));
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel2.setText("Data Muzakki");
@@ -465,6 +491,46 @@ private void loadDataKeluarga() {
     this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void field_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_cariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_field_cariActionPerformed
+
+    private void field_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_cariKeyTyped
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+model.setRowCount(0);
+
+String cari = field_cari.getText();
+
+try {
+    String sql = "Select * From keluarga WHERE nama LIKE ? OR handphone LIKE ? OR alamat LIKE ?";
+    
+            Connection conn = getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, "%" + cari + "%");
+            st.setString(2, "%" + cari + "%");
+            st.setString(3, "%" + cari + "%");
+
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                String nama = rs.getString("nama");
+                int jumlah = rs.getInt("jumlah");
+                String alamat = rs.getString("alamat");
+                String handphone = rs.getString("handphone");
+                
+
+                Object[] rowData = {nama, jumlah, alamat, handphone };
+                model.addRow(rowData);
+            }
+
+            rs.close();
+            st.close();
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pencarian:\n" + e.getMessage());
+}
+
+    }//GEN-LAST:event_field_cariKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -501,6 +567,7 @@ private void loadDataKeluarga() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField field_cari;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -533,6 +600,5 @@ private void loadDataKeluarga() {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

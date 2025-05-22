@@ -4,6 +4,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.JFrame;
 import db.DBConnection;
+import services.BerandaService;
 
 
 /*
@@ -23,23 +24,15 @@ public class FrameBeranda extends javax.swing.JFrame {
     public FrameBeranda() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-    try {
-    Connection conn = DBConnection.getConnection();
-    String sql = "SELECT beras FROM total WHERE id= 1";
-    PreparedStatement pst = conn.prepareStatement(sql);
-    ResultSet rs = pst.executeQuery();
-
-    if (rs.next()) {
-        double beras = rs.getDouble("beras");
-        jLabel3.setText(beras + " KG");
-    }
-} catch (Exception e) {
-    jLabel3.setText("Gagal");
-    System.err.println("Error: " + e.getMessage());
+        user.setText(BerandaService.getSession());
+       
+BerandaService.BerandaData data = BerandaService.getBerandaData();
+if (data != null) {
+    jumlah_beras.setText(data.getBeras() + " KG");
+     total_uangtunai.setText("Rp " + data.getUangTunai());
+} else {
+  //  jLabel3.setText("Gagal");
 }
-
-       // Label2.setText("asgdahg kG");
 
     }
 
@@ -74,24 +67,26 @@ public class FrameBeranda extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        edtNaafi = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        user = new javax.swing.JTextField();
+        jumlah_muzakkibayar = new javax.swing.JTextField();
+        total_uangtunai = new javax.swing.JTextField();
+        jumlah_beras = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        edtNaafi = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 440));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -104,7 +99,6 @@ public class FrameBeranda extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 170, 41));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -113,7 +107,6 @@ public class FrameBeranda extends javax.swing.JFrame {
                 jLabel7MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 50, 40));
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 204));
         jPanel7.setForeground(new java.awt.Color(0, 153, 204));
@@ -132,8 +125,6 @@ public class FrameBeranda extends javax.swing.JFrame {
         jLabel13.setText("Laporan");
         jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, 40));
-
         jPanel6.setBackground(new java.awt.Color(0, 153, 204));
         jPanel6.setForeground(new java.awt.Color(0, 153, 204));
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -150,8 +141,6 @@ public class FrameBeranda extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel11.setText("Penyaluran");
         jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
-
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 170, 40));
 
         jPanel5.setBackground(new java.awt.Color(0, 153, 204));
         jPanel5.setForeground(new java.awt.Color(0, 153, 204));
@@ -170,8 +159,6 @@ public class FrameBeranda extends javax.swing.JFrame {
         jLabel9.setText("Pembayaran");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 170, 40));
-
         jPanel4.setBackground(new java.awt.Color(0, 153, 204));
         jPanel4.setForeground(new java.awt.Color(0, 153, 204));
         jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -188,8 +175,6 @@ public class FrameBeranda extends javax.swing.JFrame {
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Muzakki_FIXX.png"))); // NOI18N
         jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 30, 30));
-
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 170, 40));
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 204));
         jPanel3.setForeground(new java.awt.Color(0, 153, 204));
@@ -208,8 +193,6 @@ public class FrameBeranda extends javax.swing.JFrame {
         jLabel17.setText("Mustahiq");
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 170, 40));
-
         jPanel8.setBackground(new java.awt.Color(0, 153, 204));
         jPanel8.setForeground(new java.awt.Color(0, 153, 204));
         jPanel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -227,31 +210,44 @@ public class FrameBeranda extends javax.swing.JFrame {
         jLabel19.setText("Beranda");
         jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, 20));
 
-        jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 170, 40));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 440));
-
-        edtNaafi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Naafi'_Banner.png"))); // NOI18N
-        jPanel1.add(edtNaafi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 490));
-
-        jLabel6.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel6.setText("Rp 14.433.626");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 110, 30));
-
-        jLabel2.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel2.setText("1231 Orang");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 120, 30));
-
-        jLabel3.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel3.setText("12342.34 KG");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 110, 40));
-
-        jLabel4.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel4.setText("Rp 2.367.444");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 110, 40));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Zakat Terkumpul.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 490));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 80, 170, 440);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -260,16 +256,70 @@ public class FrameBeranda extends javax.swing.JFrame {
                 jLabel20MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 50, 60));
+        jPanel1.add(jLabel20);
+        jLabel20.setBounds(110, 80, 50, 60);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/About_Fix2.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 430));
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 80, 170, 430);
+
+        jLabel6.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel6.setText("Jumlah Muzakki Membayar");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(230, 230, 180, 30);
+
+        jLabel22.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel22.setText("Total Uang Tunai");
+        jPanel1.add(jLabel22);
+        jLabel22.setBounds(230, 190, 110, 30);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(660, 420, 40, 40);
+
+        jLabel23.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel23.setText("Hi, ");
+        jPanel1.add(jLabel23);
+        jLabel23.setBounds(620, 460, 30, 30);
+
+        user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userActionPerformed(evt);
+            }
+        });
+        jPanel1.add(user);
+        user.setBounds(641, 460, 80, 30);
+        jPanel1.add(jumlah_muzakkibayar);
+        jumlah_muzakkibayar.setBounds(430, 230, 160, 30);
+        jPanel1.add(total_uangtunai);
+        total_uangtunai.setBounds(430, 190, 160, 30);
+        jPanel1.add(jumlah_beras);
+        jumlah_beras.setBounds(430, 150, 160, 30);
+
+        jLabel5.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel5.setText("Jumlah Beras");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(230, 150, 110, 30);
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel21.setText("jLabel21");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 580, 420));
+        jPanel1.add(jLabel21);
+        jLabel21.setBounds(170, 80, 580, 420);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
+        edtNaafi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Naafi'_Banner.png"))); // NOI18N
+        jPanel1.add(edtNaafi);
+        edtNaafi.setBounds(0, 0, 750, 490);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -392,6 +442,10 @@ public class FrameBeranda extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jPanel6MouseClicked
 
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,8 +498,8 @@ public class FrameBeranda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -459,5 +513,9 @@ public class FrameBeranda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JTextField jumlah_beras;
+    private javax.swing.JTextField jumlah_muzakkibayar;
+    private javax.swing.JTextField total_uangtunai;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

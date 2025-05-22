@@ -63,6 +63,15 @@ public class UserService {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+             // Ambil nama dari hasil query
+            String nama = rs.getString("nama");
+
+            // Update kolom session di tabel config
+            String updateSessionSQL = "UPDATE config SET session = ? WHERE id = 1";
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateSessionSQL)) {
+                updateStmt.setString(1, nama);
+                updateStmt.executeUpdate();
+            }
                 return "success";
             } else {
                 return "Username atau password salah!";
@@ -72,4 +81,21 @@ public class UserService {
             return "Terjadi kesalahan saat login.";
         }
     }
+    
+    public static String getSession() {
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT session FROM config WHERE id = 1";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("session");
+        } else {
+            return null; // Tidak ditemukan data dengan id = 1
+        }
+    } catch (SQLException e) {
+        System.err.println("Error getting session: " + e.getMessage());
+        return null;
+    }
+}
+
 }

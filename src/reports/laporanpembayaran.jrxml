@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pembayaran" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df013db5-f76e-44d3-b0df-bcbc46d93160">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="pembayaran_laporan"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="laporanpembayaran"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -79,7 +79,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{nama_keluarga}]]></textFieldExpression>
 					</textField>
@@ -88,7 +88,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{jumlah_anggota}]]></textFieldExpression>
 					</textField>
@@ -97,7 +97,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{jenis_zakat}]]></textFieldExpression>
 					</textField>
@@ -106,7 +106,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{jenis_pembayaran}]]></textFieldExpression>
 					</textField>
@@ -115,7 +115,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{total_pembayaran}]]></textFieldExpression>
 					</textField>
@@ -124,7 +124,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{amil}]]></textFieldExpression>
 					</textField>
@@ -133,7 +133,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 					</textField>
@@ -142,7 +142,7 @@ FROM pembayaran]]>
 							<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center">
-							<font size="12"/>
+							<font fontName="Rockwell" size="12"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
 					</textField>
@@ -325,7 +325,7 @@ FROM pembayaran]]>
 					<font fontName="Rockwell" size="12"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[DATE]]></text>
+				<text><![CDATA[TIME]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
