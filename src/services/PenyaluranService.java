@@ -112,6 +112,18 @@ private boolean createPenyaluran(String nama_mustahiq, String golongan, int umur
         stmt.setString(7, waktu);
 
         int rowsAffected = stmt.executeUpdate();
+         // Jika insert berhasil, lakukan update ke tabel total
+        if (rowsAffected > 0) {
+            String updateSql = "";
+            updateSql = "UPDATE total SET beras = beras - ?";
+           
+            if (!updateSql.isEmpty()) {
+                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+                    updateStmt.setDouble(1, jumlah_disalurkan);
+                    updateStmt.executeUpdate();
+                }
+            }
+        }
         return rowsAffected > 0;
     } catch (SQLException e) {
         System.err.println("Error creating pembayaran: " + e.getMessage());

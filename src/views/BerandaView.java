@@ -271,7 +271,7 @@ if (data != null) {
         jLabel22.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel22.setText("Total Uang Tunai");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(230, 190, 110, 30);
+        jLabel22.setBounds(230, 190, 120, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
         jPanel1.add(jLabel2);
