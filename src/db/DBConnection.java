@@ -1,13 +1,24 @@
 package db;
 
-import views.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
+    
     private static final String URL = "jdbc:sqlite:zakat.db";
     private static Connection conn = null;
+
+  
+   /** public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver tidak ditemukan: " + e.getMessage());
+        }
+
+        return DriverManager.getConnection(URL);
+    }*/
 
     public static Connection getConnection() {
         if (conn == null) {
@@ -20,7 +31,8 @@ public class DBConnection {
             }
         }
         return conn;
-    }
+    } 
+    
 
     public static void closeConnection() {
         try {

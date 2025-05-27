@@ -11,7 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class PembayaranService {
+    
+   public static List<String> getDaftarKepalaKeluarga() {
+        List<String> daftarNama = new ArrayList<>();
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "SELECT nama FROM keluarga";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                daftarNama.add(rs.getString("nama"));
+            }
+
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            // Sebaiknya lempar exception ke atas, tapi jika ingin cepat:
+            System.err.println("Gagal memuat data keluarga: " + e.getMessage());
+        }
+
+        return daftarNama;
+    }
    public Map<String, Object> getDetailKeluarga(String namaKepala) {
         Map<String, Object> result = new HashMap<>();
 
@@ -42,7 +65,7 @@ public class PembayaranService {
             // Ambil data anggota keluarga
             String sql2 = "SELECT * FROM anggota_keluarga WHERE keluarga = ?";
             ps2 = con.prepareStatement(sql2);
-            ps2.setString(1, namaKepala); // bisa diganti id jika sudah relasi foreign key
+            ps2.setString(1, namaKepala);
             rs2 = ps2.executeQuery();
 
             List<Object[]> anggota = new ArrayList<>();
@@ -71,7 +94,7 @@ public class PembayaranService {
     }
 
 
-public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat, String jenisPembayaran, double totalPembayaran, String amil, String toString, String toString1) {
+public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat, String jenisPembayaran, double totalPembayaran, String amil, String tanggal, String waktu) {
     if (namaKeluarga.isEmpty() || jenisZakat.isEmpty() || jenisPembayaran.isEmpty() || amil.isEmpty()) {
         return false;
     }
@@ -80,11 +103,8 @@ public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jen
         return false;
     }
 
-    String date = java.time.LocalDate.now().toString();
-    String time = java.time.LocalTime.now().toString();
-
     return createPembayaran(namaKeluarga, jumlahAnggota, jenisZakat,
-                            jenisPembayaran, totalPembayaran, amil, date, time);
+                            jenisPembayaran, totalPembayaran, amil, tanggal, waktu);
 }
 
 private boolean createPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat,
@@ -129,5 +149,37 @@ private boolean createPembayaran(String namaKeluarga, int jumlahAnggota, String 
     }
 }
 
+ public static String hitungZakatMaal(double pendapatan) {
+        double hargaEmas = 0;
+        String sql = "SELECT harga_emas_85gram FROM config WHERE id = 1";
+
+        Connection conn = DBConnection.getConnection(); // koneksi tunggal
+        if (conn == null) {
+            return "Koneksi DB gagal";
+        }
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                hargaEmas = rs.getDouble("harga_emas_85gram");
+            }
+
+            rs.close();
+            stmt.close();
+
+            if (pendapatan >= hargaEmas) {
+                double zakat = pendapatan * 0.025;
+                return String.format("%.2f", zakat);
+            } else {
+                return "Belum Mencapai Nisab";
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Gagal menghitung zakat: " + e.getMessage());
+            return "Error DB";
+        }
+    }
      
 }

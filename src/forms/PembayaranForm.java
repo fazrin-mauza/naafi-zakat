@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import views.BerandaView;
 import views.LaporanView;
 import auth.Login;
+import helper.Function;
 import views.MustahiqView;
 import views.MuzakkiView;
 
@@ -43,27 +44,21 @@ public class PembayaranForm extends javax.swing.JFrame {
          amil.setSelectedItem(sessionUser); // Pilih secara default
         
     }
-
+private void resetForm() {
+    keluargaBox.setSelectedItem("--Pilih Kepala Keluarga--");
+    pembayaranBox.setSelectedItem("--Pilih--");
+}
 
 
 private void loadDataKepalaKeluarga() {
-        try {
-            Connection con = DBConnection.getConnection();
-            String sql = "SELECT nama FROM keluarga";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    keluargaBox.removeAllItems();
+    keluargaBox.addItem("--Pilih Kepala Keluarga--");
 
-            jComboBox3.removeAllItems();
-            jComboBox3.addItem("--Pilih Kepala Keluarga--");
-            while (rs.next()) {
-                jComboBox3.addItem(rs.getString("nama"));
-            }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal memuat data keluarga: " + e.getMessage());
-        }
+    List<String> daftarNama = PembayaranService.getDaftarKepalaKeluarga();
+    for (String nama : daftarNama) {
+        keluargaBox.addItem(nama);
     }
+}
 
    int jumlahAnggotaKeluarga;
    String namaKeluarga;
@@ -79,9 +74,9 @@ private void loadDataKepalaKeluarga() {
     }
 
     // Tampilkan status dan alamat
-    jComboBox2.removeAllItems();
-    jComboBox2.addItem((String) data.get("status"));
-    jTextArea1.setText((String) data.get("alamat"));
+    statusBox.removeAllItems();
+    statusBox.addItem((String) data.get("status"));
+    alamatArea.setText((String) data.get("alamat"));
 
     // Tampilkan anggota keluarga di tabel
     DefaultTableModel model = (DefaultTableModel) tabelanggota.getModel();
@@ -110,11 +105,11 @@ private void loadDataKepalaKeluarga() {
         jLabel5 = new javax.swing.JLabel();
         amil = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        statusBox = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelanggota = new javax.swing.JTable();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        pembayaranBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -144,9 +139,9 @@ private void loadDataKepalaKeluarga() {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        keluargaBox = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        alamatArea = new javax.swing.JTextArea();
         jComboBox4 = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
 
@@ -183,13 +178,13 @@ private void loadDataKepalaKeluarga() {
         jLabel7.setText("Status Keluarga");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 90, 30));
 
-        jComboBox2.setToolTipText("");
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        statusBox.setToolTipText("");
+        statusBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                statusBoxActionPerformed(evt);
             }
         });
-        jPanel9.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 170, 26));
+        jPanel9.add(statusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 170, 26));
 
         jLabel8.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel8.setText("Pembayaran");
@@ -226,14 +221,14 @@ private void loadDataKepalaKeluarga() {
 
         jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 270, 80));
 
-        jComboBox5.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Beras", "Uang Tunai", " " }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+        pembayaranBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        pembayaranBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Beras", "Uang Tunai", " " }));
+        pembayaranBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
+                pembayaranBoxActionPerformed(evt);
             }
         });
-        jPanel9.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 170, 30));
+        jPanel9.add(pembayaranBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 170, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 440));
@@ -411,7 +406,7 @@ private void loadDataKepalaKeluarga() {
 
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jButton3.setText("Batal");
+        jButton3.setText("Reset");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,17 +430,17 @@ private void loadDataKepalaKeluarga() {
         jLabel24.setText("Alamat");
         jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 90, 30));
 
-        jComboBox3.setToolTipText("");
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        keluargaBox.setToolTipText("");
+        keluargaBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                keluargaBoxActionPerformed(evt);
             }
         });
-        jPanel9.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 60, 170, 26));
+        jPanel9.add(keluargaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 60, 170, 26));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        alamatArea.setColumns(20);
+        alamatArea.setRows(5);
+        jScrollPane2.setViewportView(alamatArea);
 
         jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 170, 40));
 
@@ -587,15 +582,35 @@ private void loadDataKepalaKeluarga() {
     }//GEN-LAST:event_totalActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+   resetForm();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String namaKepalaKeluarga = namaKeluarga;
+        String pesan = "ﻧَﻮَﻳْﺖُ ﺃَﻥْ ﺃُﺧْﺮِﺝَ ﺯَﻛَﺎﺓَ ﺍﻟْﻔِﻄْﺮِ ﻋَﻦِّيْ ﻭَﻋَﻦْ ﺟَﻤِﻴْﻊِ ﻣَﺎ ﻳَﻠْﺰَﻣُنِيْ ﻧَﻔَﻘَﺎﺗُﻬُﻢْ ﺷَﺮْﻋًﺎ ﻓَﺮْﺿًﺎ ِﻟﻠﻪِ ﺗَﻌَﺎﻟَﻰ\n"
+                + "Aku niat mengeluarkan zakat fitrah untuk diriku dan seluruh orang yang nafkahnya menjadi tanggunganku, fardu karena Allah Ta‘âlâ."
+                  ;
+        String[] opsi = {"Lanjutkan", "Batal"};
+        int pilihan = JOptionPane.showOptionDialog(
+            this,
+            pesan,
+            "Konfirmasi Pembayaran",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            opsi,
+            opsi[0] // default pilihan
+        );
+
+        if (pilihan == 0) {
+            String namaKepalaKeluarga = namaKeluarga;
         int jumlahAnggota = jumlahAnggotaKeluarga;
         String jenisZakat = "FITRI"; 
-        String jenisPembayaran = (String) jComboBox5.getSelectedItem();
+        String jenisPembayaran = (String) pembayaranBox.getSelectedItem();
         String totalText = total.getText();
+           if (totalText == null || totalText.isEmpty() || namaKepalaKeluarga.equals("--Pilih Kepala Keluarga--")) {
+           JOptionPane.showMessageDialog(this, "Semua field wajib diisi!");
+           return; // << Hentikan eksekusi, kode di bawah tidak akan dijalankan
+       } 
         totalText = totalText.replaceAll("[^\\d,]", "");
         totalText = totalText.replace(".", "");
         totalText = totalText.replace(",", ".");
@@ -605,21 +620,21 @@ private void loadDataKepalaKeluarga() {
 
 
  // Ambil tanggal & waktu sekarang
-    java.time.LocalDate tanggal = java.time.LocalDate.now();
-    java.time.LocalTime waktu = java.time.LocalTime.now();
+    String tanggal = Function.getCurrentDate();
+    String waktu = Function.getCurrentTime();
 
     PembayaranService service = new PembayaranService();
   /**  boolean success = service.insertPembayaran(
         namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
         namaAmil, tanggal.toString(), waktu.toString()
         */
-    boolean success = service.buatPembayaran(
-        namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
-        namaAmil, tanggal.toString(), waktu.toString()
+    boolean success = service.buatPembayaran(namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
+        namaAmil, tanggal, waktu.toString()
     );
 
     if (success) {
         JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
+        resetForm();
      //   BerandaView rgf = new BerandaView();
       //  rgf.setVisible(true);
       //  rgf.pack();
@@ -629,28 +644,28 @@ private void loadDataKepalaKeluarga() {
     } else {
         JOptionPane.showMessageDialog(this, "Gagal menyimpan data pembayaran.");
     }
-
-
-
+        } else {
+            // Aksi jika pengguna klik "Batal"
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        String namaKepala = (String) jComboBox3.getSelectedItem();
+    private void keluargaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluargaBoxActionPerformed
+        String namaKepala = (String) keluargaBox.getSelectedItem();
         if (!namaKepala.equals("")) {
             tampilkanDetailKeluarga(namaKepala);
         }
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_keluargaBoxActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void statusBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_statusBoxActionPerformed
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
-String selectedPembayaran = (String) jComboBox5.getSelectedItem();
+    private void pembayaranBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pembayaranBoxActionPerformed
+String selectedPembayaran = (String) pembayaranBox.getSelectedItem();
     jComboBox4.removeAllItems(); // reset isi jumlah
 
     if ("Beras".equals(selectedPembayaran)) {
@@ -666,13 +681,13 @@ String selectedPembayaran = (String) jComboBox5.getSelectedItem();
     } else {
         jComboBox4.addItem("--Pilih Jumlah--");
     }       
-    }//GEN-LAST:event_jComboBox5ActionPerformed
+    }//GEN-LAST:event_pembayaranBoxActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
      int jumlahAnggota = tabelanggota.getRowCount();
 
     String nilai = (String) jComboBox4.getSelectedItem();
-    String jenisPembayaran = (String) jComboBox5.getSelectedItem();
+    String jenisPembayaran = (String) pembayaranBox.getSelectedItem();
 
     int nominalPerOrang = 0;
     int totalPembayaran = 0;
@@ -764,14 +779,12 @@ String selectedPembayaran = (String) jComboBox5.getSelectedItem();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea alamatArea;
     private javax.swing.JComboBox<String> amil;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -807,7 +820,9 @@ String selectedPembayaran = (String) jComboBox5.getSelectedItem();
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> keluargaBox;
+    private javax.swing.JComboBox<String> pembayaranBox;
+    private javax.swing.JComboBox<String> statusBox;
     private javax.swing.JTable tabelanggota;
     private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables

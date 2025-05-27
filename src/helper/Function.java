@@ -1,0 +1,46 @@
+package helper;
+
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+public class Function {
+
+    // Fungsi format ke Rupiah
+    public static String formatRupiah(double amount) {
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat format = NumberFormat.getCurrencyInstance(localeID);
+        return format.format(amount);
+    }
+
+    // Fungsi angka ke teks terbilang
+    public static String terbilang(long n) {
+        String[] angka = {
+            "", "satu", "dua", "tiga", "empat", "lima", "enam",
+            "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"
+        };
+
+        if (n < 12) return angka[(int)n];
+        if (n < 20) return terbilang(n - 10) + " belas";
+        if (n < 100) return terbilang(n / 10) + " puluh " + terbilang(n % 10);
+        if (n < 200) return "seratus " + terbilang(n - 100);
+        if (n < 1000) return terbilang(n / 100) + " ratus " + terbilang(n % 100);
+        if (n < 2000) return "seribu " + terbilang(n - 1000);
+        if (n < 1000000) return terbilang(n / 1000) + " ribu " + terbilang(n % 1000);
+        if (n < 1000000000) return terbilang(n / 1000000) + " juta " + terbilang(n % 1000000);
+        return "angka terlalu besar";
+    }
+    
+     // Format tanggal & waktu
+    public static String getCurrentTime() {
+        return LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+    public static String getCurrentDate() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+    public static String getDateTime() {
+        return getCurrentDate() + " " + getCurrentTime();
+    }
+}

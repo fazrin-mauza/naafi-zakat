@@ -82,22 +82,6 @@ public class MustahiqCreateService {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     private boolean isMustahiqExist(String nama, String handphone) {
         Connection conn = DBConnection.getConnection();

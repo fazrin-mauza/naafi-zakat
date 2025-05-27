@@ -4,6 +4,7 @@ package views;
 //import static db.DBConnection.getConnection;
 
 import auth.Login;
+import forms.MaalForm;
 import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import java.util.HashMap;
@@ -19,8 +20,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class LaporanView extends javax.swing.JFrame {
-    public LaporanView() {
+public class PembayaranView extends javax.swing.JFrame {
+    public PembayaranView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -78,7 +79,7 @@ public static Connection getConnection() throws SQLException {
         laporanpembayaran.setBackground(new java.awt.Color(0, 255, 255));
         laporanpembayaran.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         laporanpembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Penerimaan Zakat_Icon.png"))); // NOI18N
-        laporanpembayaran.setText("Laporan Pembayaran Zakat");
+        laporanpembayaran.setText("Zakat Fitri");
         laporanpembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanpembayaranActionPerformed(evt);
@@ -89,7 +90,7 @@ public static Connection getConnection() throws SQLException {
         laporanpenyaluran.setBackground(new java.awt.Color(0, 255, 51));
         laporanpenyaluran.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         laporanpenyaluran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Pengeluaran Zakat_icon.png"))); // NOI18N
-        laporanpenyaluran.setText("Laporan Penyaluran Zakat");
+        laporanpenyaluran.setText("Zakat Maal");
         laporanpenyaluran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanpenyaluranActionPerformed(evt);
@@ -270,8 +271,8 @@ public static Connection getConnection() throws SQLException {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel3.setText("Data Laporan");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+        jLabel3.setText("Pembayaran Zakat");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -283,20 +284,12 @@ public static Connection getConnection() throws SQLException {
     }// </editor-fold>//GEN-END:initComponents
 
     private void laporanpenyaluranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanpenyaluranActionPerformed
-        
-        try {
-            // Pastikan koneksi SQLite menggunakan java.sql.Connection
-            Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
-
-            String reportPath = "src/reports/LaporanPenyaluran.jasper";
-            HashMap<String, Object> parameters = new HashMap<>();
-            JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
-            JasperViewer viewer = new JasperViewer(print, false);
-            viewer.setVisible(true);
-            
-      } catch (Exception e) {
-        e.printStackTrace();
-    }
+        MaalForm rgf = new MaalForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();        
     }//GEN-LAST:event_laporanpenyaluranActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -339,7 +332,7 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        LaporanView rgf = new LaporanView();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -357,7 +350,7 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -417,20 +410,12 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void laporanpembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanpembayaranActionPerformed
-
-        try {
-            // Pastikan koneksi SQLite menggunakan java.sql.Connection
-            Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
-
-            String reportPath = "src/reports/LaporanPembayaran.jasper";
-            HashMap<String, Object> parameters = new HashMap<>();
-            JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
-            JasperViewer viewer = new JasperViewer(print, false);
-            viewer.setVisible(true);
-            
-      } catch (Exception e) {
-        e.printStackTrace();
-    }
+        PembayaranForm rgf = new PembayaranForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_laporanpembayaranActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -458,14 +443,18 @@ public static Connection getConnection() throws SQLException {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LaporanView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PembayaranView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LaporanView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PembayaranView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LaporanView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PembayaranView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LaporanView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PembayaranView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -474,7 +463,7 @@ public static Connection getConnection() throws SQLException {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LaporanView().setVisible(true);
+                new PembayaranView().setVisible(true);
             }
         });
     }
