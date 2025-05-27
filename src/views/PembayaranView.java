@@ -332,7 +332,7 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        LaporanView rgf = new LaporanView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

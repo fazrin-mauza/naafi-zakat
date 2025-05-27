@@ -5,12 +5,8 @@ import services.UserService;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import db.DBConnection;
 //import java.awt.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -19,7 +15,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import views.BerandaView;
 import views.LaporanView;
@@ -27,6 +22,7 @@ import auth.Login;
 import helper.Function;
 import views.MustahiqView;
 import views.MuzakkiView;
+import views.PembayaranView;
 
 
 public class PembayaranForm extends javax.swing.JFrame {
@@ -518,7 +514,7 @@ private void loadDataKepalaKeluarga() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -586,9 +582,16 @@ private void loadDataKepalaKeluarga() {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String pesan = "ﻧَﻮَﻳْﺖُ ﺃَﻥْ ﺃُﺧْﺮِﺝَ ﺯَﻛَﺎﺓَ ﺍﻟْﻔِﻄْﺮِ ﻋَﻦِّيْ ﻭَﻋَﻦْ ﺟَﻤِﻴْﻊِ ﻣَﺎ ﻳَﻠْﺰَﻣُنِيْ ﻧَﻔَﻘَﺎﺗُﻬُﻢْ ﺷَﺮْﻋًﺎ ﻓَﺮْﺿًﺎ ِﻟﻠﻪِ ﺗَﻌَﺎﻟَﻰ\n"
-                + "Aku niat mengeluarkan zakat fitrah untuk diriku dan seluruh orang yang nafkahnya menjadi tanggunganku, fardu karena Allah Ta‘âlâ."
+         String pesan;
+        if (jumlahAnggotaKeluarga == 1) {
+          pesan = "ﻧَﻮَﻳْﺖُ أَﻥْ أُﺧْﺮِﺝَ ﺯَﻛَﺎﺓَ ﺍﻟْﻔِﻄْﺮِ ﻋَﻦْ ﻧَﻔْسيْ ﻓَﺮْﺿًﺎ ِﻟﻠﻪِ ﺗَﻌَﺎﻟَﻰ\n"
+                + "Aku niat mengeluarkan zakat fitrah untuk diriku sendiri, fardu karena Allah Ta‘âlâ."
                   ;
+      } else {
+           pesan = "ﻧَﻮَﻳْﺖُ ﺃَﻥْ ﺃُﺧْﺮِﺝَ ﺯَﻛَﺎﺓَ ﺍﻟْﻔِﻄْﺮِ ﻋَﻦِّيْ ﻭَﻋَﻦْ ﺟَﻤِﻴْﻊِ ﻣَﺎ ﻳَﻠْﺰَﻣُنِيْ ﻧَﻔَﻘَﺎﺗُﻬُﻢْ ﺷَﺮْﻋًﺎ ﻓَﺮْﺿًﺎ ِﻟﻠﻪِ ﺗَﻌَﺎﻟَﻰ\n"
+                + "Aku niat mengeluarkan zakat fitrah untuk diriku dan seluruh orang yang nafkahnya menjadi tanggunganku, fardu karena Allah Ta‘âlâ."
+                  ;  
+       }
         String[] opsi = {"Lanjutkan", "Batal"};
         int pilihan = JOptionPane.showOptionDialog(
             this,

@@ -1,6 +1,7 @@
 package services;
 
 import db.DBConnection;
+import helper.Function;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,9 +89,9 @@ public class PenyaluranService {
        return "Umur atau jumlah total disalurkan tidak boleh kurang dari 1!";
     }
    
-    String date = java.time.LocalDate.now().toString();
-    String time = java.time.LocalTime.now().toString();
-
+    String date = Function.getCurrentDate();
+    String time = Function.getCurrentTime();
+    
      boolean success = createPenyaluran(nama_mustahiq, golongan, umur,
                                         double_jumlahDisalurkan, amil, date, time);
      return success ? "success" : "Gagal menyimpan data penyaluran. Silakan coba lagi.";

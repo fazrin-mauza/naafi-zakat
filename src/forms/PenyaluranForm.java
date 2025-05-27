@@ -1,22 +1,18 @@
 package forms;
 
-import com.sun.jdi.connect.spi.Connection;
-import db.DBConnection;
-import java.sql.PreparedStatement;
+
 import services.PenyaluranService;
-import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import java.sql.ResultSet;
 import java.util.List;
-import services.PembayaranService;
 import services.UserService;
 import views.BerandaView;
 import views.LaporanView;
 import auth.Login;
 import views.MustahiqView;
 import views.MuzakkiView;
+import views.PembayaranView;
 
  
 public class PenyaluranForm extends javax.swing.JFrame {
@@ -30,6 +26,12 @@ public class PenyaluranForm extends javax.swing.JFrame {
          boxAmil.addItem(sessionUser); // Tambahkan hanya satu item
          boxAmil.setSelectedItem(sessionUser); // Pilih secara default
     }
+    
+private void resetForm() {
+    namaMustahiq.setSelectedItem("--Pilih Mustahiq--");
+    textAlamat.setText("");
+    jumlahDisalurkan.setText("");
+}
 
     private PenyaluranService penyaluranService = new PenyaluranService();
 
@@ -409,7 +411,7 @@ private void loadDataMustahiq() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -473,12 +475,7 @@ private void loadDataMustahiq() {
     }//GEN-LAST:event_jumlahDisalurkanActionPerformed
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        namaMustahiq.setSelectedItem("");
-        boxGolongan.setSelectedItem("");
-        int umur = (int) spinerUmur.getValue();
-        textAlamat.setText("");
-        jumlahDisalurkan.setText("");
-        boxAmil.setSelectedItem("");
+    resetForm();
     }//GEN-LAST:event_resetActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -498,6 +495,7 @@ private void loadDataMustahiq() {
     // Tampilkan hasil
     if (result.equals("success")) {
         JOptionPane.showMessageDialog(this, "Data penyaluran berhasil disimpan!");
+        resetForm();
     } else {
         JOptionPane.showMessageDialog(this, result);
     }

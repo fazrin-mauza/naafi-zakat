@@ -2,7 +2,6 @@ package views;
 
 import auth.Login;
 import forms.MuzakkiCreateForm;
-import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import services.MuzakkiService; 
 import javax.swing.JFrame;
@@ -406,7 +405,7 @@ private void loadDataKeluarga() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

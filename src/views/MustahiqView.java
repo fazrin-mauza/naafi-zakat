@@ -1,7 +1,6 @@
 package views;
 
 import auth.Login;
-import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import forms.MustahiqCreateForm;
 import services.MustahiqService; 
@@ -14,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import services.MuzakkiService;
+
 
 
 
@@ -404,7 +403,7 @@ public class MustahiqView extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+       PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

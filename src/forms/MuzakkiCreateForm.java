@@ -9,17 +9,14 @@ import javax.swing.table.TableColumn;
 
 import db.DBConnection;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import services.MustahiqCreateService;
 import services.MuzakkiCreateService;
 import views.BerandaView;
 import views.LaporanView;
 import auth.Login;
 import views.MustahiqView;
 import views.MuzakkiView;
+import views.PembayaranView;
 
  
 public class MuzakkiCreateForm extends javax.swing.JFrame {
@@ -615,7 +612,7 @@ private void resetFormAndTable() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        MuzakkiCreateForm rgf = new MuzakkiCreateForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

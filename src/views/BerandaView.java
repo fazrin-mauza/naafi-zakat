@@ -1,7 +1,6 @@
 package views;
 
 import auth.Login;
-import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -463,7 +462,7 @@ if (data != null) {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

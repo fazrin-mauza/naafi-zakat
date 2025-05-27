@@ -10,6 +10,7 @@ import views.LaporanView;
 import auth.Login;
 import views.MustahiqView;
 import views.MuzakkiView;
+import views.PembayaranView;
 
 
 
@@ -445,7 +446,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        MustahiqCreateForm rgf = new MustahiqCreateForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);

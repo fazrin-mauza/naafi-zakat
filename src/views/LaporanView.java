@@ -4,7 +4,6 @@ package views;
 //import static db.DBConnection.getConnection;
 
 import auth.Login;
-import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import java.util.HashMap;
 import javax.swing.JFrame;
@@ -17,6 +16,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import services.LaporanService;
 
 
 public class LaporanView extends javax.swing.JFrame {
@@ -357,7 +357,7 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranForm rgf = new PembayaranForm();
+        PembayaranView rgf = new PembayaranView();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -434,11 +434,27 @@ public static Connection getConnection() throws SQLException {
     }//GEN-LAST:event_laporanpembayaranActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String konfirmasi = JOptionPane.showInputDialog(this, 
+        "Ketik 'HAPUS SEMUA DATA PENYALURAN' untuk mengosongkan data:");
+    if (konfirmasi != null && konfirmasi.equalsIgnoreCase("HAPUS SEMUA DATA PENYALURAN")) {
+        String hasil = LaporanService.emptyTabelPenyaluran();  // ← GANTI DI SINI
+        JOptionPane.showMessageDialog(this, hasil); 
+    } else if (konfirmasi != null) {
+        JOptionPane.showMessageDialog(this, 
+            "Konfirmasi tidak cocok. Penghapusan dibatalkan.");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+         String konfirmasi = JOptionPane.showInputDialog(this, 
+        "Ketik 'HAPUS SEMUA DATA PEMBAYARAN' untuk mengosongkan data:");
+    if (konfirmasi != null && konfirmasi.equalsIgnoreCase("HAPUS SEMUA DATA PEMBAYARAN")) {
+        String hasil = LaporanService.emptyTabelPembayaran();  // ← GANTI DI SINI
+        JOptionPane.showMessageDialog(this, hasil); 
+    } else if (konfirmasi != null) {
+        JOptionPane.showMessageDialog(this, 
+            "Konfirmasi tidak cocok. Penghapusan dibatalkan.");
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
