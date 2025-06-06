@@ -66,6 +66,11 @@ public class Login extends javax.swing.JFrame {
 
         username.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         jLabel5.setText("Password");
@@ -187,7 +192,7 @@ public class Login extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menjadi Manfaat_word.png"))); // NOI18N
         jLabel7.setText("jLabel7");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, 0, 1790, 1240);
+        jLabel7.setBounds(0, 0, 1789, 1240);
 
         edtCover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menjadi Manfaat_FIXX.png"))); // NOI18N
         edtCover.setText("jLabel7");
@@ -269,6 +274,10 @@ public class Login extends javax.swing.JFrame {
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments

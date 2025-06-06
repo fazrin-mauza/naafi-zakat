@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class MuzakkiCreateService {
 
-    public String keluargaCreate(String namaKeluarga, String statusKeluarga, String alamat, String handphone, int jumlah) {
+    public String keluargaCreate(String namaKeluarga, String statusKeluarga, String alamat,int rt, int rw, String handphone, int jumlah) {
         if (namaKeluarga.isEmpty() || statusKeluarga.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
             return "Semua field wajib diisi!";
         }
@@ -27,19 +27,21 @@ public class MuzakkiCreateService {
             return "Nama keluarga "+namaKeluarga+" sudah terdaftar.";
         }
 
-        boolean success = createKeluarga(namaKeluarga, statusKeluarga, alamat, handphone, jumlah);
+        boolean success = createKeluarga(namaKeluarga, statusKeluarga, alamat, rt, rw, handphone, jumlah);
         return success ? "success" : "Gagal membuat keluarga. Silakan coba lagi.";
     }
 
-    public boolean createKeluarga(String namaKeluarga, String statusKeluarga, String alamat, String handphone, int jumlah) {
+    public boolean createKeluarga(String namaKeluarga, String statusKeluarga,String alamat, int rt, int rw, String handphone, int jumlah) {
         Connection conn = DBConnection.getConnection();
-        String sql = "INSERT INTO keluarga (nama, status, alamat, handphone, jumlah) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO keluarga (nama, status, alamat, rt, rw, handphone, jumlah) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, namaKeluarga);
             stmt.setString(2, statusKeluarga);
             stmt.setString(3, alamat);
-            stmt.setString(4, handphone);
-            stmt.setInt(5, jumlah);
+            stmt.setInt(4, rt);
+            stmt.setInt(5, rw);
+            stmt.setString(6, handphone);
+            stmt.setInt(7, jumlah);
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -179,7 +181,7 @@ private void updateJumlahAnggota(String namaKeluarga) {
     return anggota;
 }
 
-    public String keluargaUpdate(String namaBaru, String status, String alamat, String handphone, int jumlah, String namaLama) {
+    public String keluargaUpdate(String namaBaru, String status, String alamat,int rt, int rw, String handphone, int jumlah, String namaLama) {
     if (namaBaru.isEmpty() || status.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
         return "Semua field wajib diisi!";
     }
@@ -190,20 +192,22 @@ private void updateJumlahAnggota(String namaKeluarga) {
     alamat = alamat.toUpperCase();
     handphone = handphone.toUpperCase();
 
-    boolean success = updateKeluarga(namaBaru, status, alamat, handphone, jumlah, namaLama);
+    boolean success = updateKeluarga(namaBaru, status, alamat, rt, rw, handphone, jumlah, namaLama);
     return success ? "success" : "Gagal mengubah data keluarga. Silakan coba lagi.";
 }
-public boolean updateKeluarga(String namaBaru, String status, String alamat, String handphone, int jumlah, String namaLama) {
+public boolean updateKeluarga(String namaBaru, String status, String alamat, int rt, int rw, String handphone, int jumlah, String namaLama) {
     Connection conn = DBConnection.getConnection();
-    String sql = "UPDATE keluarga SET nama = ?, status = ?, alamat = ?, handphone = ?, jumlah = ? WHERE nama = ?";
+    String sql = "UPDATE keluarga SET nama = ?, status = ?, alamat = ?, rt = ?,rw = ?, handphone = ?, jumlah = ? WHERE nama = ?";
 
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, namaBaru);
         stmt.setString(2, status);
         stmt.setString(3, alamat);
-        stmt.setString(4, handphone);
-        stmt.setInt(5, jumlah);
-        stmt.setString(6, namaLama);
+        stmt.setInt(4, rt);
+        stmt.setInt(5, rw);
+        stmt.setString(6, handphone);
+        stmt.setInt(7, jumlah);
+        stmt.setString(8, namaLama);
 
         int rowsAffected = stmt.executeUpdate();
         return rowsAffected > 0;

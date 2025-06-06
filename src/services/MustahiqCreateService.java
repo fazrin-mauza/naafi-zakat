@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class MustahiqCreateService {
 
-    public String mustahiqCreate(String nama, String kategori, int umur, String alamat, String nomorhandphone) {
+    public String mustahiqCreate(String nama, String kategori, int umur, String alamat, int rt, int rw, String nomorhandphone) {
         // Validasi input
         if (nama.isEmpty() || kategori.isEmpty() || alamat.isEmpty() || nomorhandphone.isEmpty()) {
             return "Semua field wajib diisi!";
@@ -24,20 +24,22 @@ public class MustahiqCreateService {
             return "Data Mustahiq dengan nama tersebut dan nomor handphone sudah terdaftar.";
         }
 
-        boolean success = insertMustahiq(nama, kategori, umur, alamat, nomorhandphone);
+        boolean success = insertMustahiq(nama, kategori, umur, alamat,rt, rw, nomorhandphone);
         return success ? "success" : "Gagal menyimpan data mustahiq. Silakan coba lagi.";
     }
 
-    private boolean insertMustahiq(String nama, String golongan, int umur, String alamat, String nomorhandphone) {
+    private boolean insertMustahiq(String nama, String golongan, int umur, String alamat,int rt, int rw, String nomorhandphone) {
         Connection conn = DBConnection.getConnection();
-        String sql = "INSERT INTO mustahiq (nama, golongan, umur, alamat, handphone) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO mustahiq (nama, golongan, umur, alamat, rt, rw, handphone) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nama);
             stmt.setString(2, golongan);
             stmt.setInt(3, umur);
             stmt.setString(4, alamat);
-            stmt.setString(5, nomorhandphone);
+            stmt.setInt(5, rt);
+            stmt.setInt(6, rw);
+            stmt.setString(7, nomorhandphone);
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
@@ -48,7 +50,7 @@ public class MustahiqCreateService {
     }
     
     
-     public String mustahiqUpdate(String nama, String golongan, int umur, String alamat, String handphone, String namaLama) {
+     public String mustahiqUpdate(String nama, String golongan, int umur, String alamat, int rt, int rw, String handphone, String namaLama) {
         // Validasi input
         if (nama.isEmpty() || golongan.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
             return "Semua field wajib diisi!";
@@ -59,20 +61,22 @@ public class MustahiqCreateService {
         alamat = alamat.toUpperCase();
 
 
-        boolean success = updateMustahiq(nama, golongan, umur, alamat, handphone, namaLama);
+        boolean success = updateMustahiq(nama, golongan, umur, alamat, rt, rw, handphone, namaLama);
         return success ? "success" : "Gagal mengupdate data mustahiq. Silakan coba lagi.";
     }
 
-    private boolean updateMustahiq(String nama, String golongan, int umur, String alamat, String handphone, String namaLama) {
+    private boolean updateMustahiq(String nama, String golongan, int umur, String alamat,int rt, int rw, String handphone, String namaLama) {
         Connection conn = DBConnection.getConnection();
-       String sql = "UPDATE mustahiq SET nama=?, golongan=?, umur=?, alamat=?, handphone=? WHERE nama=?";
+       String sql = "UPDATE mustahiq SET nama=?, golongan=?, umur=?, alamat=?, rt=?, rw=?, handphone=? WHERE nama=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, nama);
                 stmt.setString(2, golongan);
                 stmt.setInt(3, umur);
                 stmt.setString(4, alamat);
-                stmt.setString(5, handphone);
-                stmt.setString(6, namaLama);
+                stmt.setInt(5, rt);
+                stmt.setInt(6, rw);
+                stmt.setString(7, handphone);
+                stmt.setString(8, namaLama);
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;

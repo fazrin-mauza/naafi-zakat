@@ -3,6 +3,8 @@ package views;
 import auth.Login;
 import forms.PenyaluranForm;
 import forms.MustahiqCreateForm;
+import java.io.File;
+import java.io.FileInputStream;
 import services.MustahiqService; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 
 
 
@@ -46,6 +49,7 @@ public class MustahiqView extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btn_import = new javax.swing.JButton();
         btn_tambah = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         btn_hapus = new javax.swing.JButton();
@@ -81,6 +85,7 @@ public class MustahiqView extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 255, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTable1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -96,6 +101,16 @@ public class MustahiqView extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
 
+        btn_import.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_import.setText("Import");
+        btn_import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_import.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_importActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_import, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, 30));
+
         btn_tambah.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         btn_tambah.setText("Tambah");
         btn_tambah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -104,7 +119,7 @@ public class MustahiqView extends javax.swing.JFrame {
                 btn_tambahActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
+        getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, 30));
 
         btn_edit.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         btn_edit.setText("Edit");
@@ -114,7 +129,7 @@ public class MustahiqView extends javax.swing.JFrame {
                 btn_editActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, 30));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, 30));
 
         btn_hapus.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         btn_hapus.setText("Hapus");
@@ -136,7 +151,7 @@ public class MustahiqView extends javax.swing.JFrame {
                 field_cariKeyTyped(evt);
             }
         });
-        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, 30));
+        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 160, 30));
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel1.setText("Cari");
@@ -529,6 +544,81 @@ public class MustahiqView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_editActionPerformed
 
+    private void btn_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih file Excel (.xls / .xlsx)");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    int hasil = fileChooser.showOpenDialog(this);
+    if (hasil == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+
+        if (!file.getName().toLowerCase().endsWith(".xls") &&
+            !file.getName().toLowerCase().endsWith(".xlsx")) {
+            JOptionPane.showMessageDialog(this, "File harus berformat .xls atau .xlsx");
+            return;
+        }
+
+        try (
+            FileInputStream fis = new FileInputStream(file);
+            org.apache.poi.ss.usermodel.Workbook workbook = file.getName().toLowerCase().endsWith(".xls")
+                ? new org.apache.poi.hssf.usermodel.HSSFWorkbook(fis)
+                : new org.apache.poi.xssf.usermodel.XSSFWorkbook(fis)
+        ) {
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
+            int totalBerhasil = 0;
+
+            try (Connection conn = db.DBConnection.getConnection()) {
+                if (conn == null || conn.isClosed()) {
+                    JOptionPane.showMessageDialog(this, "Koneksi database gagal!");
+                    return;
+                }
+
+                for (org.apache.poi.ss.usermodel.Row row : sheet) {
+                    if (row.getRowNum() == 0) continue; // skip header
+
+                    // Validasi sel kosong
+                    if (row.getCell(0) == null || row.getCell(1) == null || 
+                        row.getCell(2) == null || row.getCell(3) == null || row.getCell(4) == null) {
+                        continue; // skip baris yang tidak lengkap
+                    }
+
+                    String nama = row.getCell(0).toString().trim();
+                    String golongan = row.getCell(1).toString().trim();
+                    String umur = row.getCell(2).toString().trim();
+                    String alamat = row.getCell(3).toString().trim();
+                    String handphone = row.getCell(4).toString().trim();
+
+                    String sql = "INSERT INTO mustahiq (nama, golongan, umur, alamat, handphone) VALUES (?, ?, ?, ?, ?)";
+                    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                        stmt.setString(1, nama);
+                        stmt.setString(2, golongan);
+                        stmt.setString(3, umur);
+                        stmt.setString(4, alamat);
+                        stmt.setString(5, handphone);
+                        stmt.executeUpdate(); // aktifkan penyimpanan
+                        totalBerhasil++;
+                    } catch (Exception ex) {
+                        System.err.println("Gagal menyimpan baris: " + nama + " → " + ex.getMessage());
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this, "Import berhasil! Total data masuk: " + totalBerhasil);
+                loadDataMustahiq();
+
+            } catch (Exception connEx) {
+                JOptionPane.showMessageDialog(this, "Koneksi database gagal: " + connEx.getMessage());
+                connEx.printStackTrace();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal membaca file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    }//GEN-LAST:event_btn_importActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -570,6 +660,7 @@ public class MustahiqView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_hapus;
+    private javax.swing.JButton btn_import;
     private javax.swing.JButton btn_tambah;
     private javax.swing.JTextField field_cari;
     private javax.swing.JButton jButton6;

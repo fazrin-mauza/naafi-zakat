@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JTextArea;
+import java.util.regex.*;
 
 public class Function {
 
@@ -43,4 +47,20 @@ public class Function {
     public static String getDateTime() {
         return getCurrentDate() + " " + getCurrentTime();
     }
+public static String[] parseAlamat(String fullAlamat) {
+    String teks = fullAlamat.trim();
+
+    Pattern pattern = Pattern.compile("^(.*)\\s+RT\\s+(\\d+)/RW\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher(teks);
+
+    if (matcher.matches()) {
+        String alamat = matcher.group(1).trim();
+        String rt = matcher.group(2);
+        String rw = matcher.group(3);
+        return new String[] { alamat, rt, rw };
+    } else {
+        return null; // atau bisa lempar IllegalArgumentException
+    }
+}
+
 }

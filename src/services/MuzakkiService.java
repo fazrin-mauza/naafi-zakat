@@ -11,7 +11,7 @@ public class MuzakkiService {
 
     public void loadKeluargaData(DefaultTableModel tableModel) {
         Connection conn = DBConnection.getConnection();
-        String sql = "SELECT nama, jumlah, alamat, handphone FROM keluarga";
+        String sql = "SELECT nama, jumlah, alamat, rt, rw, handphone FROM keluarga";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -23,9 +23,12 @@ public class MuzakkiService {
                 String nama = rs.getString("nama");
                 int jumlah = rs.getInt("jumlah");
                 String alamat = rs.getString("alamat");
+                int rt = rs.getInt("rt");
+                int rw = rs.getInt("rw");
+                String alamatLengkap = alamat + " RT " + rt +"/" + "RW " + rw;
                 String handphone = rs.getString("handphone");
 
-                tableModel.addRow(new Object[]{nama, jumlah, alamat, handphone});
+                tableModel.addRow(new Object[]{nama, jumlah, alamatLengkap, handphone});
             }
 
         } catch (SQLException e) {

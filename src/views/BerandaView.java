@@ -2,10 +2,10 @@ package views;
 
 import auth.Login;
 import forms.PenyaluranForm;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.JFrame;
 import services.BerandaService;
-
 
 
 /*
@@ -25,12 +25,9 @@ public class BerandaView extends javax.swing.JFrame {
     public BerandaView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        user.setText(BerandaService.getSession());
-       BerandaService service = new BerandaService();
-       String result = service.getHargaEmas();
-       emasField.setText(String.valueOf(result));
-           //  int hargaEmas = BerandaService.getHargaEmas();
-           //  emasField.setText(String.valueOf(hargaEmas));
+        Map<String, String> config = BerandaService.getSessionAndMasjid();
+        user.setText(config.get("session"));
+        nama_masjid.setText(config.get("nama_masjid"));
 BerandaService.BerandaData data = BerandaService.getBerandaData();
 if (data != null) {
      jumlah_beras.setText(data.getBeras() + " KG");
@@ -66,9 +63,7 @@ if (data != null) {
         jPanel8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        emas = new javax.swing.JPanel();
-        emasField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        nama_masjid = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -252,48 +247,23 @@ if (data != null) {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 80, 170, 440);
 
-        emasField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emasFieldActionPerformed(evt);
-            }
-        });
+        nama_masjid.setFont(new java.awt.Font("Rockwell", 1, 37)); // NOI18N
+        nama_masjid.setForeground(new java.awt.Color(51, 51, 255));
+        nama_masjid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nama_masjid.setText("Nama Masjid");
+        jPanel1.add(nama_masjid);
+        nama_masjid.setBounds(250, 90, 410, 50);
 
-        javax.swing.GroupLayout emasLayout = new javax.swing.GroupLayout(emas);
-        emas.setLayout(emasLayout);
-        emasLayout.setHorizontalGroup(
-            emasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(emasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(emasLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(emasField, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        emasLayout.setVerticalGroup(
-            emasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-            .addGroup(emasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(emasLayout.createSequentialGroup()
-                    .addComponent(emasField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 2, Short.MAX_VALUE)))
-        );
-
-        jPanel1.add(emas);
-        emas.setBounds(410, 460, 100, 30);
-
-        jLabel3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel3.setText("Harga 85 Gram Emas Saat Ini  Rp");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(230, 460, 180, 30);
-
-        jButton1.setText("Edit");
+        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gear.png"))); // NOI18N
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(520, 460, 72, 30);
+        jButton1.setBounds(680, 90, 50, 40);
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
         jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -493,19 +463,13 @@ if (data != null) {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       String emas = emasField.getText();
-       BerandaService service = new BerandaService();
-       String result = service.emasUpdate(emas);
-           if (result.equals("success")) {
-                    JOptionPane.showMessageDialog(this, "Data harga 85 gram emas berhasil diupdate.");
-                } else {
-                    JOptionPane.showMessageDialog(this, result);
-                }
+       PengaturanView rgf = new PengaturanView();
+       rgf.setVisible(true);
+       rgf.pack();
+       rgf.setLocationRelativeTo(null);
+       rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void emasFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emasFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emasFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -545,8 +509,6 @@ if (data != null) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel edtNaafi;
-    private javax.swing.JPanel emas;
-    private javax.swing.JTextField emasField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -565,7 +527,6 @@ if (data != null) {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -581,6 +542,7 @@ if (data != null) {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jumlah_beras;
     private javax.swing.JTextField jumlah_muzakkibayar;
+    private javax.swing.JLabel nama_masjid;
     private javax.swing.JTextField total_uangtunai;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
