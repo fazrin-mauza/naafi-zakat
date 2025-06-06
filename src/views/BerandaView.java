@@ -1,5 +1,6 @@
 package views;
 
+import forms.PengaturanForm;
 import auth.Login;
 import forms.PenyaluranForm;
 import java.util.Map;
@@ -463,7 +464,7 @@ if (data != null) {
     }//GEN-LAST:event_userActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       PengaturanView rgf = new PengaturanView();
+       PengaturanForm rgf = new PengaturanForm();
        rgf.setVisible(true);
        rgf.pack();
        rgf.setLocationRelativeTo(null);
