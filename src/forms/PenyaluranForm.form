@@ -45,6 +45,44 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
+        <Component class="javax.swing.JComboBox" name="boxGender">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="12" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="--Pilih--"/>
+                <StringItem index="1" value="Laki-laki"/>
+                <StringItem index="2" value="Perempuan"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boxGenderActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="410" y="140" width="170" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="gender">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Rockwell" size="12" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Jenis Kelamin"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="310" y="140" width="100" height="30"/>
+            </Constraint>
+          </Constraints>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -67,7 +105,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="320" width="54" height="30"/>
+              <AbsoluteConstraints x="310" y="360" width="54" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -80,7 +118,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="280" width="54" height="29"/>
+              <AbsoluteConstraints x="310" y="320" width="54" height="29"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -105,7 +143,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="320" width="170" height="30"/>
+              <AbsoluteConstraints x="410" y="360" width="170" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -131,7 +169,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="140" width="80" height="30"/>
+              <AbsoluteConstraints x="310" y="180" width="80" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -589,7 +627,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="190" width="54" height="29"/>
+              <AbsoluteConstraints x="310" y="230" width="54" height="29"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -599,7 +637,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="280" width="170" height="30"/>
+              <AbsoluteConstraints x="410" y="320" width="170" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -655,14 +693,14 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="10">
                 <StringItem index="0" value="--Pilih--"/>
-                <StringItem index="1" value="FAKIR"/>
-                <StringItem index="2" value="MISKIN"/>
-                <StringItem index="3" value="AMIL (PETUGAS ZAKAT)"/>
-                <StringItem index="4" value="MUALLAF (ORANG YANG DILUNAKKAN HATINYA)"/>
-                <StringItem index="5" value="RIQAB (HAMBA SAHAYA/BUDAK)"/>
-                <StringItem index="6" value="GHARIM (ORANG YANG BERHUTANG)"/>
-                <StringItem index="7" value="FI SABILILLAH (PEJUANG DIJALAN ALLAH)"/>
-                <StringItem index="8" value="IBNU SABIL (MUSAFIR YANG KEHABISAN BEKAL)"/>
+                <StringItem index="1" value="Fakir"/>
+                <StringItem index="2" value="Miskin"/>
+                <StringItem index="3" value="Amil (petugas zakat)"/>
+                <StringItem index="4" value="Muallaf (orang yang dilunakkan hatinya)"/>
+                <StringItem index="5" value="Riqab (hamba sahaya/budak)"/>
+                <StringItem index="6" value="Gharim (orang yang berutang)"/>
+                <StringItem index="7" value="Fi Sabilillah (pejuang di jalan Allah)"/>
+                <StringItem index="8" value="Ibnu Sabil (musafir yang kehabisan bekal)"/>
                 <StringItem index="9" value=" "/>
               </StringArray>
             </Property>
@@ -682,7 +720,7 @@
         <Component class="javax.swing.JSpinner" name="spinerUmur">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="140" width="70" height="30"/>
+              <AbsoluteConstraints x="410" y="180" width="70" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -692,7 +730,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="190" width="170" height="80"/>
+              <AbsoluteConstraints x="410" y="230" width="170" height="80"/>
             </Constraint>
           </Constraints>
 

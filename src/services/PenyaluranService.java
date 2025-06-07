@@ -34,7 +34,7 @@ public class PenyaluranService {
     public MustahiqData getDetailMustahiqByNama(String nama) {
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "SELECT umur, alamat, golongan FROM mustahiq WHERE nama = ?";
+            String sql = "SELECT umur, alamat, golongan, jenis_kelamin FROM mustahiq WHERE nama = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nama);
             ResultSet rs = ps.executeQuery();
@@ -43,7 +43,8 @@ public class PenyaluranService {
                 int umur = rs.getInt("umur");
                 String alamat = rs.getString("alamat");
                 String golongan = rs.getString("golongan");
-                return new MustahiqData(umur, alamat, golongan);
+                String gender = rs.getString("jenis_kelamin");
+                return new MustahiqData(umur, alamat, golongan, gender);
             }
 
             rs.close();
@@ -59,11 +60,13 @@ public class PenyaluranService {
         private int umur;
         private String alamat;
         private String golongan;
+        private String gender;
 
-        public MustahiqData(int umur, String alamat, String golongan) {
+        public MustahiqData(int umur, String alamat, String golongan, String gender) {
             this.umur = umur;
             this.alamat = alamat;
             this.golongan = golongan;
+            this.gender = gender;
         }
 
         public int getUmur() {
@@ -77,11 +80,15 @@ public class PenyaluranService {
         public String getGolongan() {
             return golongan;
         }
+        
+         public String getGender() {
+            return gender;
+        }
     }
     
-    public String buatPenyaluran(String nama_mustahiq, String golongan, int umur, String jumlah_disalurkan, String amil, String toString, String toString1) {
+    public String buatPenyaluran(String nama_mustahiq, String golongan, int umur, String jenis_kelamin, String alamat, String jumlah_disalurkan, String amil, String toString, String toString1) {
     jumlah_disalurkan = jumlah_disalurkan.replaceAll("[^0-9.]", "");
-    if (nama_mustahiq.isEmpty() || golongan.isEmpty() || jumlah_disalurkan.isEmpty()|| amil.isEmpty()) {
+    if (nama_mustahiq.isEmpty() || golongan.isEmpty() || jenis_kelamin.isEmpty()|| alamat.isEmpty()|| jumlah_disalurkan.isEmpty()|| amil.isEmpty()) {
        return "Semua field wajib diisi!";
     }
     double double_jumlahDisalurkan = Double.parseDouble((String) jumlah_disalurkan);
@@ -92,25 +99,27 @@ public class PenyaluranService {
     String date = Function.getCurrentDate();
     String time = Function.getCurrentTime();
     
-     boolean success = createPenyaluran(nama_mustahiq, golongan, umur,
+     boolean success = createPenyaluran(nama_mustahiq, golongan, umur, jenis_kelamin, alamat,
                                         double_jumlahDisalurkan, amil, date, time);
      return success ? "success" : "Gagal menyimpan data penyaluran. Silakan coba lagi.";
 }
 
-private boolean createPenyaluran(String nama_mustahiq, String golongan, int umur,
+private boolean createPenyaluran(String nama_mustahiq, String golongan, int umur,String jenis_kelamin, String alamat,
                                  double jumlah_disalurkan, String amil,
                                  String tanggal, String waktu) {
     Connection conn = DBConnection.getConnection();
-    String sql = "INSERT INTO penyaluran (nama_mustahiq, golongan, umur, jumlah_disalurkan, amil, date, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO penyaluran (nama_mustahiq, golongan, umur, jenis_kelamin, alamat, jumlah_disalurkan, amil, date, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, nama_mustahiq);
         stmt.setString(2, golongan);
         stmt.setInt(3, umur);
-        stmt.setDouble(4, jumlah_disalurkan);
-        stmt.setString(5, amil);
-        stmt.setString(6, tanggal);
-        stmt.setString(7, waktu);
+        stmt.setString(4, jenis_kelamin);
+        stmt.setString(5, alamat);
+        stmt.setDouble(6, jumlah_disalurkan);
+        stmt.setString(7, amil);
+        stmt.setString(8, tanggal);
+        stmt.setString(9, waktu);
 
         int rowsAffected = stmt.executeUpdate();
          // Jika insert berhasil, lakukan update ke tabel total

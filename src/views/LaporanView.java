@@ -5,6 +5,7 @@ package views;
 
 import auth.Login;
 import forms.PenyaluranForm;
+import helper.Function;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,19 +17,21 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Map;
 import services.LaporanService;
+import helper.Function;
 
 
 public class LaporanView extends javax.swing.JFrame {
     public LaporanView() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
+        }
 public static Connection getConnection() throws SQLException {
     String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
     return (Connection) DriverManager.getConnection(url);
 }
-
+      Map<String, String> config = Function.getSessionAndMasjid();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,9 +79,11 @@ public static Connection getConnection() throws SQLException {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         laporanpembayaran.setBackground(new java.awt.Color(0, 255, 255));
-        laporanpembayaran.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        laporanpembayaran.setFont(new java.awt.Font("Rockwell", 1, 12)); // NOI18N
         laporanpembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Penerimaan Zakat_Icon.png"))); // NOI18N
         laporanpembayaran.setText("Laporan Pembayaran Zakat");
+        laporanpembayaran.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        laporanpembayaran.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         laporanpembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanpembayaranActionPerformed(evt);
@@ -87,9 +92,10 @@ public static Connection getConnection() throws SQLException {
         jPanel1.add(laporanpembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 250, 150));
 
         laporanpenyaluran.setBackground(new java.awt.Color(0, 255, 51));
-        laporanpenyaluran.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        laporanpenyaluran.setFont(new java.awt.Font("Rockwell", 1, 12)); // NOI18N
         laporanpenyaluran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Pengeluaran Zakat_icon.png"))); // NOI18N
         laporanpenyaluran.setText("Laporan Penyaluran Zakat");
+        laporanpenyaluran.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         laporanpenyaluran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laporanpenyaluranActionPerformed(evt);
@@ -290,7 +296,7 @@ public static Connection getConnection() throws SQLException {
 
             String reportPath = "src/reports/LaporanPenyaluran.jasper";
         HashMap<String, Object> parameters = new HashMap<>();
-parameters.put("judul", "Laporan Penyaluran 2025-06-01"); // contoh tanggal yang difilter
+parameters.put("judul", "Laporan Penyaluran " + config.get("nama_masjid"));
 JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
 
             JasperViewer viewer = new JasperViewer(print, false);

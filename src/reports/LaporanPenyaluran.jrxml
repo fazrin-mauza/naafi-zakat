@@ -101,12 +101,12 @@ FROM penyaluran]]>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{nama_mustahiq}]]></textFieldExpression>
 					</textField>
-					<textField>
+					<textField textAdjust="StretchHeight">
 						<reportElement style="SubTitle" x="252" y="0" width="79" height="20" forecolor="#030303" uuid="d45f8c35-89d3-4ad7-9c60-957a718a1251"/>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
 							<font fontName="Rockwell" size="12" isBold="false"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{golongan}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{umur}]]></textFieldExpression>
 					</textField>
 					<textField>
 						<reportElement style="SubTitle" x="331" y="0" width="140" height="20" forecolor="#030303" uuid="5a56bdc4-f44b-45f7-bf3e-4573e2f3a7cd"/>
@@ -114,6 +114,13 @@ FROM penyaluran]]>
 							<font fontName="Rockwell" size="12" isBold="false"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{jumlah_disalurkan}]]></textFieldExpression>
+					</textField>
+                                        <textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" x="151" y="0" width="100" height="20" forecolor="#030303" uuid="05a970b1-7016-457d-9455-b1bddd99e40a"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Rockwell" size="12" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{golongan}]]></textFieldExpression>
 					</textField>
 					<textField>
 						<reportElement style="SubTitle" x="471" y="-1" width="50" height="20" forecolor="#030303" uuid="8571a9df-2da9-4031-9fd7-2ee82d2089c4"/>
@@ -150,13 +157,7 @@ FROM penyaluran]]>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
 					</textField>
-					<textField>
-						<reportElement style="SubTitle" x="151" y="0" width="100" height="20" forecolor="#030303" uuid="05a970b1-7016-457d-9455-b1bddd99e40a"/>
-						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Rockwell" size="12" isBold="false"/>
-						</textElement>
-						<textFieldExpression><![CDATA[$F{golongan}]]></textFieldExpression>
-					</textField>
+				
 				</frame>
 			</band>
 		</groupHeader>
@@ -193,8 +194,8 @@ FROM penyaluran]]>
 				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement style="Title" x="250" y="0" width="300" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement style="Title" x="164" y="0" width="496" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="20"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{judul}]]></textFieldExpression>

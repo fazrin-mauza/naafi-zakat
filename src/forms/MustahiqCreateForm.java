@@ -49,6 +49,8 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel9 = new javax.swing.JPanel();
+        gender = new javax.swing.JLabel();
+        genderBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -106,6 +108,14 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        gender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        gender.setText("Jenis Kelamin");
+        jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 20));
+
+        genderBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)" }));
+        jPanel9.add(genderBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 170, 30));
+
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel2.setText("Golongan");
         jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 100, 30));
@@ -124,7 +134,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel7.setText("Nomor Handphone");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 150, 30));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 150, 30));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -297,7 +307,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel24.setText("Alamat");
-        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 90, 30));
+        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 90, 30));
 
         kategori.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)" }));
@@ -305,7 +315,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jLabel25.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel25.setText("Umur");
-        jPanel9.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 90, 30));
+        jPanel9.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel3.setText("Nama ");
@@ -316,14 +326,14 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
                 handphoneActionPerformed(evt);
             }
         });
-        jPanel9.add(handphone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, 170, 30));
+        jPanel9.add(handphone, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 170, 30));
 
         alamatMustahiq.setColumns(20);
         alamatMustahiq.setRows(5);
         jScrollPane2.setViewportView(alamatMustahiq);
 
-        jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 170, 40));
-        jPanel9.add(umur, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 90, 30));
+        jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 170, 40));
+        jPanel9.add(umur, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 90, 30));
 
         nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,12 +343,12 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         jPanel9.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 170, 30));
 
         jLabel8.setText("RT");
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 30, 20));
-        jPanel9.add(rtSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 80, -1));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 30, 20));
+        jPanel9.add(rtSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 80, -1));
 
         jLabel23.setText("RW");
-        jPanel9.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
-        jPanel9.add(rwSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 80, -1));
+        jPanel9.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
+        jPanel9.add(rwSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, 80, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel4.setText("jLabel2");
@@ -578,6 +588,8 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alamatMustahiq;
+    private javax.swing.JLabel gender;
+    private javax.swing.JComboBox<String> genderBox;
     private javax.swing.JTextField handphone;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

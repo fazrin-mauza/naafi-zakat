@@ -239,12 +239,12 @@ if (data != null) {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 80, 170, 440);
 
-        nama_masjid.setFont(new java.awt.Font("Rockwell", 1, 37)); // NOI18N
+        nama_masjid.setFont(new java.awt.Font("Sitka Display", 1, 37)); // NOI18N
         nama_masjid.setForeground(new java.awt.Color(51, 51, 255));
         nama_masjid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nama_masjid.setText("Nama Masjid");
         jPanel1.add(nama_masjid);
-        nama_masjid.setBounds(250, 90, 410, 50);
+        nama_masjid.setBounds(240, 90, 410, 50);
 
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gear.png"))); // NOI18N

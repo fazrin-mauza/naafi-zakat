@@ -55,6 +55,8 @@ private void loadDataMustahiq() {
     private void initComponents() {
 
         jPanel9 = new javax.swing.JPanel();
+        boxGender = new javax.swing.JComboBox<>();
+        gender = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -105,21 +107,34 @@ private void loadDataMustahiq() {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        boxGender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        boxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Laki-laki", "Perempuan" }));
+        boxGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxGenderActionPerformed(evt);
+            }
+        });
+        jPanel9.add(boxGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 170, 30));
+
+        gender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        gender.setText("Jenis Kelamin");
+        jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 100, 30));
+
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel2.setText("Nama ");
         jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel3.setText("Amil");
-        jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 54, 30));
+        jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 54, 30));
 
         jLabel4.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel4.setText("Total");
-        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 54, 29));
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 54, 29));
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
 
         boxAmil.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jPanel9.add(boxAmil, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 170, 30));
+        jPanel9.add(boxAmil, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 170, 30));
 
         jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel7.setText("Golongan");
@@ -127,7 +142,7 @@ private void loadDataMustahiq() {
 
         jLabel8.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel8.setText("Umur");
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 80, 30));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 80, 30));
 
         namaMustahiq.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         namaMustahiq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -298,14 +313,14 @@ private void loadDataMustahiq() {
 
         jLabel23.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel23.setText("Alamat");
-        jPanel9.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 54, 29));
+        jPanel9.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 54, 29));
 
         jumlahDisalurkan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jumlahDisalurkanActionPerformed(evt);
             }
         });
-        jPanel9.add(jumlahDisalurkan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 170, 30));
+        jPanel9.add(jumlahDisalurkan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 170, 30));
 
         reset.setBackground(new java.awt.Color(255, 0, 0));
         reset.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -330,20 +345,20 @@ private void loadDataMustahiq() {
         jPanel9.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
 
         boxGolongan.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "FAKIR", "MISKIN", "AMIL (PETUGAS ZAKAT)", "MUALLAF (ORANG YANG DILUNAKKAN HATINYA)", "RIQAB (HAMBA SAHAYA/BUDAK)", "GHARIM (ORANG YANG BERHUTANG)", "FI SABILILLAH (PEJUANG DIJALAN ALLAH)", "IBNU SABIL (MUSAFIR YANG KEHABISAN BEKAL)", " " }));
+        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)", " " }));
         boxGolongan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxGolonganActionPerformed(evt);
             }
         });
         jPanel9.add(boxGolongan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 170, 30));
-        jPanel9.add(spinerUmur, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 70, 30));
+        jPanel9.add(spinerUmur, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 70, 30));
 
         textAlamat.setColumns(20);
         textAlamat.setRows(5);
         jScrollPane1.setViewportView(textAlamat);
 
-        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 170, 80));
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, 170, 80));
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel25.setText("jLabel2");
@@ -482,6 +497,7 @@ private void loadDataMustahiq() {
   
     String nama_mustahiq = (String) namaMustahiq.getSelectedItem();
     String golongan = (String) boxGolongan.getSelectedItem();
+    String gender = (String) boxGender.getSelectedItem();
     int umur = (int) spinerUmur.getValue();
     String alamat = (String) textAlamat.getText();
     String jumlah_disalurkan = (String) jumlahDisalurkan.getText();
@@ -490,7 +506,7 @@ private void loadDataMustahiq() {
     // Panggil service
     PenyaluranService penyaluranService = new PenyaluranService();
     String result = penyaluranService.buatPenyaluran(
-       nama_mustahiq, golongan, umur, jumlah_disalurkan, amil, "", "");
+       nama_mustahiq, golongan, umur, gender, alamat, jumlah_disalurkan, amil, "", "");
   
     // Tampilkan hasil
     if (result.equals("success")) {
@@ -503,52 +519,32 @@ private void loadDataMustahiq() {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void namaMustahiqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMustahiqActionPerformed
- /** String selectedNama = (String) jComboBox5.getSelectedItem();
-    if (selectedNama == null || selectedNama.equals("--Pilih Nama--")) {
-       umur.setValue(0);  
-        alamat.setText("");
-        return;
-    }
-
-    try {
-        java.sql.Connection con = DBConnection.getConnection();
-        String sql2 = "SELECT umur, alamat, golongan FROM mustahiq WHERE nama = ?";
-        PreparedStatement ps2 = con.prepareStatement(sql2);
-        ps2.setString(1, selectedNama);
-        ResultSet rs2 = ps2.executeQuery();
-
-        if (rs2.next()) {
-           umur.setValue(rs2.getInt("umur"));
-           alamat.setText(rs2.getString("alamat"));
-           golongan.setSelectedItem(rs2.getString("golongan"));
-        }
-
-        rs2.close();
-        ps2.close();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Gagal mengambil data mustahiq: " + e.getMessage());
-    }  
-    **/
-  String selectedNama = (String) namaMustahiq.getSelectedItem();
+   String selectedNama = (String) namaMustahiq.getSelectedItem();
 
     if (selectedNama == null || selectedNama.equals("--Pilih Mustahiq--")) {
         spinerUmur.setValue(0);
         textAlamat.setText("");
-        boxGolongan.setSelectedIndex(0); // Sesuaikan default item jika ada
+        boxGolongan.setSelectedIndex(0);
+        boxGender.setSelectedIndex(0);
         return;
     }
 
     PenyaluranService.MustahiqData data = penyaluranService.getDetailMustahiqByNama(selectedNama);
     if (data != null) {
+        boxGolongan.setSelectedItem(data.getGolongan());
+        boxGender.setSelectedItem(data.getGender());
         spinerUmur.setValue(data.getUmur());
         textAlamat.setText(data.getAlamat());
-        boxGolongan.setSelectedItem(data.getGolongan());
     }
     }//GEN-LAST:event_namaMustahiqActionPerformed
 
     private void boxGolonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxGolonganActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxGolonganActionPerformed
+
+    private void boxGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxGenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxGenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,7 +586,9 @@ private void loadDataMustahiq() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxAmil;
+    private javax.swing.JComboBox<String> boxGender;
     private javax.swing.JComboBox<String> boxGolongan;
+    private javax.swing.JLabel gender;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
