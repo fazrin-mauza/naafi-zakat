@@ -1,17 +1,42 @@
 package helper;
 
+import db.DBConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTextArea;
 import java.util.regex.*;
 
 public class Function {
+    
+    // Fungsi tambahan untuk mengambil nilai session dan nama masjid dari tabel config
+ public static Map<String, String> getSessionAndMasjid() {
+    Map<String, String> result = new HashMap<>();
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT session, nama_masjid FROM config WHERE id = 1";
 
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            result.put("session", rs.getString("session"));
+            result.put("nama_masjid", rs.getString("nama_masjid"));
+        }
+    } catch (SQLException e) {
+        System.err.println("Error getting session and masjid: " + e.getMessage());
+    }
+
+    return result;
+}
     // Fungsi format ke Rupiah
     public static String formatRupiah(double amount) {
         Locale localeID = new Locale("in", "ID");
@@ -47,6 +72,7 @@ public class Function {
     public static String getDateTime() {
         return getCurrentDate() + " " + getCurrentTime();
     }
+    
 public static String[] parseAlamat(String fullAlamat) {
     String teks = fullAlamat.trim();
 

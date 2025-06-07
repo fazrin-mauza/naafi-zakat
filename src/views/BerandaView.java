@@ -7,26 +7,17 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.JFrame;
 import services.BerandaService;
+import helper.Function;
 
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author LENOVO
- */
 public class BerandaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrameBeranda
-     */
+   
     public BerandaView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Map<String, String> config = BerandaService.getSessionAndMasjid();
+        Map<String, String> config = Function.getSessionAndMasjid();
         user.setText(config.get("session"));
         nama_masjid.setText(config.get("nama_masjid"));
 BerandaService.BerandaData data = BerandaService.getBerandaData();

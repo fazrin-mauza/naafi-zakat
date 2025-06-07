@@ -11,11 +11,11 @@ public class JrxmlCompiler {
     public static void main(String[] args) {
         try {
             // Path ke file .jrxml
-            String jrxmlPath = "src/reports/LaporanPembayaran.jrxml";
-           //  String jrxmlPath = "src/reports/LaporanPenyaluran.jrxml";
+         //   String jrxmlPath = "src/reports/LaporanPembayaran.jrxml";
+            String jrxmlPath = "src/reports/LaporanPenyaluran.jrxml";
                               // Path output file .jasper
-           String jasperPath = "src/reports/LaporanPembayaran.jasper";
-        //      String jasperPath = "src/reports/LaporanPenyaluran.jasper";
+        //   String jasperPath = "src/reports/LaporanPembayaran.jasper";
+         String jasperPath = "src/reports/LaporanPenyaluran.jasper";
             // Compile JRXML ke JASPER
             JasperCompileManager.compileReportToFile(jrxmlPath, jasperPath);
 

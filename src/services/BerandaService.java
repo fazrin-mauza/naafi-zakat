@@ -58,27 +58,7 @@ public class BerandaService {
         }
     }
     
-    
-     // Fungsi tambahan untuk mengambil nilai session dan nama masjid dari tabel config
- public static Map<String, String> getSessionAndMasjid() {
-    Map<String, String> result = new HashMap<>();
-    Connection conn = DBConnection.getConnection();
-    String sql = "SELECT session, nama_masjid FROM config WHERE id = 1";
-
-    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            result.put("session", rs.getString("session"));
-            result.put("nama_masjid", rs.getString("nama_masjid"));
-        }
-    } catch (SQLException e) {
-        System.err.println("Error getting session and masjid: " + e.getMessage());
-    }
-
-    return result;
-}
-
-    
+ 
     public String getHargaEmas() {
     String sql = "SELECT harga_emas_85gram FROM config WHERE id = 1";
     Connection conn2 = DBConnection.getConnection();
@@ -122,21 +102,5 @@ public class BerandaService {
             return false;
         }
     }
-     public static String getNamaMasjid() {
-        try {
-            Connection conn = DBConnection.getConnection();
-            String sql = "SELECT nama_masjid FROM config WHERE id = 1";
-            PreparedStatement pst = conn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("nama_masjid");
-            } else {
-                return "Tidak ditemukan";
-            }
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-            return "Error";
-        }
-     }
+  
 }

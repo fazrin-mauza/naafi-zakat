@@ -289,8 +289,10 @@ public static Connection getConnection() throws SQLException {
             Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
 
             String reportPath = "src/reports/LaporanPenyaluran.jasper";
-            HashMap<String, Object> parameters = new HashMap<>();
-            JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
+        HashMap<String, Object> parameters = new HashMap<>();
+parameters.put("judul", "Laporan Penyaluran 2025-06-01"); // contoh tanggal yang difilter
+JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
+
             JasperViewer viewer = new JasperViewer(print, false);
             viewer.setVisible(true);
             
