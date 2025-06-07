@@ -357,7 +357,7 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
 
         jLabel27.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel27.setText("RW");
-        jPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 20, 30));
+        jPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 40, 30));
 
         jLabel26.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel26.setText("RT");

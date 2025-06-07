@@ -11,7 +11,7 @@ public class MustahiqService {
 
     public void loadDataMustahiq(DefaultTableModel tableModel) {
         Connection conn = DBConnection.getConnection();
-        String sql = "SELECT nama, golongan, umur, alamat, rt, rw, handphone FROM mustahiq";
+        String sql = "SELECT nama, golongan,jenis_kelamin, umur, alamat, rt, rw, handphone FROM mustahiq";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -21,8 +21,9 @@ public class MustahiqService {
 
             while (rs.next()) {
                 String nama = rs.getString("nama");
-                String kategori = rs.getString("golongan");
+                String golongan = rs.getString("golongan");
                 int umur = rs.getInt("umur");
+                String gender = rs.getString("jenis_kelamin");
                 String alamat = rs.getString("alamat");
                 int rt = rs.getInt("rt");
                 int rw = rs.getInt("rw");
@@ -30,7 +31,7 @@ public class MustahiqService {
                 String handphone = rs.getString("handphone");
                 
 
-                tableModel.addRow(new Object[]{nama, kategori, umur, alamatLengkap,handphone});
+                tableModel.addRow(new Object[]{nama, golongan,gender, umur, alamatLengkap,handphone});
             }
 
         } catch (SQLException e) {

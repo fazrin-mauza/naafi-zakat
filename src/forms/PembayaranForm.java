@@ -386,8 +386,8 @@ private void loadDataKepalaKeluarga() {
         jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel1.setText("Form Pembayaran Zakat");
-        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, 25));
+        jLabel1.setText("Form Pembayaran Zakat Fitri");
+        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 210, 25));
 
         jLabel23.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel23.setText("Jumlah");

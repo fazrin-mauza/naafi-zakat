@@ -25,9 +25,10 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     
     }
-    public void setFormData(String namaData, String golonganData, int umurData, String alamatData, String hpData) {
+    public void setFormData(String namaData, String golonganData, String genderData, int umurData, String alamatData, String hpData) {
         nama.setText(namaData);
         kategori.setSelectedItem(golonganData);
+        genderBox.setSelectedItem(genderData);
         umur.setValue(umurData);
          String[] hasilAlamat = Function.parseAlamat(alamatData);
          String alamat = hasilAlamat[0];
@@ -113,7 +114,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 20));
 
         genderBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)" }));
+        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Laki-laki", "Perempuan" }));
         jPanel9.add(genderBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 170, 30));
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -366,6 +367,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     String namaInput = nama.getText();
     String golonganInput = (String) kategori.getSelectedItem();
+    String genderInput = (String) genderBox.getSelectedItem();
     int umurInput = (int) umur.getValue();
     String alamatInput = alamatMustahiq.getText();
     int rtInput = (int) rtSpin.getValue();
@@ -395,7 +397,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
             } else {
                 // INSERT
                 MustahiqCreateService service = new MustahiqCreateService();
-                result = service.mustahiqCreate(namaInput, golonganInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput);
+                result = service.mustahiqCreate(namaInput, golonganInput, genderInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput);
             }
                 if (result.equals("success")) {
                     JOptionPane.showMessageDialog(this, "Data mustahiq berhasil disimpan.");

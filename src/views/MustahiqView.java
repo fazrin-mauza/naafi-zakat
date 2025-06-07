@@ -88,13 +88,13 @@ public class MustahiqView extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nama", "Golongan", "Umur", "Alamat", "Nomor Handphone"
+                "Nama", "Golongan", "Jenis Kelamin", "Umur", "Alamat", "No. HP"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -527,13 +527,14 @@ public class MustahiqView extends javax.swing.JFrame {
     // Ambil data dari tabel
     String namaData = jTable1.getValueAt(selectedRow, 0).toString();
     String golonganData = jTable1.getValueAt(selectedRow, 1).toString();
-    int umurData = Integer.parseInt(jTable1.getValueAt(selectedRow, 2).toString());
-    String alamatData = jTable1.getValueAt(selectedRow, 3).toString();
-    String hpData = jTable1.getValueAt(selectedRow, 4).toString();
+    String genderData = jTable1.getValueAt(selectedRow, 2).toString();
+    int umurData = Integer.parseInt(jTable1.getValueAt(selectedRow, 3).toString());
+    String alamatData = jTable1.getValueAt(selectedRow, 4).toString();
+    String hpData = jTable1.getValueAt(selectedRow, 5).toString();
 
     // Buka form edit dan isi dengan data tersebut
     MustahiqCreateForm formEdit = new MustahiqCreateForm();
-    formEdit.setFormData(namaData, golonganData, umurData, alamatData, hpData);
+    formEdit.setFormData(namaData, golonganData, genderData, umurData, alamatData, hpData);
     formEdit.setVisible(true);
     formEdit.pack();
     formEdit.setLocationRelativeTo(null);
