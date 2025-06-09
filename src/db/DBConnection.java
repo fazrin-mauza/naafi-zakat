@@ -5,36 +5,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    
+
     private static final String URL = "jdbc:sqlite:zakat.db";
     private static Connection conn = null;
 
-  
-   /** public static Connection getConnection() throws SQLException {
+    public static synchronized Connection getConnection() {
         try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Driver tidak ditemukan: " + e.getMessage());
-        }
-
-        return DriverManager.getConnection(URL);
-    }*/
-
-    public static Connection getConnection() {
-        if (conn == null) {
-            try {
+            if (conn == null || conn.isClosed()) {
                 Class.forName("org.sqlite.JDBC");
                 conn = DriverManager.getConnection(URL);
                 System.out.println("Koneksi berhasil ke zakat.db");
-            } catch (ClassNotFoundException | SQLException e) {
-                System.err.println("Koneksi gagal: " + e.getMessage());
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.err.println("Koneksi gagal: " + e.getMessage());
+            conn = null;
         }
         return conn;
-    } 
-    
+    }
 
-    public static void closeConnection() {
+    public static synchronized void closeConnection() {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
@@ -42,8 +31,8 @@ public class DBConnection {
             }
         } catch (SQLException e) {
             System.err.println("Gagal menutup koneksi: " + e.getMessage());
+        } finally {
+            conn = null;
         }
     }
 }
-
-

@@ -6,13 +6,14 @@ import services.AuthService;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import services.WilayahService;
 
 
 
 
 public class Config extends javax.swing.JFrame {
  private String masjid;
-
     public Config(String masjidText) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -31,19 +32,14 @@ public class Config extends javax.swing.JFrame {
                desa.setVisible(false);
   
     }
-    private void loadProvinsi() {
+    
+private void loadProvinsi() {
     try {
-        Connection conn = (Connection) DBConnection.getConnection();
-        String sql = "SELECT name FROM provinces ORDER BY name";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+        List<String> provinsiList = WilayahService.getAllProvinsi();
         provinsiBox.removeAllItems(); 
-        while (rs.next()) {
-            provinsiBox.addItem(rs.getString("name"));
-        }     
-        rs.close();
-        ps.close();
-        conn.close();    
+        for (String prov : provinsiList) {
+            provinsiBox.addItem(prov);
+        }
     } catch (Exception e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error load provinsi: " + e.getMessage());
@@ -69,9 +65,15 @@ public class Config extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         kecamatan = new javax.swing.JLabel();
         desa = new javax.swing.JLabel();
-        createsign = new javax.swing.JButton();
+        create = new javax.swing.JButton();
         kecamatanBox = new javax.swing.JComboBox<>();
         lembagaBox = new javax.swing.JComboBox<>();
+        bahan_pokokBox = new javax.swing.JComboBox<>();
+        bahan_pokok = new javax.swing.JLabel();
+        ukuranSha = new javax.swing.JLabel();
+        shaBox = new javax.swing.JComboBox<>();
+        hargaSha = new javax.swing.JLabel();
+        hargaShaField = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -87,13 +89,13 @@ public class Config extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        wilayahBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Provinsi", "Kabupaten / Kota", "Kecamatan", "Desa / Kelurahan" }));
+        wilayahBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Indonesia", "Provinsi", "Kabupaten / Kota", "Kecamatan", "Desa / Kelurahan" }));
         wilayahBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wilayahBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(wilayahBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 210, 30));
+        jPanel2.add(wilayahBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 210, 30));
 
         desaBox.setEditable(true);
         desaBox.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +103,7 @@ public class Config extends javax.swing.JFrame {
                 desaBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(desaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 210, 30));
+        jPanel2.add(desaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 210, 30));
 
         provinsiBox.setEditable(true);
         provinsiBox.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +111,7 @@ public class Config extends javax.swing.JFrame {
                 provinsiBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(provinsiBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 210, 30));
+        jPanel2.add(provinsiBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 210, 30));
 
         kabupatenBox.setEditable(true);
         kabupatenBox.addActionListener(new java.awt.event.ActionListener() {
@@ -117,20 +119,20 @@ public class Config extends javax.swing.JFrame {
                 kabupatenBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(kabupatenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 210, 30));
+        jPanel2.add(kabupatenBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 210, 30));
 
         lembaga.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         lembaga.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lembaga.setText("Nama Lembaga");
-        jPanel2.add(lembaga, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 40));
+        jPanel2.add(lembaga, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 40));
 
         wilayah.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         wilayah.setText("Cakupan Wilayah");
-        jPanel2.add(wilayah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 60));
+        jPanel2.add(wilayah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 20));
 
         kabupaten.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         kabupaten.setText("Kabupaten / Kota");
-        jPanel2.add(kabupaten, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 224, -1, 20));
+        jPanel2.add(kabupaten, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("X");
@@ -144,37 +146,37 @@ public class Config extends javax.swing.JFrame {
 
         provinsi.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         provinsi.setText("Provinsi");
-        jPanel2.add(provinsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 168, 150, -1));
+        jPanel2.add(provinsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 150, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 27)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Pengaturan");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 190, 40));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 190, 40));
 
         kecamatan.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         kecamatan.setText("Kecamatan");
-        jPanel2.add(kecamatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 268, 120, 30));
+        jPanel2.add(kecamatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 120, 20));
 
         desa.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
         desa.setText("Desa / Kelurahan");
-        jPanel2.add(desa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 140, 20));
+        jPanel2.add(desa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 140, 20));
 
-        createsign.setBackground(new java.awt.Color(0, 255, 0));
-        createsign.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        createsign.setText("Create");
-        createsign.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        createsign.addMouseListener(new java.awt.event.MouseAdapter() {
+        create.setBackground(new java.awt.Color(0, 255, 0));
+        create.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        create.setText("Create");
+        create.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        create.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                createsignMouseClicked(evt);
+                createMouseClicked(evt);
             }
         });
-        createsign.addActionListener(new java.awt.event.ActionListener() {
+        create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createsignActionPerformed(evt);
+                createActionPerformed(evt);
             }
         });
-        jPanel2.add(createsign, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 80, 30));
+        jPanel2.add(create, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 80, 30));
 
         kecamatanBox.setEditable(true);
         kecamatanBox.addActionListener(new java.awt.event.ActionListener() {
@@ -182,17 +184,55 @@ public class Config extends javax.swing.JFrame {
                 kecamatanBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(kecamatanBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 210, 30));
+        jPanel2.add(kecamatanBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 210, 30));
 
         lembagaBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lembagaBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(lembagaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 210, 30));
+        jPanel2.add(lembagaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 210, 30));
+
+        bahan_pokokBox.setEditable(true);
+        bahan_pokokBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beras", "Gandum", "Jagung", "Keju", "Kentang", "Kismis", "Kurma", "Labu kuning", "Sagu", "Singkong", "Talas", "Ubi jalar" }));
+        bahan_pokokBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bahan_pokokBoxActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bahan_pokokBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 210, 30));
+
+        bahan_pokok.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        bahan_pokok.setText(" Bahan Makanan Pokok");
+        jPanel2.add(bahan_pokok, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 160, 60));
+
+        ukuranSha.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        ukuranSha.setText("Ukuran sha' (Kg)");
+        jPanel2.add(ukuranSha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 100, 20));
+
+        shaBox.setEditable(true);
+        shaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3.0", "2.8", "2.7", "2.6", "2.5" }));
+        shaBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shaBoxActionPerformed(evt);
+            }
+        });
+        jPanel2.add(shaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 100, -1));
+
+        hargaSha.setFont(new java.awt.Font("Rockwell", 0, 13)); // NOI18N
+        hargaSha.setText("Harga sha' (Rp)");
+        jPanel2.add(hargaSha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 100, 20));
+
+        hargaShaField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        hargaShaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hargaShaFieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(hargaShaField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 100, -1));
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(460, 30, 290, 450);
+        jPanel2.setBounds(460, 10, 290, 490);
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -238,26 +278,63 @@ public class Config extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel7MouseClicked
 
-    private void createsignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createsignActionPerformed
-String lembagaText = lembagaBox.getEditor().getItem().toString();
-String provinsi = lembagaBox.getEditor().getItem().toString();
+    private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
+  // Ambil nilai dari GUI
+    String nama = (String) lembagaBox.getSelectedItem();
+    String makananPokok = (String) bahan_pokokBox.getSelectedItem();
+    String shaStr = (String) shaBox.getSelectedItem();
+    String hargaStr = hargaShaField.getText();
+    hargaStr = hargaStr.replace(",", "");
+    String cakupan = (String) wilayahBox.getSelectedItem();
+    String provinsiText = (String) provinsiBox.getSelectedItem();
+    String kabupatenText = (String) kabupatenBox.getSelectedItem();
+    String kecamatanText = (String) kecamatanBox.getSelectedItem();
+    String desaText = (String) desaBox.getSelectedItem();
 
-/** String result = userService.signUp(usernameText, namaText, handphoneText, masjidText, passwordText, ulangiPasswordText);
+    // Validasi input wajib
+    if (nama == null || nama.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nama lembaga harus diisi!");
+        return;
+    }
+    if (shaStr == null || shaStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "SHA harus dipilih!");
+        return;
+    }
+    if (hargaStr == null || hargaStr.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Harga SHA harus diisi!");
+        return;
+    }
 
-    if (result.equals("success")) {
-        JOptionPane.showMessageDialog(this, "Akun berhasil dibuat!");
-        this.dispose(); 
+    // Konversi sha dan harga ke double dengan try-catch
+        double sha = Double.parseDouble(shaStr);
+        double harga = Double.parseDouble(hargaStr);
+   
+
+    // Panggil method insertLembaga (pastikan method ini menerima parameter double)
+    boolean berhasil = WilayahService.insertLembaga(
+        nama,
+        makananPokok,
+        sha,
+        harga,
+        cakupan,
+        provinsiText,
+        kabupatenText,
+        kecamatanText,
+        desaText
+    );
+
+    if (berhasil) {
+            this.dispose(); 
         Login lgf = new Login();
         lgf.setVisible(true);
-        
     } else {
-        JOptionPane.showMessageDialog(this, result);
-    }*/
-    }//GEN-LAST:event_createsignActionPerformed
+        JOptionPane.showMessageDialog(this, "Gagal menyimpan data lembaga.");
+    }
+    }//GEN-LAST:event_createActionPerformed
 
-    private void createsignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createsignMouseClicked
+    private void createMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_createsignMouseClicked
+    }//GEN-LAST:event_createMouseClicked
 
     private void wilayahBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wilayahBoxActionPerformed
     String selectedWilayah = wilayahBox.getSelectedItem().toString();
@@ -315,20 +392,47 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
     }//GEN-LAST:event_desaBoxActionPerformed
 
     private void provinsiBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinsiBoxActionPerformed
-        // TODO add your handling code here:
+String selectedProvinsi = (String) provinsiBox.getSelectedItem();
+List<String> kabupatenList = WilayahService.getAllKabupatenByProvinsiName(selectedProvinsi);
+kabupatenBox.removeAllItems();
+for (String kab : kabupatenList) {
+    kabupatenBox.addItem(kab);
+}
     }//GEN-LAST:event_provinsiBoxActionPerformed
 
     private void kabupatenBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kabupatenBoxActionPerformed
-        // TODO add your handling code here:
+String selectedKabupaten = (String) kabupatenBox.getSelectedItem();
+List<String> kacamatanList = WilayahService.getAllKecamatanByKabupatenName(selectedKabupaten);
+kecamatanBox.removeAllItems();
+for (String kec : kacamatanList) {
+    kecamatanBox.addItem(kec);
+}
     }//GEN-LAST:event_kabupatenBoxActionPerformed
 
     private void kecamatanBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kecamatanBoxActionPerformed
-        // TODO add your handling code here:
+    String selectedKecamatan = (String) kecamatanBox.getSelectedItem();
+    List<String> desaList = WilayahService.getAllDesaByKecamatanName(selectedKecamatan);
+    desaBox.removeAllItems();
+    for (String des : desaList) {
+        desaBox.addItem(des);
+    }
     }//GEN-LAST:event_kecamatanBoxActionPerformed
 
     private void lembagaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lembagaBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lembagaBoxActionPerformed
+
+    private void bahan_pokokBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bahan_pokokBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bahan_pokokBoxActionPerformed
+
+    private void shaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shaBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_shaBoxActionPerformed
+
+    private void hargaShaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaShaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hargaShaFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,10 +465,14 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createsign;
+    private javax.swing.JLabel bahan_pokok;
+    private javax.swing.JComboBox<String> bahan_pokokBox;
+    private javax.swing.JButton create;
     private javax.swing.JLabel desa;
     private javax.swing.JComboBox<String> desaBox;
     private javax.swing.JLabel gamber;
+    private javax.swing.JLabel hargaSha;
+    private javax.swing.JFormattedTextField hargaShaField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -380,6 +488,8 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
     private javax.swing.JComboBox<String> lembagaBox;
     private javax.swing.JLabel provinsi;
     private javax.swing.JComboBox<String> provinsiBox;
+    private javax.swing.JComboBox<String> shaBox;
+    private javax.swing.JLabel ukuranSha;
     private javax.swing.JLabel wilayah;
     private javax.swing.JComboBox<String> wilayahBox;
     // End of variables declaration//GEN-END:variables
