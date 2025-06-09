@@ -1,9 +1,13 @@
 package auth;
 
-import java.util.List;
-import javax.swing.JFrame;
+import db.DBConnection;
+import java.sql.Connection;
 import services.AuthService;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
 
 
 public class Config extends javax.swing.JFrame {
@@ -13,11 +17,11 @@ public class Config extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.masjid = masjidText;
-         String namaLembaga = AuthService.getSession(); // Ambil session
-         lembagaBox.removeAllItems(); // Hapus semua item lama
-         lembagaBox.addItem(masjid); // Tambahkan hanya satu item
-         lembagaBox.setSelectedItem(masjidText); // Pilih secara default
-               peovinsiBox.setVisible(false);
+         lembagaBox.removeAllItems();
+         lembagaBox.addItem(masjid); 
+         lembagaBox.setSelectedItem(masjidText); 
+         loadProvinsi();
+               provinsiBox.setVisible(false);
                provinsi.setVisible(false);
                kabupatenBox.setVisible(false);
                kabupaten.setVisible(false);
@@ -27,6 +31,24 @@ public class Config extends javax.swing.JFrame {
                desa.setVisible(false);
   
     }
+    private void loadProvinsi() {
+    try {
+        Connection conn = (Connection) DBConnection.getConnection();
+        String sql = "SELECT name FROM provinces ORDER BY name";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        provinsiBox.removeAllItems(); 
+        while (rs.next()) {
+            provinsiBox.addItem(rs.getString("name"));
+        }     
+        rs.close();
+        ps.close();
+        conn.close();    
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error load provinsi: " + e.getMessage());
+    }
+}
 
     
     @SuppressWarnings("unchecked")
@@ -37,7 +59,7 @@ public class Config extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         wilayahBox = new javax.swing.JComboBox<>();
         desaBox = new javax.swing.JComboBox<>();
-        peovinsiBox = new javax.swing.JComboBox<>();
+        provinsiBox = new javax.swing.JComboBox<>();
         kabupatenBox = new javax.swing.JComboBox<>();
         lembaga = new javax.swing.JLabel();
         wilayah = new javax.swing.JLabel();
@@ -81,13 +103,13 @@ public class Config extends javax.swing.JFrame {
         });
         jPanel2.add(desaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 210, 30));
 
-        peovinsiBox.setEditable(true);
-        peovinsiBox.addActionListener(new java.awt.event.ActionListener() {
+        provinsiBox.setEditable(true);
+        provinsiBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                peovinsiBoxActionPerformed(evt);
+                provinsiBoxActionPerformed(evt);
             }
         });
-        jPanel2.add(peovinsiBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 210, 30));
+        jPanel2.add(provinsiBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 210, 30));
 
         kabupatenBox.setEditable(true);
         kabupatenBox.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +263,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
     String selectedWilayah = wilayahBox.getSelectedItem().toString();
 
     if (selectedWilayah.equalsIgnoreCase("Provinsi")) {
-               peovinsiBox.setVisible(true);
+               provinsiBox.setVisible(true);
                provinsi.setVisible(true);
                kabupatenBox.setVisible(false);
                kabupaten.setVisible(false);
@@ -250,7 +272,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
                desaBox.setVisible(false);
                desa.setVisible(false);
     } else if (selectedWilayah.equalsIgnoreCase("Kabupaten / Kota")) {
-               peovinsiBox.setVisible(true);
+               provinsiBox.setVisible(true);
                provinsi.setVisible(true);
                kabupatenBox.setVisible(true);
                kabupaten.setVisible(true);
@@ -259,7 +281,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
                desaBox.setVisible(false);
                desa.setVisible(false);
      } else if (selectedWilayah.equalsIgnoreCase("Kecamatan")) {
-               peovinsiBox.setVisible(true);
+               provinsiBox.setVisible(true);
                provinsi.setVisible(true);
                kabupatenBox.setVisible(true);
                kabupaten.setVisible(true);
@@ -268,7 +290,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
                desaBox.setVisible(false);
                desa.setVisible(false);
      } else if (selectedWilayah.equalsIgnoreCase("Desa / Kelurahan")) {
-               peovinsiBox.setVisible(true);
+               provinsiBox.setVisible(true);
                provinsi.setVisible(true);
                kabupatenBox.setVisible(true);
                kabupaten.setVisible(true);
@@ -277,7 +299,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
                desaBox.setVisible(true);
                desa.setVisible(true);
      } else {
-               peovinsiBox.setVisible(false);
+               provinsiBox.setVisible(false);
                provinsi.setVisible(false);
                kabupatenBox.setVisible(false);
                kabupaten.setVisible(false);
@@ -292,9 +314,9 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
         // TODO add your handling code here:
     }//GEN-LAST:event_desaBoxActionPerformed
 
-    private void peovinsiBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peovinsiBoxActionPerformed
+    private void provinsiBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinsiBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_peovinsiBoxActionPerformed
+    }//GEN-LAST:event_provinsiBoxActionPerformed
 
     private void kabupatenBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kabupatenBoxActionPerformed
         // TODO add your handling code here:
@@ -334,39 +356,7 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
             java.util.logging.Logger.getLogger(Config.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+      
 
     }
 
@@ -388,8 +378,8 @@ String provinsi = lembagaBox.getEditor().getItem().toString();
     private javax.swing.JComboBox<String> kecamatanBox;
     private javax.swing.JLabel lembaga;
     private javax.swing.JComboBox<String> lembagaBox;
-    private javax.swing.JComboBox<String> peovinsiBox;
     private javax.swing.JLabel provinsi;
+    private javax.swing.JComboBox<String> provinsiBox;
     private javax.swing.JLabel wilayah;
     private javax.swing.JComboBox<String> wilayahBox;
     // End of variables declaration//GEN-END:variables
