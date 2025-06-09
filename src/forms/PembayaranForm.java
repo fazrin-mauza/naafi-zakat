@@ -1,7 +1,7 @@
 package forms;
 
 import services.PembayaranService;
-import services.UserService;
+import services.AuthService;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -34,7 +34,7 @@ public class PembayaranForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataKepalaKeluarga();
-        String sessionUser = UserService.getSession(); // Ambil session
+        String sessionUser = AuthService.getSession(); // Ambil session
          amil.removeAllItems(); // Hapus semua item lama
          amil.addItem(sessionUser); // Tambahkan hanya satu item
          amil.setSelectedItem(sessionUser); // Pilih secara default

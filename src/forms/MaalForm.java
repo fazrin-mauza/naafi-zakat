@@ -1,7 +1,7 @@
 package forms;
 
 import services.PembayaranService;
-import services.UserService;
+import services.AuthService;
 import helper.Function;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,7 +25,7 @@ public class MaalForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataKepalaKeluarga();
-        String sessionUser = UserService.getSession(); // Ambil session
+        String sessionUser = AuthService.getSession(); // Ambil session
          amilBox.removeAllItems(); // Hapus semua item lama
          amilBox.addItem(sessionUser); // Tambahkan hanya satu item
          amilBox.setSelectedItem(sessionUser); // Pilih secara default

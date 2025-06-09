@@ -2,7 +2,7 @@ package auth;
 
 import java.util.List;
 import javax.swing.JFrame;
-import services.UserService;
+import services.AuthService;
 import javax.swing.JOptionPane;
 
 
@@ -14,7 +14,7 @@ public class Register extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
     // Ambil daftar nama masjid dari database
-    List<String> masjidList = UserService.getNamaMasjidList();
+    List<String> masjidList = AuthService.getNamaMasjidList();
     for (String nama : masjidList) {
         masjid.addItem(nama); // ✅ 'masjid' adalah JComboBox, 'nama' adalah String
     }
@@ -232,7 +232,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void createsignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createsignActionPerformed
-UserService userService = new UserService();
+AuthService userService = new AuthService();
 String usernameText = username.getText();
 String namaText = nama.getText();
 String handphoneText = nomorhandphone.getText();
@@ -245,10 +245,26 @@ String ulangiPasswordText = new String(ulangipw.getPassword());
 
     if (result.equals("success")) {
         JOptionPane.showMessageDialog(this, "Akun berhasil dibuat!");
-        this.dispose(); 
+        
+        String masjidSet = masjid.getEditor().getItem().toString().trim();
+
+boolean foundInList = false;
+for (int i = 0; i < masjid.getItemCount(); i++) {
+    if (masjid.getItemAt(i).toString().equalsIgnoreCase(masjidSet)) {
+        foundInList = true;
+        break;
+    }
+}
+if (foundInList) {
+       this.dispose(); 
         Login lgf = new Login();
         lgf.setVisible(true);
-        
+} else {
+    Config cfg = new Config(masjidSet); 
+    cfg.setVisible(true);
+    this.dispose();    
+}
+
     } else {
         JOptionPane.showMessageDialog(this, result);
     }

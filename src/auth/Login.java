@@ -6,7 +6,7 @@
 package auth;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import services.UserService;
+import services.AuthService;
 import views.BerandaView;
 
 /**
@@ -230,8 +230,8 @@ public class Login extends javax.swing.JFrame {
     String usernameInput = username.getText();
     String passwordInput = new String(password.getPassword());  // Convert password to String
 
-    // Panggil method login dari UserService
-    UserService userService = new UserService();
+    // Panggil method login dari AuthService
+    AuthService userService = new AuthService();
     String result = userService.login(usernameInput, passwordInput);
 
     // Tampilkan hasil login

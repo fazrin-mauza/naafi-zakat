@@ -16,7 +16,7 @@ public class MustahiqCreateService {
 
         // Ubah semua input jadi huruf besar (kecuali umur)
         nama = nama.toUpperCase();
-    //    golongan = golongan.toUpperCase();
+    //  golongan = golongan.toUpperCase();
         alamat = alamat.toUpperCase();
 
         // Cek apakah mustahiq dengan nama dan nomor HP sudah terdaftar
@@ -58,7 +58,7 @@ public class MustahiqCreateService {
         }
 
         nama = nama.toUpperCase();
-        golongan = golongan.toUpperCase();
+      //  golongan = golongan.toUpperCase();
         alamat = alamat.toUpperCase();
 
 

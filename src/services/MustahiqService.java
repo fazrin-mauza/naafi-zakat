@@ -47,7 +47,7 @@ public class MustahiqService {
         // Hapus semua anggota keluarga berdasarkan nama keluarga
         String sqlMustahiq = "DELETE FROM mustahiq WHERE nama = ?";
         try (PreparedStatement ps1 = conn.prepareStatement(sqlMustahiq)) {
-            ps1.setString(1, namaMustahiq.toUpperCase());
+            ps1.setString(1, namaMustahiq);
             ps1.executeUpdate();
         }
 

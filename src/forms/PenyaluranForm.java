@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.util.List;
-import services.UserService;
+import services.AuthService;
 import views.BerandaView;
 import views.LaporanView;
 import auth.Login;
@@ -21,7 +21,7 @@ public class PenyaluranForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         loadDataMustahiq();
-        String sessionUser = UserService.getSession(); // Ambil session
+        String sessionUser = AuthService.getSession(); // Ambil session
          boxAmil.removeAllItems(); // Hapus semua item lama
          boxAmil.addItem(sessionUser); // Tambahkan hanya satu item
          boxAmil.setSelectedItem(sessionUser); // Pilih secara default

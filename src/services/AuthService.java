@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-public class UserService {
+public class AuthService {
 
      public String signUp(String usernameText, String namaText, String handphoneText, String masjidText, String passwordText, String ulangiPasswordText) {
         if (usernameText.isEmpty() || namaText.isEmpty() || handphoneText.isEmpty() || masjidText.isEmpty() || passwordText.isEmpty() || ulangiPasswordText.isEmpty()) {
@@ -74,14 +72,9 @@ public class UserService {
             String nama = rs.getString("nama");
             String masjid = rs.getString("masjid");
 
-            // Update kolom session & nama_masjid di tabel config
+            
             updateConfig(nama, masjid);
-           /** String updateSessionSQL = "UPDATE config SET session = ?,nama_masjid = ? WHERE id = 1";
-            try (PreparedStatement updateStmt = conn.prepareStatement(updateSessionSQL)) {
-                updateStmt.setString(1, nama);
-                updateStmt.setString(2, masjid);
-                updateStmt.executeUpdate();
-            } */
+   
                 return "success";
             } else {
                 return "Username atau password salah!";
@@ -129,20 +122,7 @@ public class UserService {
 
     return namaMasjidList;
 }
- /** public static boolean updateMasjid(String nama_masjid) {
-        Connection conn = DBConnection.getConnection();
-        String updateMasjid = "UPDATE config SET nama_masjid=? WHERE id=?";
-        try (PreparedStatement stmt = conn.prepareStatement(updateMasjid)) {
-                stmt.setString(1, nama_masjid);
-                stmt.setInt(2, 1);
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            System.err.println("Error update nama masjid: " + e.getMessage());
-            return false;
-        }
-    } */
    public static boolean updateConfig(String Session, String nama_masjid) {
         Connection conn = DBConnection.getConnection();
         // Update kolom session di tabel config

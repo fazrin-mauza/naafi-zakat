@@ -37,7 +37,6 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
         alamatKeluarga.setText(alamat);
         rtSpin.setValue(rt);
         rwSpin.setValue(rw);
-        handphoneKeluarga.setText(handphoneData);
         
         isEditMode = true;
         namaLama = namaData;
@@ -72,12 +71,20 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
 
         jPanel9 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jComboBox4 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jComboBox9 = new javax.swing.JComboBox<>();
+        jComboBox10 = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -108,14 +115,13 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel25 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        handphoneKeluarga = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         alamatKeluarga = new javax.swing.JTextArea();
         namaKepalaKeluarga = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 153));
@@ -133,7 +139,15 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel2.setText("Status Keluarga");
         jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 100, 30));
+
+        jLabel28.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel28.setText("Kecamatan");
+        jPanel9.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 70, 20));
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
+
+        jLabel30.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel30.setText("Provinsi");
+        jPanel9.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 80, 20));
 
         jButton2.setBackground(new java.awt.Color(0, 255, 0));
         jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -149,17 +163,23 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
+        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 90, 30));
+
+        jComboBox4.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, 140, 30));
 
         jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel7.setText("Daftar Anggota Keluarga");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, 150, 30));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 150, 20));
 
         jTable1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -182,7 +202,7 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 270, 110));
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 290, 90));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -193,7 +213,39 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 90, 30));
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 90, 30));
+
+        jComboBox8.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jComboBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox8ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jComboBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 140, 30));
+
+        jComboBox9.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jComboBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox9ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jComboBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 140, 30));
+
+        jComboBox10.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jComboBox10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox10ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jComboBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 140, 30));
+
+        jLabel32.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel32.setText("Kabupaten");
+        jPanel9.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 70, 20));
+
+        jLabel31.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel31.setText("Desa");
+        jPanel9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 30, 20));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 440));
@@ -352,27 +404,28 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
         jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
-        jPanel9.add(rwSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 70, 30));
-        jPanel9.add(rtSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 70, 30));
+        jPanel9.add(rwSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 70, 30));
+        jPanel9.add(rtSpin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 60, 30));
 
         jLabel27.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel27.setText("RW");
-        jPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 40, 30));
+        jPanel9.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, 30, 20));
 
         jLabel26.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel26.setText("RT");
-        jPanel9.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 90, 30));
+        jPanel9.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 30, 20));
 
         jLabel24.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel24.setText("Alamat");
-        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 90, 30));
+        jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 60, 20));
 
         jComboBox3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jPanel9.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 170, 30));
-
-        jLabel25.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel25.setText("No. Handphone");
-        jPanel9.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 90, 30));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 190, 30));
 
         jButton3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton3.setText("Tambah Anggota");
@@ -382,35 +435,32 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel9.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 130, 30));
+        jPanel9.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 130, 30));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel3.setText("Nama Keluarga");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 100, 30));
 
-        handphoneKeluarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                handphoneKeluargaActionPerformed(evt);
-            }
-        });
-        jPanel9.add(handphoneKeluarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 170, 30));
-
         alamatKeluarga.setColumns(20);
         alamatKeluarga.setRows(5);
         jScrollPane2.setViewportView(alamatKeluarga);
 
-        jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 170, 30));
+        jPanel9.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 140, 40));
 
         namaKepalaKeluarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaKepalaKeluargaActionPerformed(evt);
             }
         });
-        jPanel9.add(namaKepalaKeluarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 170, 30));
+        jPanel9.add(namaKepalaKeluarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 190, 30));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel4.setText("jLabel2");
         jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 580, 500));
+
+        jLabel29.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel29.setText("Desa");
+        jPanel9.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 30, 20));
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
 
@@ -428,7 +478,7 @@ public class MuzakkiCreateForm extends javax.swing.JFrame {
     String alamat = alamatKeluarga.getText().trim();
     int rt = (int) rtSpin.getValue();
     int rw = (int) rwSpin.getValue();
-    String handphone = handphoneKeluarga.getText().trim();
+    String handphone = "0";
     String statusKeluarga = (String) jComboBox3.getSelectedItem();
     int jumlah = 1;
     
@@ -566,7 +616,6 @@ if (!hasilInsert.isEmpty()) {
 // Fungsi untuk mereset form dan tabel
 private void resetFormAndTable() {
     // Reset JTextField dan JTextArea
-    handphoneKeluarga.setText("");  // Reset input nomor handphone
     namaKepalaKeluarga.setText("");  // Reset input nama keluarga
     alamatKeluarga.setText("");    // Reset input alamat
     jComboBox3.setSelectedIndex(0);  // Mengatur combo box ke index pertama, misalnya
@@ -697,13 +746,9 @@ private void resetFormAndTable() {
     model.addRow(new Object[]{"", ""}); // atau "" kosong
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void handphoneKeluargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handphoneKeluargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_handphoneKeluargaActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     // 1. Isi combo box untuk kolom "Status" anggota keluarga
-    String[] statusOptions = {"Ayah", "Ibu", "Anak", "Sendiri", ""};
+    String[] statusOptions = {"Sendiri", "Kepala Keluarga", "Suami", "Istri", "Anak", "Menantu", "Cucu", "Orangtua", "Mertua", "Famili Lain", "Pembantu", "Lainnya"};
     JComboBox<String> comboBox = new JComboBox<>(statusOptions);
     TableColumn statusColumn = jTable1.getColumnModel().getColumn(1);
     statusColumn.setCellEditor(new DefaultCellEditor(comboBox));
@@ -714,15 +759,15 @@ private void resetFormAndTable() {
     TableColumn jenisKelaminColumn = jTable1.getColumnModel().getColumn(2);
     jenisKelaminColumn.setCellEditor(new DefaultCellEditor(jenisKelaminComboBox));
 
-    // 3. Otomatis atur jenis kelamin berdasarkan status (Ayah/Ibu)
+    // 3. Otomatis atur jenis kelamin berdasarkan status
     comboBox.addActionListener(e -> {
         int row = jTable1.getEditingRow();
         if (row >= 0) {
             String selectedStatus = (String) comboBox.getSelectedItem();
             if (selectedStatus != null) {
-                if (selectedStatus.equals("Ayah")) {
+                if (selectedStatus.equals("Suami")) {
                     jTable1.setValueAt("Laki-laki", row, 2);
-                } else if (selectedStatus.equals("Ibu")) {
+                } else if (selectedStatus.equals("Istri")) {
                     jTable1.setValueAt("Perempuan", row, 2);
                 }
             }
@@ -749,11 +794,11 @@ private void resetFormAndTable() {
                     model.setValueAt("Sendiri", 0, 1); // kolom Status
                 }
             } else if ("Berkeluarga".equals(selectedStatus)) {
-                jButton3.setVisible(true); // Tampilkan tombol tambah anggota
-
+                jButton3.setVisible(true);
+                model.addRow(new Object[]{"", ""});
                 if (model.getRowCount() > 0) {
-                    model.setValueAt(nama, 0, 0);      // kolom Nama tetap
-                    model.setValueAt("", 0, 1);        // kosongkan Status
+                    model.setValueAt(nama, 0, 0);     
+                    model.setValueAt("", 0, 1); 
                 }
             } else {
                 // Jika "--Pilih--" dipilih
@@ -780,6 +825,26 @@ private void resetFormAndTable() {
     private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1AncestorAdded
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox8ActionPerformed
+
+    private void jComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox9ActionPerformed
+
+    private void jComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -833,12 +898,15 @@ private void resetFormAndTable() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alamatKeluarga;
-    private javax.swing.JTextField handphoneKeluarga;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox10;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -855,10 +923,14 @@ private void resetFormAndTable() {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
