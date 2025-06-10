@@ -3,6 +3,8 @@ package views;
 import auth.Login;
 import forms.MuzakkiCreateForm;
 import forms.PenyaluranForm;
+import java.io.File;
+import java.io.FileInputStream;
 import services.MuzakkiService; 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFileChooser;
 
 
 public class MuzakkiView extends javax.swing.JFrame {
@@ -42,6 +45,7 @@ private void loadDataKeluarga() {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btn_import = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -86,7 +90,7 @@ private void loadDataKeluarga() {
                 {null, null, null, null}
             },
             new String [] {
-                "Kepala Keluarga", "Jumlah Anggota", "Alamat", "Nomor Handphone"
+                "Kepala Keluarga", "Jumlah Anggota", "Alamat", "Nomor HP"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,13 +100,22 @@ private void loadDataKeluarga() {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Kepala Keluarga");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Jumlah Anggota");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Alamat");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Nomor Handphone");
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(65);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
+
+        btn_import.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_import.setText("Import");
+        btn_import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_import.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_importActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_import, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, 30));
 
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton1.setText("Tambah");
@@ -112,7 +125,7 @@ private void loadDataKeluarga() {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, 30));
 
         jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton2.setText("Edit");
@@ -122,7 +135,7 @@ private void loadDataKeluarga() {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, 30));
 
         jButton3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jButton3.setText("Hapus");
@@ -144,7 +157,7 @@ private void loadDataKeluarga() {
                 field_cariKeyTyped(evt);
             }
         });
-        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, 30));
+        getContentPane().add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 160, 30));
 
         jLabel1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel1.setText("Cari");
@@ -540,6 +553,77 @@ try {
 
     }//GEN-LAST:event_field_cariKeyTyped
 
+    private void btn_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importActionPerformed
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih file Excel (.xls / .xlsx)");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    int hasil = fileChooser.showOpenDialog(this);
+    if (hasil == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+
+        if (!file.getName().toLowerCase().endsWith(".xls") &&
+            !file.getName().toLowerCase().endsWith(".xlsx")) {
+            JOptionPane.showMessageDialog(this, "File harus berformat .xls atau .xlsx");
+            return;
+        }
+
+        try (
+            FileInputStream fis = new FileInputStream(file);
+            org.apache.poi.ss.usermodel.Workbook workbook = file.getName().toLowerCase().endsWith(".xls")
+                ? new org.apache.poi.hssf.usermodel.HSSFWorkbook(fis)
+                : new org.apache.poi.xssf.usermodel.XSSFWorkbook(fis)
+        ) {
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
+            int totalBerhasil = 0;
+
+            try (Connection conn = getConnection()) {
+                if (conn == null || conn.isClosed()) {
+                    JOptionPane.showMessageDialog(this, "Koneksi database gagal!");
+                    return;
+                }
+
+                for (org.apache.poi.ss.usermodel.Row row : sheet) {
+                    if (row.getRowNum() == 0) continue; // skip header
+
+                    // Validasi sel kosong
+                    if (row.getCell(0) == null || row.getCell(1) == null ||
+                        row.getCell(2) == null || row.getCell(3) == null || row.getCell(4) == null) {
+                        continue; // skip baris yang tidak lengkap
+                    }
+
+                    String nama = row.getCell(1).toString().trim();
+                    int jumlah = (int) row.getCell(2).getNumericCellValue();
+                    String alamat = row.getCell(3).toString().trim();
+                    String handphone = row.getCell(4).toString().trim();
+
+                    String sql = "INSERT INTO keluarga (nama, jumlah, alamat, handphone) VALUES (?, ?, ?, ?)";
+                    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                        stmt.setString(1, nama);
+                        stmt.setInt(2, jumlah);
+                        stmt.setString(3, alamat);
+                        stmt.setString(4, handphone);
+                        stmt.executeUpdate();
+                        totalBerhasil++;
+                    } catch (Exception ex) {
+                        System.err.println("Gagal menyimpan baris: " + nama + " → " + ex.getMessage());
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this, "Import berhasil! Total data masuk: " + totalBerhasil);
+                loadDataKeluarga();
+
+            } catch (Exception connEx) {
+                JOptionPane.showMessageDialog(this, "Koneksi database gagal: " + connEx.getMessage());
+                connEx.printStackTrace();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal membaca file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_btn_importActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -577,6 +661,7 @@ try {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_import;
     private javax.swing.JTextField field_cari;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

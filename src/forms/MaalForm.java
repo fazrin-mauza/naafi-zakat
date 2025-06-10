@@ -505,6 +505,7 @@ private void loadDataKepalaKeluarga() {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String namaKepalaKeluarga = namaKeluarga;
+        String alamatText = alamatArea.getText();
         int jumlahAnggota = 1;//jumlahAnggotaKeluarga;
         String jenisZakat = "MAAL"; 
         String jenisPembayaran = "Uang Tunai";
@@ -530,7 +531,7 @@ private void loadDataKepalaKeluarga() {
 
     PembayaranService service = new PembayaranService();
     boolean success = service.buatPembayaran(
-        namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
+        namaKepalaKeluarga, alamatText, jumlahAnggota, jenisZakat, jenisPembayaran, total,
         namaAmil, tanggal, waktu
     );
 

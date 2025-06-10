@@ -583,7 +583,7 @@ private void loadDataKepalaKeluarga() {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
          String pesan;
-        if (jumlahAnggotaKeluarga == 1) {
+      if (jumlahAnggotaKeluarga == 1) {
           pesan = "ﻧَﻮَﻳْﺖُ أَﻥْ أُﺧْﺮِﺝَ ﺯَﻛَﺎﺓَ ﺍﻟْﻔِﻄْﺮِ ﻋَﻦْ ﻧَﻔْسيْ ﻓَﺮْﺿًﺎ ِﻟﻠﻪِ ﺗَﻌَﺎﻟَﻰ\n"
                 + "Aku niat mengeluarkan zakat fitrah untuk diriku sendiri, fardu karena Allah Ta‘âlâ."
                   ;
@@ -605,7 +605,8 @@ private void loadDataKepalaKeluarga() {
         );
 
         if (pilihan == 0) {
-            String namaKepalaKeluarga = namaKeluarga;
+        String namaKepalaKeluarga = namaKeluarga;
+        String alamatText = alamatArea.getText();
         int jumlahAnggota = jumlahAnggotaKeluarga;
         String jenisZakat = "FITRI"; 
         String jenisPembayaran = (String) pembayaranBox.getSelectedItem();
@@ -618,20 +619,13 @@ private void loadDataKepalaKeluarga() {
         totalText = totalText.replace(".", "");
         totalText = totalText.replace(",", ".");
         double total = Double.parseDouble(totalText);
-        
         String namaAmil = (String) amil.getSelectedItem();
-
-
  // Ambil tanggal & waktu sekarang
     String tanggal = Function.getCurrentDate();
     String waktu = Function.getCurrentTime();
 
     PembayaranService service = new PembayaranService();
-  /**  boolean success = service.insertPembayaran(
-        namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
-        namaAmil, tanggal.toString(), waktu.toString()
-        */
-    boolean success = service.buatPembayaran(namaKepalaKeluarga, jumlahAnggota, jenisZakat, jenisPembayaran, total,
+    boolean success = service.buatPembayaran(namaKepalaKeluarga, alamatText, jumlahAnggota, jenisZakat, jenisPembayaran, total,
         namaAmil, tanggal, waktu.toString()
     );
 

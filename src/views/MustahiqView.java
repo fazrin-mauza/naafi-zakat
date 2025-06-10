@@ -546,7 +546,7 @@ public class MustahiqView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
+    JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Pilih file Excel (.xls / .xlsx)");
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -580,23 +580,29 @@ public class MustahiqView extends javax.swing.JFrame {
 
                     // Validasi sel kosong
                     if (row.getCell(0) == null || row.getCell(1) == null || 
-                        row.getCell(2) == null || row.getCell(3) == null || row.getCell(4) == null) {
+                        row.getCell(2) == null || row.getCell(3) == null || row.getCell(4) == null || row.getCell(5) == null) {
                         continue; // skip baris yang tidak lengkap
                     }
 
-                    String nama = row.getCell(0).toString().trim();
-                    String golongan = row.getCell(1).toString().trim();
-                    String umur = row.getCell(2).toString().trim();
-                    String alamat = row.getCell(3).toString().trim();
-                    String handphone = row.getCell(4).toString().trim();
+                    String nama = row.getCell(1).toString().trim();
+                    String golongan = row.getCell(2).toString().trim();
+                    String jenis_kelamin =  row.getCell(3).toString().trim();
+                    String umur = row.getCell(4).toString().trim();
+                    String alamat = row.getCell(5).toString().trim();
+                    int rt = (int) row.getCell(6).getNumericCellValue();
+                    int rw = (int) row.getCell(7).getNumericCellValue();
+                    String handphone = row.getCell(8).toString().trim();
 
-                    String sql = "INSERT INTO mustahiq (nama, golongan, umur, alamat, handphone) VALUES (?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO mustahiq (nama, golongan, jenis_kelamin, umur, alamat, rt, rw, handphone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                         stmt.setString(1, nama);
                         stmt.setString(2, golongan);
-                        stmt.setString(3, umur);
-                        stmt.setString(4, alamat);
-                        stmt.setString(5, handphone);
+                        stmt.setString(3, jenis_kelamin);
+                        stmt.setString(4, umur);
+                        stmt.setString(5, alamat);
+                        stmt.setInt(6, rt);
+                        stmt.setInt(7, rw);
+                        stmt.setString(8, handphone);
                         stmt.executeUpdate(); // aktifkan penyimpanan
                         totalBerhasil++;
                     } catch (Exception ex) {

@@ -8,20 +8,23 @@ public class DBConnection {
 
     private static final String URL = "jdbc:sqlite:zakat.db";
     private static Connection conn = null;
+    private static int koneksiCounter = 0;
 
-    public static synchronized Connection getConnection() {
-        try {
-            if (conn == null || conn.isClosed()) {
-                Class.forName("org.sqlite.JDBC");
-                conn = DriverManager.getConnection(URL);
-                System.out.println("Koneksi berhasil ke zakat.db");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Koneksi gagal: " + e.getMessage());
-            conn = null;
+public static synchronized Connection getConnection() {
+    try {
+        if (conn == null || conn.isClosed()) {
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection(URL);
+            koneksiCounter++;
+           System.out.print("\rKoneksi berhasil ke zakat.db (" + koneksiCounter + ")    ");
         }
-        return conn;
+    } catch (ClassNotFoundException | SQLException e) {
+        System.err.println("Koneksi gagal: " + e.getMessage());
+        conn = null;
     }
+    return conn;
+}
+
 
     public static synchronized void closeConnection() {
         try {

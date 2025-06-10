@@ -2,33 +2,38 @@ package views;
 
 import forms.PengaturanForm;
 import auth.Login;
+import db.DBConnection;
 import forms.PenyaluranForm;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.JFrame;
 import services.BerandaService;
 import helper.Function;
+import java.sql.Connection;
+import services.WilayahService;
 
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BerandaView extends javax.swing.JFrame {
-
-   
+  Map<String, String> makanan = WilayahService.getMakananPokok();
     public BerandaView() {
         initComponents();
         this.setLocationRelativeTo(null);
         Map<String, String> config = Function.getSessionAndMasjid();
         user.setText(config.get("session"));
         nama_masjid.setText(config.get("nama_masjid"));
-BerandaService.BerandaData data = BerandaService.getBerandaData();
-if (data != null) {
-     jumlah_beras.setText(data.getBeras() + " KG");
-     total_uangtunai.setText("Rp " + data.getUangTunai());
-} else {
-  //  jLabel3.setText("Gagal");
-}
+      
+        makanan_pokokLabel.setText("Jumlah Total "+makanan.get("makanan_pokok"));
+        loadBeranda();
     }
-
+    private void loadBeranda() {
+        // selalu ambil data terbaru
+        BerandaService.BerandaData data = BerandaService.getBerandaData();
+        jumlah_beras.setText(data.getBeras() + " KG");
+        total_uangtunai.setText("Rp " + data.getUangTunai());
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,6 +60,7 @@ if (data != null) {
         jPanel8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        konversi = new javax.swing.JButton();
         nama_masjid = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
@@ -67,7 +73,7 @@ if (data != null) {
         jumlah_muzakkibayar = new javax.swing.JTextField();
         total_uangtunai = new javax.swing.JTextField();
         jumlah_beras = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        makanan_pokokLabel = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         edtNaafi = new javax.swing.JLabel();
 
@@ -239,6 +245,15 @@ if (data != null) {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 80, 170, 440);
 
+        konversi.setText("jButton2");
+        konversi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                konversiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(konversi);
+        konversi.setBounds(220, 440, 80, 30);
+
         nama_masjid.setFont(new java.awt.Font("Sitka Display", 1, 37)); // NOI18N
         nama_masjid.setForeground(new java.awt.Color(51, 51, 255));
         nama_masjid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -277,7 +292,7 @@ if (data != null) {
         jLabel6.setBounds(230, 230, 190, 30);
 
         jLabel22.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        jLabel22.setText("Total Uang Tunai");
+        jLabel22.setText("Total Uang Tunai Rp");
         jPanel1.add(jLabel22);
         jLabel22.setBounds(230, 190, 120, 30);
 
@@ -304,10 +319,10 @@ if (data != null) {
         jPanel1.add(jumlah_beras);
         jumlah_beras.setBounds(430, 150, 160, 30);
 
-        jLabel5.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        jLabel5.setText("Jumlah Beras");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(230, 150, 110, 30);
+        makanan_pokokLabel.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        makanan_pokokLabel.setText("Jumlah <Makanan Pokok>");
+        jPanel1.add(makanan_pokokLabel);
+        makanan_pokokLabel.setBounds(230, 150, 190, 30);
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel21.setText("jLabel21");
@@ -463,6 +478,47 @@ if (data != null) {
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void konversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiActionPerformed
+                                       
+   double hargaPerKg = Double.parseDouble(makanan.get("harga_kg"));
+
+    String input = JOptionPane.showInputDialog(this, "Masukkan nominal uang tunai yang ingin dikonversi:");
+
+    if (input != null && !input.isEmpty()) {
+        try {
+            double uangTunai = Double.parseDouble(input);
+            double beras = uangTunai / hargaPerKg;
+
+            int konfirmasi = JOptionPane.showConfirmDialog(
+                this, 
+                "Uang tunai: Rp" + uangTunai + "\nAkan dikonversi menjadi: " + String.format("%.2f", beras) + " kg " + makanan.get("makanan_pokok") + ".\nLanjutkan?",
+                "Konfirmasi Konversi",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (konfirmasi == JOptionPane.YES_OPTION) {
+                BerandaService service = new BerandaService();
+                boolean sukses = service.konversiTunaiKeMakananPokok(uangTunai, hargaPerKg, 1);
+
+                if (sukses) {
+                    JOptionPane.showMessageDialog(this, "Konversi berhasil dan data berhasil diperbarui.");
+                    loadBeranda();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Data tidak ditemukan atau gagal diperbarui.");
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Input tidak valid. Harap masukkan angka.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Kesalahan SQL: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Input dibatalkan atau kosong.");
+    }
+
+    }//GEN-LAST:event_konversiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,7 +575,6 @@ if (data != null) {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -534,6 +589,8 @@ if (data != null) {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jumlah_beras;
     private javax.swing.JTextField jumlah_muzakkibayar;
+    private javax.swing.JButton konversi;
+    private javax.swing.JLabel makanan_pokokLabel;
     private javax.swing.JLabel nama_masjid;
     private javax.swing.JTextField total_uangtunai;
     private javax.swing.JTextField user;

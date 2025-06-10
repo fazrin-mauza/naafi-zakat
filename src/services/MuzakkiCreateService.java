@@ -21,7 +21,6 @@ public class MuzakkiCreateService {
         namaKeluarga = namaKeluarga.toUpperCase();
         statusKeluarga = statusKeluarga.toUpperCase();
         alamat = alamat.toUpperCase();
-        handphone = handphone.toUpperCase();
 
         if (isKeluargaExist(namaKeluarga)) {
             return "Nama keluarga "+namaKeluarga+" sudah terdaftar.";
@@ -97,8 +96,8 @@ private boolean createAnggota(String namaKeluarga, String namaAnggota, String st
 private void updateJumlahAnggota(String namaKeluarga) {
     Connection conn = DBConnection.getConnection();
     String sqlCount = "SELECT COUNT(*) FROM anggota_keluarga WHERE UPPER(keluarga) = ?";
-    String sqlUpdate = "UPDATE keluarga SET jumlah = ? WHERE UPPER(nama) = ?";
-
+    String sqlUpdate = "UPDATE keluarga SET jumlah = ?, status = ? WHERE UPPER(nama) = ?";
+    String status;
     try (PreparedStatement countStmt = conn.prepareStatement(sqlCount);
          PreparedStatement updateStmt = conn.prepareStatement(sqlUpdate)) {
 
@@ -107,9 +106,15 @@ private void updateJumlahAnggota(String namaKeluarga) {
 
         if (rs.next()) {
             int jumlah = rs.getInt(1);
+            if (jumlah > 1) {
+               status = "Berkeluarga";
+            } else {
+               status = "Sendiri";
+            }
 
             updateStmt.setInt(1, jumlah);
-            updateStmt.setString(2, namaKeluarga);
+            updateStmt.setString(2, status);
+            updateStmt.setString(3, namaKeluarga);
 
             int updatedRows = updateStmt.executeUpdate();
             if (updatedRows > 0) {
@@ -190,7 +195,6 @@ private void updateJumlahAnggota(String namaKeluarga) {
     namaBaru = namaBaru.toUpperCase();
     status = status.toUpperCase();
     alamat = alamat.toUpperCase();
-    handphone = handphone.toUpperCase();
 
     boolean success = updateKeluarga(namaBaru, status, alamat, rt, rw, handphone, jumlah, namaLama);
     return success ? "success" : "Gagal mengubah data keluarga. Silakan coba lagi.";

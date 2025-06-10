@@ -103,4 +103,15 @@ public class BerandaService {
         }
     }
   
+        public boolean konversiTunaiKeMakananPokok(double uangTunai, double hargaPerKg, int id) throws SQLException {
+        double beras = uangTunai / hargaPerKg;
+        String sql = "UPDATE total SET beras = beras + ?, tunai = tunai - ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, beras);
+            stmt.setDouble(2, uangTunai);
+            stmt.setInt(3, id);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        }
+    }
 }

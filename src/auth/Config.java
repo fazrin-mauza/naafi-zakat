@@ -194,6 +194,7 @@ private void loadProvinsi() {
         jPanel2.add(lembagaBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 210, 30));
 
         bahan_pokokBox.setEditable(true);
+        bahan_pokokBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         bahan_pokokBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Beras", "Gandum", "Jagung", "Keju", "Kentang", "Kismis", "Kurma", "Labu kuning", "Sagu", "Singkong", "Talas", "Ubi jalar" }));
         bahan_pokokBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,7 +325,7 @@ private void loadProvinsi() {
     );
 
     if (berhasil) {
-            this.dispose(); 
+        this.dispose(); 
         Login lgf = new Login();
         lgf.setVisible(true);
     } else {

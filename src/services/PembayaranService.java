@@ -52,6 +52,7 @@ public class PembayaranService {
             ps1 = con.prepareStatement(sql1);
             ps1.setString(1, namaKepala);
             rs1 = ps1.executeQuery();
+            String alamatLengkap = "RT "+rs1.getString("rt")+" / RW "+rs1.getString("rw")+rs1.getString("alamat");
 
             if (rs1.next()) {
                 result.put("status", rs1.getString("status"));
@@ -94,7 +95,7 @@ public class PembayaranService {
     }
 
 
-public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat, String jenisPembayaran, double totalPembayaran, String amil, String tanggal, String waktu) {
+public boolean buatPembayaran(String namaKeluarga, String alamatText,int jumlahAnggota, String jenisZakat, String jenisPembayaran, double totalPembayaran, String amil, String tanggal, String waktu) {
     if (namaKeluarga.isEmpty() || jenisZakat.isEmpty() || jenisPembayaran.isEmpty() || amil.isEmpty()) {
         return false;
     }
@@ -103,25 +104,25 @@ public boolean buatPembayaran(String namaKeluarga, int jumlahAnggota, String jen
         return false;
     }
 
-    return createPembayaran(namaKeluarga, jumlahAnggota, jenisZakat,
+    return createPembayaran(namaKeluarga, alamatText, jumlahAnggota, jenisZakat,
                             jenisPembayaran, totalPembayaran, amil, tanggal, waktu);
 }
 
-private boolean createPembayaran(String namaKeluarga, int jumlahAnggota, String jenisZakat,
+private boolean createPembayaran(String namaKeluarga, String alamatText, int jumlahAnggota, String jenisZakat,
                                  String jenisPembayaran, double totalPembayaran, String amil,
                                  String tanggal, String waktu) {
     Connection conn = DBConnection.getConnection();
-    String sql = "INSERT INTO pembayaran (nama_keluarga, jumlah_anggota, jenis_zakat, jenis_pembayaran, total_pembayaran, amil, date, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+    String sql = "INSERT INTO pembayaran (nama_keluarga, alamat, jumlah_anggota, jenis_zakat, jenis_pembayaran, total_pembayaran, amil, date, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, namaKeluarga);
-        stmt.setInt(2, jumlahAnggota);
-        stmt.setString(3, jenisZakat);
-        stmt.setString(4, jenisPembayaran);
-        stmt.setDouble(5, totalPembayaran);
-        stmt.setString(6, amil);
-        stmt.setString(7, tanggal);
-        stmt.setString(8, waktu);
+        stmt.setString(2, alamatText);
+        stmt.setInt(3, jumlahAnggota);
+        stmt.setString(4, jenisZakat);
+        stmt.setString(5, jenisPembayaran);
+        stmt.setDouble(6, totalPembayaran);
+        stmt.setString(7, amil);
+        stmt.setString(8, tanggal);
+        stmt.setString(9, waktu);
 
         int rowsAffected = stmt.executeUpdate();
         

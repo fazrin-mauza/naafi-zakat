@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WilayahService {
     
@@ -21,8 +23,6 @@ public class WilayahService {
             while (rs.next()) {
                 provinsiList.add(rs.getString("name"));
             }
-
-           
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,10 +114,10 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
     String kabupaten,
     String kecamatan,
     String desa) {
-
+    double harga_kg = harga / sha;
     Connection conn = DBConnection.getConnection();
-    String insertSQL = "INSERT INTO lembaga (nama, makanan_pokok, sha, harga, cakupan, provinsi, kabupaten, kecamatan, desa) " +
-                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String insertSQL = "INSERT INTO lembaga (nama, makanan_pokok, sha, harga, cakupan, provinsi, kabupaten, kecamatan, desa, harga_kg) " +
+                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
         stmt.setString(1, nama);
@@ -129,7 +129,8 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
         stmt.setString(7, kabupaten);
         stmt.setString(8, kecamatan);
         stmt.setString(9, desa);
-
+        stmt.setDouble(10, harga_kg);
+        
         int rowsInserted = stmt.executeUpdate();
         return rowsInserted > 0;
     } catch (SQLException e) {
@@ -138,5 +139,51 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
     }
 }
 
+    public static Map<String, String> getWilayah() {
+        Map<String, String> wilayahData = new HashMap<>();
+        Connection conn = DBConnection.getConnection();
+        String sql = "SELECT nama, cakupan, provinsi, kabupaten, kecamatan, desa FROM lembaga WHERE nama = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+           Map<String, String> data = helper.Function.getSessionAndMasjid();
+           ps.setString(1, data.get("nama_masjid"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    wilayahData.put("nama", rs.getString("nama"));
+                    wilayahData.put("cakupan", rs.getString("cakupan"));
+                    wilayahData.put("provinsi", rs.getString("provinsi"));
+                    wilayahData.put("kabupaten", rs.getString("kabupaten"));
+                    wilayahData.put("kecamatan", rs.getString("kecamatan"));
+                    wilayahData.put("desa", rs.getString("desa"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Gagal mengambil data wilayah: " + e.getMessage());
+        }
+        return wilayahData;
+    }
      
+  public static Map<String, String> getMakananPokok() {
+    Map<String, String> makananData = new HashMap<>();
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT makanan_pokok, sha, harga, harga_kg FROM lembaga WHERE nama = ?";
+    
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        Map<String, String> data = helper.Function.getSessionAndMasjid();
+        ps.setString(1, data.get("nama_masjid"));
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                makananData.put("makanan_pokok", rs.getString("makanan_pokok"));
+                makananData.put("sha", rs.getString("sha"));
+                makananData.put("harga", rs.getString("harga"));
+                makananData.put("harga_kg", rs.getString("harga_kg"));
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Gagal mengambil data makanan pokok: " + e.getMessage());
+    }
+    
+    return makananData;
+}
+
 }
