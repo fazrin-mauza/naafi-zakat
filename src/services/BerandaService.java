@@ -59,7 +59,7 @@ public class BerandaService {
     }
     
  
-    public String getHargaEmas() {
+    public static String getHargaEmas() {
     String sql = "SELECT harga_emas_85gram FROM config WHERE id = 1";
     Connection conn2 = DBConnection.getConnection();
 
