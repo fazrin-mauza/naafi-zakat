@@ -10,7 +10,7 @@ public class MustahiqCreateService {
 
     public String mustahiqCreate(String nama, String golongan, String jenis_kelamin, int umur, String alamat, int rt, int rw, String nomorhandphone) {
         // Validasi input
-        if (nama.isEmpty() || golongan.isEmpty() ||  jenis_kelamin.isEmpty() || alamat.isEmpty() || nomorhandphone.isEmpty()) {
+        if (nama.isEmpty() || golongan.isEmpty() || golongan.equals("--Pilih--") || jenis_kelamin.equals("--Pilih--") ||  jenis_kelamin.isEmpty() || alamat.isEmpty()) {
             return "Semua field wajib diisi!";
         }
 
@@ -51,9 +51,9 @@ public class MustahiqCreateService {
     }
     
     
-     public String mustahiqUpdate(String nama, String golongan, int umur, String alamat, int rt, int rw, String handphone, String namaLama) {
+     public String mustahiqUpdate(String nama, String golongan, String jenis_kelamin, int umur, String alamat, int rt, int rw, String handphone, String namaLama) {
         // Validasi input
-        if (nama.isEmpty() || golongan.isEmpty() || alamat.isEmpty() || handphone.isEmpty()) {
+        if (nama.isEmpty() || golongan.isEmpty() || golongan.equals("--Pilih--") || jenis_kelamin.equals("--Pilih--") || alamat.isEmpty() || handphone.isEmpty()) {
             return "Semua field wajib diisi!";
         }
 
@@ -62,13 +62,13 @@ public class MustahiqCreateService {
         alamat = alamat.toUpperCase();
 
 
-        boolean success = updateMustahiq(nama, golongan, umur, alamat, rt, rw, handphone, namaLama);
+        boolean success = updateMustahiq(nama, golongan, jenis_kelamin, umur, alamat, rt, rw, handphone, namaLama);
         return success ? "success" : "Gagal mengupdate data mustahiq. Silakan coba lagi.";
     }
 
-    private boolean updateMustahiq(String nama, String golongan, int umur, String alamat,int rt, int rw, String handphone, String namaLama) {
+    private boolean updateMustahiq(String nama, String golongan ,String jenis_kelamin, int umur, String alamat,int rt, int rw, String handphone, String namaLama) {
         Connection conn = DBConnection.getConnection();
-       String sql = "UPDATE mustahiq SET nama=?, golongan=?, umur=?, alamat=?, rt=?, rw=?, handphone=? WHERE nama=?";
+       String sql = "UPDATE mustahiq SET nama=?, golongan=?, umur=?, alamat=?, rt=?, rw=?, handphone=?, jenis_kelamin=? WHERE nama=?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, nama);
                 stmt.setString(2, golongan);
@@ -77,7 +77,8 @@ public class MustahiqCreateService {
                 stmt.setInt(5, rt);
                 stmt.setInt(6, rw);
                 stmt.setString(7, handphone);
-                stmt.setString(8, namaLama);
+                stmt.setString(8, jenis_kelamin);
+                stmt.setString(9, namaLama);
 
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;

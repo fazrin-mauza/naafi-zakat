@@ -12,6 +12,7 @@ public class Register extends javax.swing.JFrame {
     public Register() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
     // Ambil daftar nama masjid dari database
     List<String> masjidList = AuthService.getNamaMasjidList();

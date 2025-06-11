@@ -3,6 +3,8 @@ package views;
 import forms.PengaturanForm;
 import auth.Login;
 import db.DBConnection;
+import forms.MaalForm;
+import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import java.util.Map;
 import javax.swing.*;
@@ -21,12 +23,36 @@ public class BerandaView extends javax.swing.JFrame {
     public BerandaView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
         Map<String, String> config = Function.getSessionAndMasjid();
         user.setText(config.get("session"));
         nama_masjid.setText(config.get("nama_masjid"));
       
         makanan_pokokLabel.setText("Jumlah Total "+makanan.get("makanan_pokok"));
+        jumlah_muzakkibayar.setText(String.valueOf(services.BerandaService.getTotalMuzakki()));
+        jumlah_mustahiq.setText(String.valueOf(services.BerandaService.getTotalMustahiq()));
         loadBeranda();
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
     }
     private void loadBeranda() {
         // selalu ambil data terbaru
@@ -60,6 +86,9 @@ public class BerandaView extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jumlah_mustahiq = new javax.swing.JTextField();
+        maal = new javax.swing.JButton();
         konversi = new javax.swing.JButton();
         nama_masjid = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -86,7 +115,7 @@ public class BerandaView extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -245,14 +274,40 @@ public class BerandaView extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 80, 170, 440);
 
-        konversi.setText("jButton2");
+        jLabel24.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
+        jLabel24.setText("Jumlah Tersalurkan");
+        jPanel1.add(jLabel24);
+        jLabel24.setBounds(230, 270, 190, 30);
+        jPanel1.add(jumlah_mustahiq);
+        jumlah_mustahiq.setBounds(430, 270, 160, 30);
+
+        maal.setBackground(new java.awt.Color(0, 51, 153));
+        maal.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        maal.setForeground(new java.awt.Color(255, 255, 255));
+        maal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Kalkulator_24.png"))); // NOI18N
+        maal.setText("Kalkulator Zakat Maal");
+        maal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        maal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(maal);
+        maal.setBounds(340, 430, 180, 40);
+
+        konversi.setBackground(new java.awt.Color(0, 51, 153));
+        konversi.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        konversi.setForeground(new java.awt.Color(255, 255, 255));
+        konversi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Convert_24.png"))); // NOI18N
+        konversi.setText("Konversi");
+        konversi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         konversi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 konversiActionPerformed(evt);
             }
         });
         jPanel1.add(konversi);
-        konversi.setBounds(220, 440, 80, 30);
+        konversi.setBounds(220, 430, 110, 40);
 
         nama_masjid.setFont(new java.awt.Font("Sitka Display", 1, 37)); // NOI18N
         nama_masjid.setForeground(new java.awt.Color(51, 51, 255));
@@ -282,7 +337,7 @@ public class BerandaView extends javax.swing.JFrame {
         jPanel1.add(jLabel20);
         jLabel20.setBounds(110, 80, 50, 60);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/About_Fix2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tentang_Aplikasi.png"))); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 80, 170, 430);
 
@@ -294,16 +349,16 @@ public class BerandaView extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel22.setText("Total Uang Tunai Rp");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(230, 190, 150, 30);
+        jLabel22.setBounds(230, 190, 130, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(660, 420, 40, 40);
+        jLabel2.setBounds(660, 400, 40, 40);
 
         jLabel23.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         jLabel23.setText("Hi, ");
         jPanel1.add(jLabel23);
-        jLabel23.setBounds(620, 460, 30, 30);
+        jLabel23.setBounds(620, 440, 30, 30);
 
         user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,7 +366,13 @@ public class BerandaView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(user);
-        user.setBounds(641, 460, 80, 30);
+        user.setBounds(640, 440, 80, 30);
+
+        jumlah_muzakkibayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jumlah_muzakkibayarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jumlah_muzakkibayar);
         jumlah_muzakkibayar.setBounds(430, 230, 160, 30);
         jPanel1.add(total_uangtunai);
@@ -439,7 +500,7 @@ public class BerandaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -480,44 +541,65 @@ public class BerandaView extends javax.swing.JFrame {
 
     private void konversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiActionPerformed
                                        
-   double hargaPerKg = Double.parseDouble(makanan.get("harga_kg"));
+    Connection conn = DBConnection.getConnection();                       
+    double hargaPerKg = Double.parseDouble(makanan.get("harga_kg")); // Harga patokan 1kg
 
+    // Input nominal uang tunai dari user
     String input = JOptionPane.showInputDialog(this, "Masukkan nominal uang tunai yang ingin dikonversi:");
-
+    
     if (input != null && !input.isEmpty()) {
         try {
             double uangTunai = Double.parseDouble(input);
             double beras = uangTunai / hargaPerKg;
 
+            // Konfirmasi
             int konfirmasi = JOptionPane.showConfirmDialog(
                 this, 
-                "Uang tunai: Rp" + uangTunai + "\nAkan dikonversi menjadi: " + String.format("%.2f", beras) + " kg " + makanan.get("makanan_pokok") + ".\nLanjutkan?",
+                "Uang tunai: Rp" + uangTunai + "\nAkan dikonversi menjadi: " + String.format("%.2f", beras) + " kg "+makanan.get("makanan_pokok")+".\nLanjutkan?",
                 "Konfirmasi Konversi",
                 JOptionPane.YES_NO_OPTION
             );
 
-            if (konfirmasi == JOptionPane.YES_OPTION) {
-                BerandaService service = new BerandaService();
-                boolean sukses = service.konversiTunaiKeMakananPokok(uangTunai, hargaPerKg, 1);
+                if (konfirmasi == JOptionPane.YES_OPTION) {
+         String sql = "UPDATE total SET beras = beras + ?, tunai = tunai - ? WHERE id = ?";
+         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+             stmt.setDouble(1, beras);         // nilai yang ingin ditambahkan ke beras
+             stmt.setDouble(2, uangTunai);     // nilai yang ingin dikurangi dari tunai
+             stmt.setInt(3, 1);                // ID yang ingin diperbarui (ganti sesuai kebutuhan)
 
-                if (sukses) {
-                    JOptionPane.showMessageDialog(this, "Konversi berhasil dan data berhasil diperbarui.");
-                    loadBeranda();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Data tidak ditemukan atau gagal diperbarui.");
-                }
-            }
+             int rowsAffected = stmt.executeUpdate();
+             if (rowsAffected > 0) {
+                 JOptionPane.showMessageDialog(this, "Konversi berhasil dan data berhasil diperbarui.");
+                 loadBeranda();
+             } else {
+                 JOptionPane.showMessageDialog(this, "Data tidak ditemukan atau gagal diperbarui.");
+             }
+         } catch (SQLException e) {
+             JOptionPane.showMessageDialog(this, "Kesalahan SQL: " + e.getMessage());
+         }
+     }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Input tidak valid. Harap masukkan angka.");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Kesalahan SQL: " + e.getMessage());
         }
     } else {
         JOptionPane.showMessageDialog(this, "Input dibatalkan atau kosong.");
     }
 
     }//GEN-LAST:event_konversiActionPerformed
+
+    private void maalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maalActionPerformed
+        MaalForm rgf = new MaalForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose(); 
+    }//GEN-LAST:event_maalActionPerformed
+
+    private void jumlah_muzakkibayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlah_muzakkibayarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jumlah_muzakkibayarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,6 +657,7 @@ public class BerandaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -588,8 +671,10 @@ public class BerandaView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField jumlah_beras;
+    private javax.swing.JTextField jumlah_mustahiq;
     private javax.swing.JTextField jumlah_muzakkibayar;
     private javax.swing.JButton konversi;
+    private javax.swing.JButton maal;
     private javax.swing.JLabel makanan_pokokLabel;
     private javax.swing.JLabel nama_masjid;
     private javax.swing.JTextField total_uangtunai;

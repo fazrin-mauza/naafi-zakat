@@ -9,9 +9,10 @@ import views.BerandaView;
 import views.LaporanView;
 import auth.Login;
 import helper.Function;
+import javax.swing.JPanel;
 import views.MustahiqView;
 import views.MuzakkiView;
-import views.PembayaranView;
+
 
 
 
@@ -23,6 +24,28 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     public MustahiqCreateForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
     
     }
     public void setFormData(String namaData, String golonganData, String genderData, int umurData, String alamatData, String hpData) {
@@ -49,14 +72,6 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel9 = new javax.swing.JPanel();
-        gender = new javax.swing.JLabel();
-        genderBox = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -78,9 +93,16 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        gender = new javax.swing.JLabel();
+        genderBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         kategori = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
@@ -95,6 +117,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         rwSpin = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 153));
@@ -107,54 +130,13 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        gender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        gender.setText("Jenis Kelamin");
-        jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 20));
-
-        genderBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Laki-laki", "Perempuan" }));
-        jPanel9.add(genderBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 170, 30));
-
-        jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel2.setText("Golongan");
-        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 100, 30));
-        jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
-
-        jButton2.setBackground(new java.awt.Color(0, 255, 0));
-        jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jButton2.setText("Simpan");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
-
-        jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel7.setText("Nomor Handphone");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 150, 30));
-
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jButton1.setText("Batal");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 90, 30));
-
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 440));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -227,7 +209,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel15.setText("Pembayaran");
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 100, 20));
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 170, 40));
 
@@ -243,7 +225,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel16.setText("Muzakki");
-        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
+        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 80, 20));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Muzakki_FIXX.png"))); // NOI18N
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 30, 30));
@@ -288,11 +270,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 40));
 
-        jPanel9.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
-
-        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel1.setText("Form Data Mustahiq");
-        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, 25));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
         jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -301,10 +279,54 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
                 jLabel22MouseClicked(evt);
             }
         });
-        jPanel9.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Form_Mustahiq.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
+
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        gender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        gender.setText("Jenis Kelamin");
+        jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, 20));
+
+        genderBox.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        genderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Laki-laki", "Perempuan" }));
+        jPanel9.add(genderBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 170, 30));
+
+        jLabel2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel2.setText("Golongan");
+        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 100, 30));
+
+        jButton2.setBackground(new java.awt.Color(0, 255, 0));
+        jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton2.setText("Simpan");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
+
+        jLabel7.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel7.setText("Nomor Handphone");
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 150, 30));
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton1.setText("Batal");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 90, 30));
+
+        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel1.setText("Form Data Mustahiq");
+        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, 25));
 
         jLabel24.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         jLabel24.setText("Alamat");
@@ -357,6 +379,10 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
+        jLabel6.setText("jLabel2");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 580, 500));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -366,14 +392,14 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     String namaInput = nama.getText();
-    String golonganInput = (String) kategori.getSelectedItem();
+    String golonganInput = (String) kategori.getSelectedItem();String golonganOutput = golonganInput.split("\\s*\\(")[0];
     String genderInput = (String) genderBox.getSelectedItem();
     int umurInput = (int) umur.getValue();
     String alamatInput = alamatMustahiq.getText();
     int rtInput = (int) rtSpin.getValue();
     int rwInput = (int) rwSpin.getValue();
     String handphoneInput = handphone.getText();
- 
+    if (handphoneInput.isEmpty()) { handphoneInput = "-"; }
     String confirm1;
     if (isEditMode) {
       confirm1 = "Apakah ingin menyimpan perubahan?";
@@ -393,21 +419,22 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
             if (isEditMode) {
                 // UPDATE
                 MustahiqCreateService service = new MustahiqCreateService();
-                result = service.mustahiqUpdate(namaInput, golonganInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput, namaLama);
+                result = service.mustahiqUpdate(namaInput, golonganOutput, genderInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput, namaLama);
             } else {
                 // INSERT
                 MustahiqCreateService service = new MustahiqCreateService();
-                result = service.mustahiqCreate(namaInput, golonganInput, genderInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput);
+                result = service.mustahiqCreate(namaInput, golonganOutput, genderInput, umurInput, alamatInput, rtInput, rwInput, handphoneInput);
             }
                 if (result.equals("success")) {
                     JOptionPane.showMessageDialog(this, "Data mustahiq berhasil disimpan.");
+         // Kembali ke form utama
+            new MustahiqView().setVisible(true);
+            this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, result);
                 }
 
-            // Kembali ke form utama
-            new MustahiqView().setVisible(true);
-            this.dispose();
+    
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -417,6 +444,18 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Gagal menyimpan perubahan!");
     }
     }//GEN-LAST:event_jButton2ActionPerformed
+    int x = 170;
+    private void handphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handphoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_handphoneActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+  
+    }//GEN-LAST:event_formWindowOpened
+
+    private void namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int pilihan = JOptionPane.showConfirmDialog(
@@ -432,7 +471,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
             new Login().setVisible(true); // Tampilkan form login
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-    int x = 170;
+
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         if (x == 170) {
             jPanel2.setSize(170, 500);
@@ -475,7 +514,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -533,18 +572,6 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
             x = 170;
         }
     }//GEN-LAST:event_jLabel22MouseClicked
-
-    private void handphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_handphoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_handphoneActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-  
-    }//GEN-LAST:event_formWindowOpened
-
-    private void namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaActionPerformed
 
     /**
      * @param args the command line arguments

@@ -13,11 +13,12 @@
 			<style backcolor="#E6DAC3"/>
 		</conditionalStyle>
 	</style>
+	<parameter name="judul" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT id,
 	nama_keluarga,
 	jumlah_anggota,
-	jenis_zakat,
+	alamat,
 	jenis_pembayaran,
 	total_pembayaran,
 	amil,
@@ -35,9 +36,9 @@ FROM pembayaran]]>
 		<property name="com.jaspersoft.studio.field.label" value="jumlah_anggota"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
 	</field>
-	<field name="jenis_zakat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="jenis_zakat"/>
-		<property name="com.jaspersoft.studio.field.label" value="jenis_zakat"/>
+	<field name="alamat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="alamat"/>
+		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pembayaran"/>
 	</field>
 	<field name="jenis_pembayaran" class="java.lang.String">
@@ -99,7 +100,7 @@ FROM pembayaran]]>
 						<textElement textAlignment="Center">
 							<font fontName="Rockwell" size="12"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{jenis_zakat}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 					</textField>
 					<textField>
 						<reportElement x="324" y="0" width="100" height="18" uuid="00231d32-5f5e-4ac6-b326-ece03c2d07f2">
@@ -150,8 +151,8 @@ FROM pembayaran]]>
 			</band>
 		</groupHeader>
 	</group>
-	<group name="jenis_zakat">
-		<groupExpression><![CDATA[$F{jenis_zakat}]]></groupExpression>
+	<group name="alamat">
+		<groupExpression><![CDATA[$F{alamat}]]></groupExpression>
 	</group>
 	<group name="jenis_pembayaran">
 		<groupExpression><![CDATA[$F{jenis_pembayaran}]]></groupExpression>
@@ -177,13 +178,13 @@ FROM pembayaran]]>
 				<reportElement x="0" y="-10" width="164" height="126" uuid="1c003177-754c-448f-8ce1-16868856f545"/>
 				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
 			</image>
-			<staticText>
-				<reportElement style="Title" x="230" y="-12" width="315" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
+			<textField>
+				<reportElement style="Title" x="164" y="0" width="496" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="30"/>
+					<font size="20"/>
 				</textElement>
-				<text><![CDATA[Laporan Pembayaran]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{judul}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement style="SubTitle" x="329" y="50" width="110" height="20" uuid="f6a78448-8260-4445-a9e0-e3fb53b080d9"/>
 				<textElement>
@@ -241,7 +242,7 @@ FROM pembayaran]]>
 					<font fontName="Rockwell" size="12"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[JUMLAH]]></text>
+				<text><![CDATA[JUMLAH ANGGOTA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="220" y="0" width="83" height="19" uuid="2855e44a-e8c3-46d1-ab3e-45eed5649ed0"/>
@@ -255,7 +256,7 @@ FROM pembayaran]]>
 					<font fontName="Rockwell" size="12"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[JENIS ZAKAT]]></text>
+				<text><![CDATA[ALAMAT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="303" y="0" width="100" height="19" uuid="013119a2-fcd9-4962-b5c9-c06b5b6d1832"/>
@@ -283,7 +284,7 @@ FROM pembayaran]]>
 					<font fontName="Rockwell" size="12"/>
 					<paragraph lineSpacingSize="2.0"/>
 				</textElement>
-				<text><![CDATA[TOTAL]]></text>
+				<text><![CDATA[TOTAL (Kg/Rp)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="489" y="0" width="86" height="19" uuid="2f2582ba-de4d-402e-9087-75f7a697d310"/>

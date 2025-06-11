@@ -43,7 +43,14 @@ public class Function {
         NumberFormat format = NumberFormat.getCurrencyInstance(localeID);
         return format.format(amount);
     }
-
+   public static String formatRupiah2(double amount) {
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat format = NumberFormat.getCurrencyInstance(localeID);
+    format.setMaximumFractionDigits(0); // Hapus dua nol di belakang koma
+    return format.format(amount);
+}
+    
+    
     // Fungsi angka ke teks terbilang
     public static String terbilang(long n) {
         String[] angka = {

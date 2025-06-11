@@ -7,6 +7,23 @@ import java.sql.SQLException;
 public class DBConnection {
 
     private static final String URL = "jdbc:sqlite:zakat.db";
+    /**private static final String URL;
+static {
+    String dbPath;
+    try {
+        String jarDir = new java.io.File(DBConnection.class
+            .getProtectionDomain()
+            .getCodeSource()
+            .getLocation()
+            .toURI())
+            .getParent();
+        dbPath = jarDir + java.io.File.separator + "zakat.db";
+    } catch (Exception e) {
+        dbPath = "zakat.db"; // fallback jika gagal
+    }
+    URL = "jdbc:sqlite:" + dbPath;
+}
+*/
     private static Connection conn = null;
     private static int koneksiCounter = 0;
 

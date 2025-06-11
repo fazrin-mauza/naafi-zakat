@@ -114,4 +114,33 @@ public class BerandaService {
             return rowsAffected > 0;
         }
     }
+        
+public static int getTotalMuzakki() {
+    String sql = "SELECT SUM(jumlah_anggota) AS total_muzakki FROM pembayaran";
+    try (Connection conn = DBConnection.getConnection(); 
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+            return rs.getInt("total_muzakki");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Atau tampilkan pesan error ke UI
+    }
+    return 0;
+}
+
+public static int getTotalMustahiq() {
+    String sql = "SELECT COUNT(*) AS total_data FROM penyaluran";
+    try (Connection conn = DBConnection.getConnection(); 
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+            return rs.getInt("total_data");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Atau tampilkan pesan error ke UI
+    }
+    return 0;
+}
+
 }

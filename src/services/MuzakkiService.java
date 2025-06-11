@@ -41,19 +41,20 @@ public class MuzakkiService {
     try {
         conn.setAutoCommit(false); // Mulai transaksi
 
+               // Hapus keluarga berdasarkan nama
+        String sqlKeluarga = "DELETE FROM keluarga WHERE nama = ?";
+        try (PreparedStatement ps2 = conn.prepareStatement(sqlKeluarga)) {
+            ps2.setString(1, namaKeluarga);
+            ps2.executeUpdate();
+        }
         // Hapus semua anggota keluarga berdasarkan nama keluarga
         String sqlAnggota = "DELETE FROM anggota_keluarga WHERE keluarga = ?";
         try (PreparedStatement ps1 = conn.prepareStatement(sqlAnggota)) {
-            ps1.setString(1, namaKeluarga.toUpperCase());
+            ps1.setString(1, namaKeluarga);
             ps1.executeUpdate();
         }
 
-        // Hapus keluarga berdasarkan nama
-        String sqlKeluarga = "DELETE FROM keluarga WHERE nama = ?";
-        try (PreparedStatement ps2 = conn.prepareStatement(sqlKeluarga)) {
-            ps2.setString(1, namaKeluarga.toUpperCase());
-            ps2.executeUpdate();
-        }
+ 
 
         conn.commit(); // Sukses semua, simpan perubahan
         return true;

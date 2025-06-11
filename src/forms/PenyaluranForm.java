@@ -4,15 +4,15 @@ package forms;
 import services.PenyaluranService;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import auth.Login;
 import java.util.List;
+import javax.swing.JPanel;
 import services.AuthService;
 import views.BerandaView;
 import views.LaporanView;
-import auth.Login;
 import views.MustahiqView;
 import views.MuzakkiView;
-import views.PembayaranView;
+
 
  
 public class PenyaluranForm extends javax.swing.JFrame {
@@ -20,11 +20,35 @@ public class PenyaluranForm extends javax.swing.JFrame {
     public PenyaluranForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        
         loadDataMustahiq();
         String sessionUser = AuthService.getSession(); // Ambil session
          boxAmil.removeAllItems(); // Hapus semua item lama
          boxAmil.addItem(sessionUser); // Tambahkan hanya satu item
          boxAmil.setSelectedItem(sessionUser); // Pilih secara default
+         
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
     }
     
 private void resetForm() {
@@ -86,6 +110,7 @@ private void loadDataMustahiq() {
         jPanel8 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        salurkanAll = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -159,7 +184,7 @@ private void loadDataMustahiq() {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -295,6 +320,19 @@ private void loadDataMustahiq() {
 
         jPanel9.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
+        salurkanAll.setBackground(new java.awt.Color(0, 51, 153));
+        salurkanAll.setFont(new java.awt.Font("Rockwell", 0, 10)); // NOI18N
+        salurkanAll.setForeground(new java.awt.Color(255, 255, 255));
+        salurkanAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Convert_24.png"))); // NOI18N
+        salurkanAll.setText("Salurkan All");
+        salurkanAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salurkanAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salurkanAllActionPerformed(evt);
+            }
+        });
+        jPanel9.add(salurkanAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, 40));
+
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel1.setText("Form Penyaluran Zakat");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 170, 25));
@@ -308,7 +346,7 @@ private void loadDataMustahiq() {
         });
         jPanel9.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tentang_Penyaluran.png"))); // NOI18N
         jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel23.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -345,7 +383,7 @@ private void loadDataMustahiq() {
         jPanel9.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
 
         boxGolongan.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)", " " }));
+        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil", "Muallaf", "Riqab", "Gharim", "Fii Sabilillah", "Ibnu Sabil" }));
         boxGolongan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxGolonganActionPerformed(evt);
@@ -368,123 +406,7 @@ private void loadDataMustahiq() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int pilihan = JOptionPane.showConfirmDialog(
-            this,
-            "Anda yakin ingin logout?",
-            "Konfirmasi Logout",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-        );
-
-        if (pilihan == JOptionPane.YES_OPTION) {
-            this.dispose(); // Tutup form sekarang
-            new Login().setVisible(true); // Tampilkan form login
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
     int x = 170;
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        if (x == 170) {
-            jPanel2.setSize(170, 500);
-
-            Thread th = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 170; i >= 0; i--) {
-                            Thread.sleep(1);
-                            jPanel2.setSize(i, 500);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-            };
-
-            th.start();
-            x = 0;
-        }
-    }//GEN-LAST:event_jLabel9MouseClicked
-
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        LaporanView rgf = new LaporanView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel7MouseClicked
-
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranForm lrn = new PenyaluranForm();
-        lrn.setVisible(true);
-        lrn.pack();
-        lrn.setLocationRelativeTo(null);
-        lrn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel6MouseClicked
-
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel5MouseClicked
-
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        MuzakkiView rgf = new MuzakkiView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel4MouseClicked
-
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        MustahiqView rgf = new MustahiqView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel3MouseClicked
-
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        BerandaView rgf = new BerandaView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        if (x == 0) {
-            jPanel2.show();
-            jPanel2.setSize(x, 500);
-
-            Thread th = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i <= x; i++) {
-                            Thread.sleep(1);
-                            jPanel2.setSize(i, 500);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-            };
-
-            th.start();
-            x = 170;
-        }
-    }//GEN-LAST:event_jLabel22MouseClicked
-
     private void jumlahDisalurkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahDisalurkanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jumlahDisalurkanActionPerformed
@@ -515,7 +437,7 @@ private void loadDataMustahiq() {
     } else {
         JOptionPane.showMessageDialog(this, result);
     }
-    
+    loadDataMustahiq();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void namaMustahiqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMustahiqActionPerformed
@@ -524,8 +446,9 @@ private void loadDataMustahiq() {
     if (selectedNama == null || selectedNama.equals("--Pilih Mustahiq--")) {
         spinerUmur.setValue(0);
         textAlamat.setText("");
-        boxGolongan.setSelectedIndex(0);
+        boxGolongan.setSelectedItem("--Pilih--");
         boxGender.setSelectedIndex(0);
+                
         return;
     }
 
@@ -535,16 +458,202 @@ private void loadDataMustahiq() {
         boxGender.setSelectedItem(data.getGender());
         spinerUmur.setValue(data.getUmur());
         textAlamat.setText(data.getAlamat());
+        String golonganInput =  data.getGolongan();
+        String golonganOutput;
+            if (golonganInput.equals("Fii Sabilillah")) {
+                golonganOutput = "Fii_Sabilillah";
+            } else if (golonganInput.equals("Ibnu Sabil")) {
+                golonganOutput = "Ibnu_Sabil";
+            } else {
+                golonganOutput = golonganInput;
+            }
+        double nilai = PenyaluranService.cekPembagian(golonganOutput);
+        jumlahDisalurkan.setText(String.format("%.2f", nilai));
+
     }
     }//GEN-LAST:event_namaMustahiqActionPerformed
 
     private void boxGolonganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxGolonganActionPerformed
-        // TODO add your handling code here:
+    String golonganInput = (String) boxGolongan.getSelectedItem(); // Ambil pilihan dari combo box
+    String golonganOutput;
+  if (golonganInput == null || golonganInput.isEmpty() || golonganInput.equals("--Pilih--")) {
+// tidak ada aksi 
+  } else {
+    if (golonganInput.equals("Fii Sabilillah")) {
+        golonganOutput = "Fii_Sabilillah";
+    } else if (golonganInput.equals("Ibnu Sabil")) {
+        golonganOutput = "Ibnu_Sabil";
+    } else {
+        // Jika ada keterangan dalam kurung, buang (contoh: "Amil (Petugas zakat)" → "Amil")
+        golonganOutput = golonganInput.split("\\s*\\(")[0].trim();
+    }
+
+    double nilai = PenyaluranService.cekPembagian(golonganOutput);
+    jumlahDisalurkan.setText(String.format("%.2f", nilai)); // Tampilkan hasil ke field
+  }
     }//GEN-LAST:event_boxGolonganActionPerformed
 
     private void boxGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxGenderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boxGenderActionPerformed
+
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        if (x == 0) {
+            jPanel2.show();
+            jPanel2.setSize(x, 500);
+
+            Thread th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 0; i <= x; i++) {
+                            Thread.sleep(1);
+                            jPanel2.setSize(i, 500);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };
+
+            th.start();
+            x = 170;
+        }
+    }//GEN-LAST:event_jLabel22MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        BerandaView rgf = new BerandaView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        MustahiqView rgf = new MustahiqView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        MuzakkiView rgf = new MuzakkiView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        PembayaranForm rgf = new PembayaranForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        PenyaluranForm lrn = new PenyaluranForm();
+        lrn.setVisible(true);
+        lrn.pack();
+        lrn.setLocationRelativeTo(null);
+        lrn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        LaporanView rgf = new LaporanView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        if (x == 170) {
+            jPanel2.setSize(170, 500);
+
+            Thread th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 170; i >= 0; i--) {
+                            Thread.sleep(1);
+                            jPanel2.setSize(i, 500);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };
+
+            th.start();
+            x = 0;
+        }
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int pilihan = JOptionPane.showConfirmDialog(
+            this,
+            "Anda yakin ingin logout?",
+            "Konfirmasi Logout",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (pilihan == JOptionPane.YES_OPTION) {
+            this.dispose(); // Tutup form sekarang
+            new Login().setVisible(true); // Tampilkan form login
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void salurkanAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salurkanAllActionPerformed
+                                        
+    String amil = "Nama Amil"; // Ganti dengan data amil dari UI, misalnya: comboBoxAmil.getSelectedItem().toString();
+
+    PenyaluranService service = new PenyaluranService();
+    PenyaluranService.PenyaluranMetadata meta = service.buatPenyaluranSemuaDetail(amil);
+
+    // Jika tidak ada data mustahiq yang perlu disalurkan
+    if (meta.totalMustahiq == 0) {
+        JOptionPane.showMessageDialog(this, "Tidak ada mustahiq baru yang perlu disalurkan.");
+        return;
+    }
+
+    // Siapkan pesan konfirmasi
+    StringBuilder message = new StringBuilder();
+    message.append("Apakah Anda yakin ingin menyalurkan bantuan kepada semua mustahiq berikut?\n\n");
+    message.append("📌 Jumlah Mustahiq: ").append(meta.totalMustahiq).append("\n");
+    message.append("📦 Total Makanan Pokok yang Dibutuhkan: ").append(meta.totalDisalurkan).append(" Kg\n");
+    message.append("📊 Sisa Makanan Pokok Saat Ini: ").append(meta.sisaBeras + meta.totalDisalurkan).append(" Kg\n");
+    message.append("📉 Sisa Makanan Pokok Setelah Penyaluran: ").append(meta.sisaBeras).append(" Kg\n\n");
+
+    message.append("Rincian Golongan:\n");
+    for (String gol : meta.jumlahPerGolongan.keySet()) {
+        message.append("- ").append(gol)
+               .append(": ").append(meta.jumlahPerGolongan.get(gol))
+               .append(" orang x ").append(meta.pembagianPerGolongan.get(gol)).append(" Kg\n");
+    }
+
+    message.append("\nLanjutkan penyaluran?");
+
+    // Tampilkan konfirmasi
+    int confirm = JOptionPane.showConfirmDialog(this, message.toString(), 
+                    "Konfirmasi Penyaluran Massal", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        String hasil = service.buatPenyaluranSemua(amil);
+        JOptionPane.showMessageDialog(this, hasil);
+    }
+
+ loadDataMustahiq();
+    }//GEN-LAST:event_salurkanAllActionPerformed
 
     /**
      * @param args the command line arguments
@@ -627,6 +736,7 @@ private void loadDataMustahiq() {
     private javax.swing.JTextField jumlahDisalurkan;
     private javax.swing.JComboBox<String> namaMustahiq;
     private javax.swing.JButton reset;
+    private javax.swing.JButton salurkanAll;
     private javax.swing.JSpinner spinerUmur;
     private javax.swing.JTextArea textAlamat;
     // End of variables declaration//GEN-END:variables

@@ -14,27 +14,30 @@ import java.util.Map;
 
 public class PembayaranService {
     
-   public static List<String> getDaftarKepalaKeluarga() {
-        List<String> daftarNama = new ArrayList<>();
-        try {
-            Connection con = DBConnection.getConnection();
-            String sql = "SELECT nama FROM keluarga";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+public static List<String> getDaftarKepalaKeluarga() {
+    List<String> daftarNama = new ArrayList<>();
+    try {
+        Connection con = DBConnection.getConnection();
+        String sql = """
+            SELECT nama FROM keluarga 
+            WHERE nama NOT IN (SELECT nama_keluarga FROM pembayaran)
+            """;
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                daftarNama.add(rs.getString("nama"));
-            }
-
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            // Sebaiknya lempar exception ke atas, tapi jika ingin cepat:
-            System.err.println("Gagal memuat data keluarga: " + e.getMessage());
+        while (rs.next()) {
+            daftarNama.add(rs.getString("nama"));
         }
 
-        return daftarNama;
+        rs.close();
+        ps.close();
+    } catch (Exception e) {
+        System.err.println("Gagal memuat data keluarga: " + e.getMessage());
     }
+
+    return daftarNama;
+}
+
    public Map<String, Object> getDetailKeluarga(String namaKepala) {
         Map<String, Object> result = new HashMap<>();
 

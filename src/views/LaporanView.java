@@ -4,6 +4,7 @@ package views;
 //import static db.DBConnection.getConnection;
 
 import auth.Login;
+import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import helper.Function;
 import java.util.HashMap;
@@ -20,12 +21,35 @@ import java.sql.SQLException;
 import java.util.Map;
 import services.LaporanService;
 import helper.Function;
+import javax.swing.JPanel;
 
 
 public class LaporanView extends javax.swing.JFrame {
     public LaporanView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
         }
 public static Connection getConnection() throws SQLException {
     String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
@@ -109,7 +133,7 @@ public static Connection getConnection() throws SQLException {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -272,7 +296,7 @@ public static Connection getConnection() throws SQLException {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 140, 40));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FIXX.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tentang_Laporan.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
@@ -365,7 +389,7 @@ JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -425,20 +449,23 @@ JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void laporanpembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporanpembayaranActionPerformed
-
-        try {
+ try {
             // Pastikan koneksi SQLite menggunakan java.sql.Connection
             Connection conn = (Connection) getConnection(); // menggunakan java.sql.Connection
 
             String reportPath = "src/reports/LaporanPembayaran.jasper";
-            HashMap<String, Object> parameters = new HashMap<>();
-            JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
+        HashMap<String, Object> parameters = new HashMap<>();
+parameters.put("judul", "Laporan Pembayaran " + config.get("nama_masjid"));
+JasperPrint print = JasperFillManager.fillReport(reportPath, parameters, conn);
+
             JasperViewer viewer = new JasperViewer(print, false);
             viewer.setVisible(true);
             
       } catch (Exception e) {
         e.printStackTrace();
     }
+ 
+      
     }//GEN-LAST:event_laporanpembayaranActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -17,6 +17,7 @@ public class Config extends javax.swing.JFrame {
     public Config(String masjidText) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.masjid = masjidText;
          lembagaBox.removeAllItems();
          lembagaBox.addItem(masjid); 

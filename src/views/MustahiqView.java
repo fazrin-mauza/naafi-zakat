@@ -3,6 +3,7 @@ package views;
 import auth.Login;
 import forms.PenyaluranForm;
 import forms.MustahiqCreateForm;
+import forms.PembayaranForm;
 import java.io.File;
 import java.io.FileInputStream;
 import services.MustahiqService; 
@@ -11,25 +12,46 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
 
 
 
 public class MustahiqView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MuzakkiView
-     */
-    
     public MustahiqView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         loadDataMustahiq();
+        
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
+
+
+
     }  
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
@@ -101,7 +123,9 @@ public class MustahiqView extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
 
+        btn_import.setBackground(new java.awt.Color(0, 51, 204));
         btn_import.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_import.setForeground(new java.awt.Color(255, 255, 255));
         btn_import.setText("Import");
         btn_import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_import.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +135,9 @@ public class MustahiqView extends javax.swing.JFrame {
         });
         getContentPane().add(btn_import, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, 30));
 
+        btn_tambah.setBackground(new java.awt.Color(0, 51, 204));
         btn_tambah.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_tambah.setForeground(new java.awt.Color(255, 255, 255));
         btn_tambah.setText("Tambah");
         btn_tambah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +147,9 @@ public class MustahiqView extends javax.swing.JFrame {
         });
         getContentPane().add(btn_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, 30));
 
+        btn_edit.setBackground(new java.awt.Color(0, 51, 204));
         btn_edit.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_edit.setForeground(new java.awt.Color(255, 255, 255));
         btn_edit.setText("Edit");
         btn_edit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
@@ -129,9 +157,11 @@ public class MustahiqView extends javax.swing.JFrame {
                 btn_editActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, 30));
+        getContentPane().add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 70, 30));
 
+        btn_hapus.setBackground(new java.awt.Color(0, 51, 204));
         btn_hapus.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_hapus.setForeground(new java.awt.Color(255, 255, 255));
         btn_hapus.setText("Hapus");
         btn_hapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +197,7 @@ public class MustahiqView extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -312,7 +342,7 @@ public class MustahiqView extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tentang_Mustahiq.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
@@ -418,7 +448,7 @@ public class MustahiqView extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-       PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -585,7 +615,8 @@ public class MustahiqView extends javax.swing.JFrame {
                     }
 
                     String nama = row.getCell(1).toString().trim();
-                    String golongan = row.getCell(2).toString().trim();
+                    String golonganInput = row.getCell(2).toString().trim();
+                    String golongan = golonganInput.split("\\s*\\(")[0];
                     String jenis_kelamin =  row.getCell(3).toString().trim();
                     String umur = row.getCell(4).toString().trim();
                     String alamat = row.getCell(5).toString().trim();

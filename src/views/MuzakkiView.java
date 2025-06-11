@@ -2,6 +2,7 @@ package views;
 
 import auth.Login;
 import forms.MuzakkiCreateForm;
+import forms.PembayaranForm;
 import forms.PenyaluranForm;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
 
 public class MuzakkiView extends javax.swing.JFrame {
@@ -23,7 +25,31 @@ public class MuzakkiView extends javax.swing.JFrame {
     public MuzakkiView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
         loadDataKeluarga(); // << tampilkan data Muzakki
+        
+        
     }  
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:sqlite:zakat.db"; // Path ke file SQLite
@@ -107,7 +133,9 @@ private void loadDataKeluarga() {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 520, 390));
 
+        btn_import.setBackground(new java.awt.Color(0, 51, 204));
         btn_import.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        btn_import.setForeground(new java.awt.Color(255, 255, 255));
         btn_import.setText("Import");
         btn_import.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_import.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +145,9 @@ private void loadDataKeluarga() {
         });
         getContentPane().add(btn_import, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, 30));
 
+        jButton1.setBackground(new java.awt.Color(0, 51, 204));
         jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Tambah");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +157,9 @@ private void loadDataKeluarga() {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, -1, 30));
 
+        jButton2.setBackground(new java.awt.Color(0, 51, 204));
         jButton2.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Edit");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +169,9 @@ private void loadDataKeluarga() {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, -1, 30));
 
+        jButton3.setBackground(new java.awt.Color(0, 51, 204));
         jButton3.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Hapus");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +207,7 @@ private void loadDataKeluarga() {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -318,7 +352,7 @@ private void loadDataKeluarga() {
         });
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Sidebar_Laporan_fixx.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tentang_Muzakki.png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
@@ -424,7 +458,7 @@ private void loadDataKeluarga() {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
+        PembayaranForm rgf = new PembayaranForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
@@ -592,7 +626,8 @@ try {
                         continue; // skip baris yang tidak lengkap
                     }
 
-                    String nama = row.getCell(1).toString().trim();
+                    String namaKeluarga = row.getCell(1).toString().trim();
+                    String nama = namaKeluarga.toUpperCase();
                     int jumlah = (int) row.getCell(2).getNumericCellValue();
                     String alamat = row.getCell(3).toString().trim();
                     String handphone = row.getCell(4).toString().trim();

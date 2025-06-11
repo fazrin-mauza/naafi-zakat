@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import services.PengaturanService;
 import services.WilayahService;
 import views.BerandaView;
 import views.LaporanView;
 import views.MustahiqView;
 import views.MuzakkiView;
-import views.PembayaranView;
+
 
 
 public class PengaturanForm extends javax.swing.JFrame {
@@ -19,11 +20,34 @@ public class PengaturanForm extends javax.swing.JFrame {
     public PengaturanForm() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         
         makananPokokLabel.setText("Harga 1 Kg "+makanan.get("makanan_pokok")+" Rp  ");
         harga_Field.setText(makanan.get("harga_kg"));
+        hargaSha_Field.setText(makanan.get("harga"));
         emas_Field.setText((String)services.BerandaService.getHargaEmas());
         loadPembagianKeForm();
+        
+        addHoverEffect(jPanel3); // Mustahiq
+        addHoverEffect(jPanel4); // Muzakki
+        addHoverEffect(jPanel5); // Pembayaran
+        addHoverEffect(jPanel6); // Penyaluran
+        addHoverEffect(jPanel7); // Laporan
+        addHoverEffect(jPanel8); // Beranda
+    }
+    private void addHoverEffect(JPanel panel) {
+        java.awt.Color warnaAsli = panel.getBackground();
+        java.awt.Color warnaHover = new java.awt.Color(0, 153, 255); // Biru muda
+
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaHover);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel.setBackground(warnaAsli);
+            }
+        });
     }
 
 private void loadPembagianKeForm() {
@@ -71,6 +95,31 @@ private void simpanPembagian() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        hargaSha = new javax.swing.JLabel();
+        hargaSha_Field = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         makananPokokLabel = new javax.swing.JLabel();
@@ -94,160 +143,21 @@ private void simpanPembagian() {
         FiiField = new javax.swing.JTextField();
         IbnuField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel3.setText("Pengaturan");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, -1, -1));
+        hargaSha.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        hargaSha.setText("Harga 1 Sha'  (Rp) ");
+        getContentPane().add(hargaSha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel5.setText("Harga 85 Gram Emas Saat Ini  Rp");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
-
-        makananPokokLabel.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        makananPokokLabel.setText("Harga 1 Kg <makanan_pokok> Rp ");
-        getContentPane().add(makananPokokLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
-
-        jLabel21.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel21.setText("Miskin");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
-
-        jLabel22.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel22.setText("Fakir");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
-
-        jLabel23.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel23.setText("Pembagian Zakat (Kg)");
-        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 160, -1));
-
-        jLabel24.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel24.setText("Muallaf");
-        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
-
-        jLabel25.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel25.setText("Amil");
-        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
-
-        jLabel26.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel26.setText("Riqab");
-        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, -1, -1));
-
-        jLabel27.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel27.setText("Gharim");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, -1, -1));
-
-        jLabel28.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel28.setText("Fii Sabilillah");
-        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, -1));
-
-        jLabel29.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel29.setText("Ibnu Sabil");
-        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, -1, -1));
-
-        harga_Field.addActionListener(new java.awt.event.ActionListener() {
+        hargaSha_Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                harga_FieldActionPerformed(evt);
+                hargaSha_FieldActionPerformed(evt);
             }
         });
-        getContentPane().add(harga_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 160, 30));
-
-        emas_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emas_FieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(emas_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 72, 160, 30));
-
-        MiskinField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MiskinFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(MiskinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 160, 30));
-
-        FakirField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FakirFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(FakirField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 160, 30));
-
-        AmilField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AmilFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(AmilField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 160, 30));
-
-        MuallafField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MuallafFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(MuallafField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 160, 30));
-
-        RiqabField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RiqabFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(RiqabField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 160, 30));
-
-        GharimField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GharimFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(GharimField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 160, 30));
-
-        FiiField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FiiFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(FiiField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, 160, 30));
-
-        IbnuField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IbnuFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(IbnuField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 160, 30));
-
-        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jButton1.setText("Simpan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, -1, 30));
+        getContentPane().add(hargaSha_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 160, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
         jPanel2.setPreferredSize(new java.awt.Dimension(170, 440));
@@ -255,7 +165,7 @@ private void simpanPembagian() {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 204));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Keluar_FIXX.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exit_25.png"))); // NOI18N
         jButton6.setText("Keluar");
         jButton6.setBorder(null);
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -266,14 +176,14 @@ private void simpanPembagian() {
         });
         jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 170, 41));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                jLabel8MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 50, 40));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 50, 40));
 
         jPanel7.setBackground(new java.awt.Color(0, 153, 204));
         jPanel7.setForeground(new java.awt.Color(0, 153, 204));
@@ -323,12 +233,12 @@ private void simpanPembagian() {
         });
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Payment_FIXX.png"))); // NOI18N
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Payment_FIXX.png"))); // NOI18N
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
 
-        jLabel9.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel9.setText("Pembayaran");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
+        jLabel14.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel14.setText("Pembayaran");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 90, 20));
 
         jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 170, 40));
 
@@ -342,12 +252,12 @@ private void simpanPembagian() {
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel14.setText("Muzakki");
-        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
+        jLabel15.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel15.setText("Muzakki");
+        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Muzakki_FIXX.png"))); // NOI18N
-        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 30, 30));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Muzakki_FIXX.png"))); // NOI18N
+        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 30, 30));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 170, 40));
 
@@ -361,12 +271,12 @@ private void simpanPembagian() {
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Mustahiq_Fix.png"))); // NOI18N
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Mustahiq_Fix.png"))); // NOI18N
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
 
-        jLabel17.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel17.setText("Mustahiq");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
+        jLabel18.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel18.setText("Mustahiq");
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 70, 20));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 170, 40));
 
@@ -380,28 +290,155 @@ private void simpanPembagian() {
         });
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Beranda_Icon.png"))); // NOI18N
-        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Beranda_Icon.png"))); // NOI18N
+        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 40));
 
-        jLabel19.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jLabel19.setText("Beranda");
-        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, 20));
+        jLabel20.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel20.setText("Beranda");
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, 20));
 
         jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
-        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Menubar.png"))); // NOI18N
+        jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel20MouseClicked(evt);
+                jLabel30MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
+        getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 50, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FIXX.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Pengaturan.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, -1));
+
+        jLabel3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel3.setText("Pengaturan");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel5.setText("Harga 85 Gram Emas Saat Ini  (Rp)");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
+
+        makananPokokLabel.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        makananPokokLabel.setText("Harga 1 Kg makanan_pokok (Rp) ");
+        getContentPane().add(makananPokokLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel21.setText("Miskin");
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, -1));
+
+        jLabel22.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel22.setText("Fakir");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        jLabel23.setText("Pembagian Zakat (Kg)");
+        getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 160, -1));
+
+        jLabel24.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel24.setText("Muallaf");
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel25.setText("Amil");
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel26.setText("Riqab");
+        getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel27.setText("Gharim");
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel28.setText("Fii Sabilillah");
+        getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jLabel29.setText("Ibnu Sabil");
+        getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, -1, -1));
+
+        harga_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                harga_FieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(harga_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 160, 30));
+
+        emas_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emas_FieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(emas_Field, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 72, 160, 30));
+
+        MiskinField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MiskinFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(MiskinField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 160, 30));
+
+        FakirField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FakirFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(FakirField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 160, 30));
+
+        AmilField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmilFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AmilField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 160, 30));
+
+        MuallafField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MuallafFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(MuallafField, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 160, 30));
+
+        RiqabField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RiqabFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(RiqabField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 160, 30));
+
+        GharimField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GharimFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(GharimField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 160, 30));
+
+        FiiField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FiiFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(FiiField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, 160, 30));
+
+        IbnuField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IbnuFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(IbnuField, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 160, 30));
+
+        jButton1.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
+        jButton1.setText("Simpan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, -1, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -409,124 +446,8 @@ private void simpanPembagian() {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        int pilihan = JOptionPane.showConfirmDialog(
-            this,
-            "Anda yakin ingin logout?",
-            "Konfirmasi Logout",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-        );
-
-        if (pilihan == JOptionPane.YES_OPTION) {
-            this.dispose(); // Tutup form sekarang
-            new Login().setVisible(true); // Tampilkan form login
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
     
     int x = 170;
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        if (x == 170) {
-            jPanel2.setSize(170, 500);
-
-            Thread th = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 170; i >= 0; i--) {
-                            Thread.sleep(1);
-                            jPanel2.setSize(i, 500);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-            };
-
-            th.start();
-            x = 0;
-        }
-    }//GEN-LAST:event_jLabel7MouseClicked
-
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
-        LaporanView rgf = new LaporanView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel7MouseClicked
-
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        PenyaluranForm lrn = new PenyaluranForm();
-        lrn.setVisible(true);
-        lrn.pack();
-        lrn.setLocationRelativeTo(null);
-        lrn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel6MouseClicked
-
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        PembayaranView rgf = new PembayaranView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel5MouseClicked
-
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        MuzakkiView rgf = new MuzakkiView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel4MouseClicked
-
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        MustahiqView rgf = new MustahiqView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel3MouseClicked
-
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        BerandaView rgf = new BerandaView();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-        if (x == 0) {
-            jPanel2.show();
-            jPanel2.setSize(x, 500);
-
-            Thread th = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        for (int i = 0; i <= x; i++) {
-                            Thread.sleep(1);
-                            jPanel2.setSize(i, 500);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-            };
-
-            th.start();
-            x = 170;
-        }
-    }//GEN-LAST:event_jLabel20MouseClicked
-
     private void emas_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emas_FieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emas_FieldActionPerformed
@@ -566,9 +487,11 @@ private void simpanPembagian() {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        String emas = emas_Field.getText();
        String harga_kg = harga_Field.getText();
+       String harga_sha = hargaSha_Field.getText();
        PengaturanService service = new PengaturanService();
        String result = service.emasUpdate(emas);
        boolean hargaUpdate = PengaturanService.updateHargakMakananPokok(harga_kg);
+       boolean hargaUpdate2 = PengaturanService.updateHargakSha(harga_sha);
        simpanPembagian();
            if (result.equals("success") && hargaUpdate == true) {
                 JOptionPane.showMessageDialog(this, "Data pengaturan berhasil diupdate.");
@@ -581,6 +504,126 @@ private void simpanPembagian() {
     private void harga_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_harga_FieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_harga_FieldActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        int pilihan = JOptionPane.showConfirmDialog(
+            this,
+            "Anda yakin ingin logout?",
+            "Konfirmasi Logout",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (pilihan == JOptionPane.YES_OPTION) {
+            this.dispose(); // Tutup form sekarang
+            new Login().setVisible(true); // Tampilkan form login
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        if (x == 170) {
+            jPanel2.setSize(170, 500);
+
+            Thread th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 170; i >= 0; i--) {
+                            Thread.sleep(1);
+                            jPanel2.setSize(i, 500);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };
+
+            th.start();
+            x = 0;
+        }
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        LaporanView rgf = new LaporanView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        PenyaluranForm lrn = new PenyaluranForm();
+        lrn.setVisible(true);
+        lrn.pack();
+        lrn.setLocationRelativeTo(null);
+        lrn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        PembayaranForm rgf = new PembayaranForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        MuzakkiView rgf = new MuzakkiView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        MustahiqView rgf = new MustahiqView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        BerandaView rgf = new BerandaView();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jLabel30MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel30MouseClicked
+        if (x == 0) {
+            jPanel2.show();
+            jPanel2.setSize(x, 500);
+
+            Thread th = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i = 0; i <= x; i++) {
+                            Thread.sleep(1);
+                            jPanel2.setSize(i, 500);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };
+
+            th.start();
+            x = 170;
+        }
+    }//GEN-LAST:event_jLabel30MouseClicked
+
+    private void hargaSha_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaSha_FieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hargaSha_FieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -630,10 +673,11 @@ private void simpanPembagian() {
     private javax.swing.JTextField MuallafField;
     private javax.swing.JTextField RiqabField;
     private javax.swing.JTextField emas_Field;
+    private javax.swing.JLabel hargaSha;
+    private javax.swing.JTextField hargaSha_Field;
     private javax.swing.JTextField harga_Field;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -656,8 +700,9 @@ private void simpanPembagian() {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;

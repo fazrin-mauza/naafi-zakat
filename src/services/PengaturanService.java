@@ -69,6 +69,21 @@ public class PengaturanService {
             return false;
         }
     }
+         public static boolean updateHargakSha(String harga) {
+        Connection conn = DBConnection.getConnection();
+        double harga_kg = Double.parseDouble(harga);
+        String updateHarga = "UPDATE lembaga SET harga=? WHERE nama=?";
+        try (PreparedStatement stmt = conn.prepareStatement(updateHarga)) {
+           Map<String, String> data = helper.Function.getSessionAndMasjid();
+                stmt.setDouble(1, harga_kg);    
+                stmt.setString(2, data.get("nama_masjid"));
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error update harga Sha: " + e.getMessage());
+            return false;
+        }
+    }
    
     
 public static Map<String, Double> getPembagian() {
