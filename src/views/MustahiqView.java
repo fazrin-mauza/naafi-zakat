@@ -526,11 +526,12 @@ public class MustahiqView extends javax.swing.JFrame {
             while(rs.next()) {
                 String nama = rs.getString("nama");
                 String golongan = rs.getString("golongan");
+                String jenis_kelamin = rs.getString("jenis_kelamin");
                 int umur = rs.getInt("umur");
                 String alamat = rs.getString("alamat");
                 String handphone = rs.getString("handphone");
 
-                Object[] rowData = {nama, golongan, umur, alamat, handphone };
+                Object[] rowData = {nama, golongan, jenis_kelamin, umur, alamat, handphone };
                 model.addRow(rowData);
             }
 
