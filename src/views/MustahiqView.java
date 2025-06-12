@@ -508,6 +508,7 @@ public class MustahiqView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel20MouseClicked
 
     private void field_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_cariKeyTyped
+        btn_edit.setVisible(false);
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
