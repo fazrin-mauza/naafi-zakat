@@ -146,7 +146,7 @@ FROM penyaluran]]>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
 							<font fontName="Rockwell" size="12" isBold="false"/>
 						</textElement>
-						<textFieldExpression><![CDATA[$F{jumlah_disalurkan}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{jumlah_disalurkan} + " bungkus"]]></textFieldExpression>
 					</textField>
 					<textField>
 						<reportElement style="SubTitle" x="630" y="-1" width="71" height="20" forecolor="#030303" uuid="7ba212d5-d697-444d-a334-65088ed2736e"/>

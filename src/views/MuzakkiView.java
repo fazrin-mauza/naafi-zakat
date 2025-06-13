@@ -554,7 +554,7 @@ private void loadDataKeluarga() {
     private void field_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_cariKeyTyped
         jButton2.setVisible(false);
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
+model.setRowCount(0);
 
 String cari = field_cari.getText();
 

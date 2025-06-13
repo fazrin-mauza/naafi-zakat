@@ -157,19 +157,21 @@ private boolean createPenyaluran(String nama_mustahiq, String golongan, int umur
 }
 
     
-public static double cekPembagian(String golongan) {
-    String sql = "SELECT " + golongan + " FROM pembagian WHERE id = 1";
+public static int cekPembagian(String golongan) {
+    String sql = "SELECT bungkus FROM pembagian WHERE golongan = ?"; 
     try (Connection conn = DBConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-        
-        if (rs.next()) {
-            return rs.getDouble(golongan);
-        }
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, golongan);  // Gunakan parameter untuk keamanan
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("bungkus");
+            }
+        }   
     } catch (SQLException e) {
         e.printStackTrace();
     }
-    return 0.0; // Jika error atau data tidak ditemukan
+    
+    return 0; // Jika tidak ditemukan atau error
 }
 
 ////// kode masal
@@ -183,6 +185,7 @@ public static class PenyaluranMetadata {
 }
 
 public PenyaluranMetadata buatPenyaluranSemuaDetail(String amil) {
+    Map<String, String> makanan = WilayahService.getMakananPokok();
     PenyaluranMetadata meta = new PenyaluranMetadata();
 
     try (Connection conn = FlexibleDBConnection.getNewConnection()) {
@@ -205,7 +208,7 @@ public PenyaluranMetadata buatPenyaluranSemuaDetail(String amil) {
 
         // Hitung total beras berdasarkan pembagian
         for (String gol : meta.jumlahPerGolongan.keySet()) {
-            double perOrang = ambilPembagianLangsung(conn, gol);
+            double perOrang = ambilPembagianLangsung(conn, gol) * Double.parseDouble(makanan.get("bungkus"));
             meta.pembagianPerGolongan.put(gol, perOrang);
             meta.totalDisalurkan += perOrang * meta.jumlahPerGolongan.get(gol);
         }
@@ -291,23 +294,14 @@ public String buatPenyaluranSemua(String amil) {
 private double ambilPembagianLangsung(Connection conn, String golongan) {
     double hasil = 0;
 
-    // Validasi nama kolom agar aman dari SQL injection
-    List<String> kolomValid = List.of(
-        "Fakir", "Miskin", "Amil", "Muallaf", "Riqab",
-        "Gharim", "Fii_Sabilillah", "Ibnu_Sabil"
-    );
+    String sql = "SELECT bungkus FROM pembagian WHERE golongan = ? LIMIT 1";
 
-    if (!kolomValid.contains(golongan)) {
-        System.err.println("Golongan tidak valid: " + golongan);
-        return 0;
-    }
-
-    String sql = "SELECT \"" + golongan + "\" FROM pembagian WHERE nama = 'main' LIMIT 1";
-
-    try (PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-        if (rs.next()) {
-            hasil = rs.getDouble(1); // ambil kolom pertama dari hasil query dinamis
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, golongan);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                hasil = rs.getDouble("bungkus");
+            }
         }
     } catch (SQLException e) {
         System.err.println("Gagal ambil jumlah pembagian untuk golongan: " + golongan);

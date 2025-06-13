@@ -44,7 +44,7 @@ public class PembayaranForm extends javax.swing.JFrame {
         amil.removeAllItems(); // Hapus semua item lama
         amil.addItem(sessionUser); // Tambahkan hanya satu item
         amil.setSelectedItem(sessionUser); // Pilih secara default
-         
+        pembayaranBox.setSelectedItem("--Pilih--");
         addHoverEffect(jPanel3); // Mustahiq
         addHoverEffect(jPanel4); // Muzakki
         addHoverEffect(jPanel5); // Pembayaran
@@ -580,7 +580,7 @@ String selectedPembayaran = (String) pembayaranBox.getSelectedItem();
     } else {
         jComboBox4.addItem("--Pilih Jumlah--");
     }       
-     jComboBox4.setSelectedIndex(0);
+     
     }//GEN-LAST:event_pembayaranBoxActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed

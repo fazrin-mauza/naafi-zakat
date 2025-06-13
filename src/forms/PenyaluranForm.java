@@ -80,6 +80,7 @@ private void loadDataMustahiq() {
 
         jPanel9 = new javax.swing.JPanel();
         boxGender = new javax.swing.JComboBox<>();
+        salurkanAll = new javax.swing.JButton();
         gender = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -110,7 +111,6 @@ private void loadDataMustahiq() {
         jPanel8 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        salurkanAll = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -141,6 +141,19 @@ private void loadDataMustahiq() {
         });
         jPanel9.add(boxGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 170, 30));
 
+        salurkanAll.setBackground(new java.awt.Color(0, 51, 153));
+        salurkanAll.setFont(new java.awt.Font("Rockwell", 0, 10)); // NOI18N
+        salurkanAll.setForeground(new java.awt.Color(255, 255, 255));
+        salurkanAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Convert_24.png"))); // NOI18N
+        salurkanAll.setText("Salurkan All");
+        salurkanAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salurkanAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salurkanAllActionPerformed(evt);
+            }
+        });
+        jPanel9.add(salurkanAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, -1, 40));
+
         gender.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
         gender.setText("Jenis Kelamin");
         jPanel9.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 100, 30));
@@ -154,8 +167,8 @@ private void loadDataMustahiq() {
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 54, 30));
 
         jLabel4.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        jLabel4.setText("Total");
-        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 54, 29));
+        jLabel4.setText("Total (bungkus)");
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 90, 29));
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 37, -1));
 
         boxAmil.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
@@ -320,19 +333,6 @@ private void loadDataMustahiq() {
 
         jPanel9.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
-        salurkanAll.setBackground(new java.awt.Color(0, 51, 153));
-        salurkanAll.setFont(new java.awt.Font("Rockwell", 0, 10)); // NOI18N
-        salurkanAll.setForeground(new java.awt.Color(255, 255, 255));
-        salurkanAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Convert_24.png"))); // NOI18N
-        salurkanAll.setText("Salurkan All");
-        salurkanAll.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        salurkanAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salurkanAllActionPerformed(evt);
-            }
-        });
-        jPanel9.add(salurkanAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, 40));
-
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         jLabel1.setText("Form Penyaluran Zakat");
         jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 170, 25));
@@ -383,7 +383,7 @@ private void loadDataMustahiq() {
         jPanel9.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 90, 30));
 
         boxGolongan.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil", "Muallaf", "Riqab", "Gharim", "Fii Sabilillah", "Ibnu Sabil" }));
+        boxGolongan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil", "Muallaf", "Riqab", "Gharim", "Fii Sabilillah", "Ibnu Sabil", "Janda", "Duda", "Yatim/Piatu", "Ketua Amil", "Lainnya" }));
         boxGolongan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxGolonganActionPerformed(evt);
@@ -460,15 +460,9 @@ private void loadDataMustahiq() {
         textAlamat.setText(data.getAlamat());
         String golonganInput =  data.getGolongan();
         String golonganOutput;
-            if (golonganInput.equals("Fii Sabilillah")) {
-                golonganOutput = "Fii_Sabilillah";
-            } else if (golonganInput.equals("Ibnu Sabil")) {
-                golonganOutput = "Ibnu_Sabil";
-            } else {
-                golonganOutput = golonganInput;
-            }
-        double nilai = PenyaluranService.cekPembagian(golonganOutput);
-        jumlahDisalurkan.setText(String.format("%.2f", nilai));
+         golonganOutput = golonganInput;
+        int nilai = PenyaluranService.cekPembagian(golonganOutput);
+        jumlahDisalurkan.setText(String.valueOf(nilai));
 
     }
     }//GEN-LAST:event_namaMustahiqActionPerformed
@@ -479,17 +473,12 @@ private void loadDataMustahiq() {
   if (golonganInput == null || golonganInput.isEmpty() || golonganInput.equals("--Pilih--")) {
 // tidak ada aksi 
   } else {
-    if (golonganInput.equals("Fii Sabilillah")) {
-        golonganOutput = "Fii_Sabilillah";
-    } else if (golonganInput.equals("Ibnu Sabil")) {
-        golonganOutput = "Ibnu_Sabil";
-    } else {
         // Jika ada keterangan dalam kurung, buang (contoh: "Amil (Petugas zakat)" → "Amil")
         golonganOutput = golonganInput.split("\\s*\\(")[0].trim();
-    }
+    
 
-    double nilai = PenyaluranService.cekPembagian(golonganOutput);
-    jumlahDisalurkan.setText(String.format("%.2f", nilai)); // Tampilkan hasil ke field
+    int nilai = PenyaluranService.cekPembagian(golonganOutput);
+    jumlahDisalurkan.setText(String.valueOf(nilai)); // Tampilkan hasil ke field
   }
     }//GEN-LAST:event_boxGolonganActionPerformed
 

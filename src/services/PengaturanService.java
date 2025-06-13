@@ -69,7 +69,7 @@ public class PengaturanService {
             return false;
         }
     }
-         public static boolean updateHargakSha(String harga) {
+   public static boolean updateHargakSha(String harga) {
         Connection conn = DBConnection.getConnection();
         double harga_kg = Double.parseDouble(harga);
         String updateHarga = "UPDATE lembaga SET harga=? WHERE nama=?";
@@ -85,58 +85,164 @@ public class PengaturanService {
         }
     }
    
+   public static boolean updateBungkus(String besaran) {
+        Connection conn = DBConnection.getConnection();
+        double besaranDouble = Double.parseDouble(besaran);
+        String updateHarga = "UPDATE lembaga SET bungkus=? WHERE nama=?";
+        try (PreparedStatement stmt = conn.prepareStatement(updateHarga)) {
+           Map<String, String> data = helper.Function.getSessionAndMasjid();
+                stmt.setDouble(1, besaranDouble);    
+                stmt.setString(2, data.get("nama_masjid"));
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.err.println("Error update harga Sha: " + e.getMessage());
+            return false;
+        }
+    }
     
-public static Map<String, Double> getPembagian() {
-    Map<String, Double> pembagianData = new HashMap<>();
+public static int getPembagian(String golongan) {
+    int bungkus = 0;
     Connection conn = DBConnection.getConnection();
-    String sql = "SELECT Fakir, Miskin, Amil, Muallaf, Riqab, Gharim, Fii_Sabilillah, Ibnu_Sabil FROM pembagian WHERE id = ?";
-    
+    String sql = "SELECT bungkus FROM pembagian WHERE golongan = ?";
+
     try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        //Map<String, String> data = helper.Function.getSessionAndMasjid();
-        ps.setInt(1, 1);
+        ps.setString(1, golongan);
 
         try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
-                pembagianData.put("Fakir", rs.getDouble("Fakir"));
-                pembagianData.put("Miskin", rs.getDouble("Miskin"));
-                pembagianData.put("Amil", rs.getDouble("Amil"));
-                pembagianData.put("Muallaf", rs.getDouble("Muallaf"));
-                pembagianData.put("Riqab", rs.getDouble("Riqab"));
-                pembagianData.put("Gharim", rs.getDouble("Gharim"));
-                pembagianData.put("Fii_Sabilillah", rs.getDouble("Fii_Sabilillah"));
-                pembagianData.put("Ibnu_Sabil", rs.getDouble("Ibnu_Sabil"));
+                bungkus = rs.getInt("bungkus");
             }
         }
     } catch (SQLException e) {
-        System.err.println("Gagal mengambil data pembagian: " + e.getMessage());
+        System.err.println("Gagal mengambil bungkus untuk golongan " + golongan + ": " + e.getMessage());
+    }
+
+    return bungkus;
+}
+public static Map<String, Integer> getPembagianSemua() {
+    Map<String, Integer> pembagianData = new HashMap<>();
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT golongan, bungkus FROM pembagian";
+
+    try (PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        
+        while (rs.next()) {
+            String golongan = rs.getString("golongan");
+            int bungkus = rs.getInt("bungkus");
+            pembagianData.put(golongan, bungkus);
+        }
+    } catch (SQLException e) {
+        System.err.println("Gagal mengambil seluruh data pembagian: " + e.getMessage());
     }
 
     return pembagianData;
 }
 
-public static boolean updatePembagian(Map<String, Double> dataPembagian) {
+public static boolean updatePembagian(Map<String, Integer> dataPembagian) {
     Connection conn = DBConnection.getConnection();
-    String sql = "UPDATE pembagian SET Fakir = ?, Miskin = ?, Amil = ?, Muallaf = ?, Riqab = ?, Gharim = ?, Fii_Sabilillah = ?, Ibnu_Sabil = ? WHERE id = ?";
+    String sql = "UPDATE pembagian SET bungkus = ? WHERE golongan = ?";
+    boolean success = true;
 
     try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setDouble(1, dataPembagian.getOrDefault("Fakir", 0.0));
-        ps.setDouble(2, dataPembagian.getOrDefault("Miskin", 0.0));
-        ps.setDouble(3, dataPembagian.getOrDefault("Amil", 0.0));
-        ps.setDouble(4, dataPembagian.getOrDefault("Muallaf", 0.0));
-        ps.setDouble(5, dataPembagian.getOrDefault("Riqab", 0.0));
-        ps.setDouble(6, dataPembagian.getOrDefault("Gharim", 0.0));
-        ps.setDouble(7, dataPembagian.getOrDefault("Fii_Sabilillah", 0.0));
-        ps.setDouble(8, dataPembagian.getOrDefault("Ibnu_Sabil", 0.0));
-        ps.setInt(9, 1); // ID yang diupdate, bisa diganti parameter kalau dinamis
+        for (Map.Entry<String, Integer> entry : dataPembagian.entrySet()) {
+            ps.setInt(1, entry.getValue());
+            ps.setString(2, entry.getKey());
+            ps.addBatch();
+        }
 
-        int affectedRows = ps.executeUpdate();
-        return affectedRows > 0;
+        int[] results = ps.executeBatch();
+        for (int result : results) {
+            if (result == 0) {
+                success = false; // salah satu update gagal (tidak ada baris terpengaruh)
+            }
+        }
     } catch (SQLException e) {
         System.err.println("Gagal mengupdate data pembagian: " + e.getMessage());
+        success = false;
     }
 
-    return false;
+    return success;
 }
 
+public static String estimasiPembagian(Map<String, Double> pembagianPerGolongan, double isiPerBungkus) {
+        StringBuilder keteranganBuilder = new StringBuilder();
 
+        try {
+            // Ambil stok beras dari service
+            BerandaService.BerandaData dataNya = BerandaService.getBerandaData();
+            double stokBeras = dataNya.getBeras();
+            double totalBerasDisalurkan = 0;
+            int totalBungkus = 0;
+
+            // Hitung total beras dan bungkus berdasarkan database mustahiq
+            String sql = "SELECT golongan, COUNT(*) as jumlah FROM mustahiq GROUP BY golongan";
+            try (Connection conn = DBConnection.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+
+                while (rs.next()) {
+                    String gol = rs.getString("golongan");
+                    int jumlahOrang = rs.getInt("jumlah");
+
+                    double bungkusPerOrang = pembagianPerGolongan.getOrDefault(gol, 0.0);
+                    double totalGolongan = jumlahOrang * bungkusPerOrang * isiPerBungkus;
+
+                    totalBerasDisalurkan += totalGolongan;
+                    totalBungkus += (int)(jumlahOrang * bungkusPerOrang);
+                }
+            }
+
+            double sisa = stokBeras - totalBerasDisalurkan;
+
+            // Format keterangan hasil
+            keteranganBuilder.append("📦 Jumlah Makanan Pokok Terkumpul: ")
+                             .append(stokBeras)
+                             .append(" Kg\n");
+
+            keteranganBuilder.append("🎯 Kebutuhan Penyaluran: ")
+                             .append(totalBungkus)
+                             .append(" bungkus (")
+                             .append(String.format("%.2f", totalBerasDisalurkan))
+                             .append(" Kg)\n");
+
+            if (sisa > 0) {
+                keteranganBuilder.append("✅ Masih ada sisa: ")
+                                 .append(String.format("%.2f", sisa))
+                                 .append(" Kg\n")
+                                 .append("💡 Rekomendasi: Anda bisa menambah jumlah bungkus pada golongan tertentu jika diperlukan.");
+            } else if (sisa < 0) {
+                keteranganBuilder.append("❌ Kekurangan: ")
+                                 .append(String.format("%.2f", Math.abs(sisa)))
+                                 .append(" Kg\n")
+                                 .append("⚠️ Rekomendasi: Kurangi jumlah pembagian per golongan atau tambahkan stok beras.");
+            } else {
+                keteranganBuilder.append("✔️ Pas! Stok dan kebutuhan seimbang.");
+            }
+
+        } catch (Exception e) {
+            keteranganBuilder.setLength(0);
+            keteranganBuilder.append("❗ Terjadi kesalahan: ").append(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return keteranganBuilder.toString();
+    }
+
+public static int getJumlahMustahiq(String golongan) {
+    String sql = "SELECT COUNT(*) FROM mustahiq WHERE golongan = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, golongan);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
 }

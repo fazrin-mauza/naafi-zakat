@@ -116,8 +116,8 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
     String desa) {
     double harga_kg = harga / sha;
     Connection conn = DBConnection.getConnection();
-    String insertSQL = "INSERT INTO lembaga (nama, makanan_pokok, sha, harga, cakupan, provinsi, kabupaten, kecamatan, desa, harga_kg) " +
-                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String insertSQL = "INSERT INTO lembaga (nama, makanan_pokok, sha, harga, cakupan, provinsi, kabupaten, kecamatan, desa, harga_kg, bungkus) " +
+                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
         stmt.setString(1, nama);
@@ -130,7 +130,8 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
         stmt.setString(8, kecamatan);
         stmt.setString(9, desa);
         stmt.setDouble(10, harga_kg);
-        
+        stmt.setDouble(10, 3.0);
+          
         int rowsInserted = stmt.executeUpdate();
         return rowsInserted > 0;
     } catch (SQLException e) {
@@ -165,7 +166,7 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
   public static Map<String, String> getMakananPokok() {
     Map<String, String> makananData = new HashMap<>();
     Connection conn = DBConnection.getConnection();
-    String sql = "SELECT makanan_pokok, sha, harga, harga_kg FROM lembaga WHERE nama = ?";
+    String sql = "SELECT makanan_pokok, sha, harga,bungkus, harga_kg FROM lembaga WHERE nama = ?";
     
     try (PreparedStatement ps = conn.prepareStatement(sql)) {
         Map<String, String> data = helper.Function.getSessionAndMasjid();
@@ -177,6 +178,7 @@ public static List<String> getAllKecamatanByKabupatenName(String kabupatenName) 
                 makananData.put("sha", rs.getString("sha"));
                 makananData.put("harga", rs.getString("harga"));
                 makananData.put("harga_kg", rs.getString("harga_kg"));
+                makananData.put("bungkus", rs.getString("bungkus"));
             }
         }
     } catch (SQLException e) {

@@ -597,7 +597,7 @@
               <Font name="Rockwell" size="12" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="9">
+              <StringArray count="14">
                 <StringItem index="0" value="--Pilih--"/>
                 <StringItem index="1" value="Fakir"/>
                 <StringItem index="2" value="Miskin"/>
@@ -605,8 +605,13 @@
                 <StringItem index="4" value="Muallaf (orang yang dilunakkan hatinya)"/>
                 <StringItem index="5" value="Riqab (hamba sahaya/budak)"/>
                 <StringItem index="6" value="Gharim (orang yang berutang)"/>
-                <StringItem index="7" value="Fi Sabilillah (pejuang di jalan Allah)"/>
+                <StringItem index="7" value="Fii Sabilillah (pejuang di jalan Allah)"/>
                 <StringItem index="8" value="Ibnu Sabil (musafir yang kehabisan bekal)"/>
+                <StringItem index="9" value="Janda"/>
+                <StringItem index="10" value="Duda"/>
+                <StringItem index="11" value="Yatim/Piatu"/>
+                <StringItem index="12" value="Ketua Amil"/>
+                <StringItem index="13" value="Lainnya"/>
               </StringArray>
             </Property>
           </Properties>

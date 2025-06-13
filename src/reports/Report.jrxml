@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<title>
+		<band height="463" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<image hAlign="Center">
+				<reportElement x="0" y="0" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
+				<imageExpression><![CDATA["Naafi.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="465" y="10" width="84" height="20" uuid="619f9914-a483-490a-95a5-850548cf34c5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="95" y="40" width="315" height="15" uuid="3ea11242-d02b-465d-b1d5-e4c2163096a9"/>
+				<text><![CDATA[Ds. Karangrejo, Kec. Gayungan, Surabaya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="25" width="315" height="15" uuid="87dbc5b0-b5f6-4c88-b726-29636306ce2f"/>
+				<text><![CDATA[Laporan Zakat Fitrah Periode 1446H / 2025M]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="10" width="50" height="20" uuid="0270fa9b-3d73-440d-8901-a37c37ef53b4"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Printed:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="315" height="25" uuid="3f4c23c0-7de5-423e-9269-ca97ec8f937f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Masjid Baitul Makmur 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="230" width="105" height="18" uuid="93af4a9f-421e-4700-8b9f-c2e329b12181">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[2388 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="177" width="120" height="20" uuid="6a1d5a2e-dabb-4b71-a1bb-b439a1618979">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="197" width="105" height="15" uuid="d1500ec9-b706-41c3-8ff3-181abe0c7640">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[2388 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="150" width="240" height="18" uuid="6024d71d-4803-412a-832c-565277c8acd4">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[TOTAL PENERIMAAN ZAKAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="240" height="15" uuid="dd897f7e-ddd2-4831-9a0f-073b4b3f6892">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Penerimaan Zakat Uang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="100" width="105" height="20" uuid="87ff0000-c976-4cb5-92ff-5b52b16302f7">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="120" width="90" height="15" uuid="04c39381-8753-4fa1-8d6f-951fccf9cd96"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="135" width="240" height="15" uuid="4b75dc2f-b351-4782-8493-821020c69cfa">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Penerimaan Zakat Beras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="150" width="90" height="18" uuid="1219e4cb-65ad-443a-80c0-f6b1638d6618"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[468]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="177" width="240" height="20" uuid="a2b47817-27e0-494d-8c58-dfa404bae8b3">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[B. Pengeluaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="150" width="120" height="18" uuid="4150facd-3b5a-4aff-ac0e-3eacf171a242">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="120" width="120" height="15" uuid="6192ae8a-dd31-409f-89e7-c3d7e498465e">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="197" width="120" height="15" uuid="af6c82f5-19c9-407b-957b-1fc7cbc24469">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="135" width="90" height="15" uuid="16058910-ac0b-42bf-ae7e-7385a446b742"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="230" width="120" height="18" uuid="a1893f93-8074-4364-8a78-44c02a17dd6d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="197" width="240" height="15" uuid="082c4f8e-1e3f-4c53-9df9-5df1eab42cc0">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Penyaluran ke Mustahiq]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="135" width="105" height="15" uuid="0f742b66-3230-4e19-8539-eab82a0456de">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[23 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="197" width="90" height="15" uuid="30793d1d-2fd6-4e86-ab9a-8dd0606447ff"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="177" width="105" height="20" uuid="8b64af96-7b1f-4ea4-8309-e178041f4c81">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="177" width="90" height="20" uuid="d34353f5-09c8-4182-a50f-643844822c30">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mustahiq]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="230" width="240" height="18" uuid="ab473c75-51a7-4f25-a205-104eb348508c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[TOTAL PENYALURAN ZAKAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="100" width="120" height="20" uuid="3faf6b92-2de8-48c1-8deb-682f629c997f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="240" height="20" uuid="72b844f1-6a05-4a63-bfd1-2df7b92657db">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[A. Penerimaan Zakat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="100" width="90" height="20" uuid="104373e9-f4e6-48fd-abbc-31c99cb3cbcb">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Muzakki]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="135" width="120" height="15" uuid="8976631e-caed-4607-8953-9084b0ee64a1">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="120" width="105" height="15" uuid="400f08af-c0bf-4bf5-a50b-6e24d504ca31">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="150" width="105" height="18" uuid="1767b14e-1ae3-4642-b850-ea2edea37d7e">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[23 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="230" width="90" height="18" uuid="4ae0fd12-9ddf-42a2-b955-4b8a2f9f5c74"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[468]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="55" width="315" height="15" uuid="5a7815c8-273e-46c2-8c18-24ee57e7d301"/>
+				<text><![CDATA[Periode Pencatatan Zakat: 17 Maret - 10 Mei 2025]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="278" width="120" height="15" uuid="24d8bc82-929d-4fe3-a7ba-e934f2fe8c42">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="258" width="120" height="20" uuid="afba5183-87fa-4513-b464-db4c2dce0acc">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="278" width="70" height="15" uuid="1bd01485-e105-42f6-9d24-1024d9553ad3"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="293" width="105" height="15" uuid="906e0663-efd7-487a-ba90-2ae9d9099c47">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[23 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="308" width="120" height="18" uuid="52d244fc-a4a2-49dd-90ff-630cfa8792db">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 30.000,00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="308" width="190" height="18" uuid="055694fa-b3c8-4b55-81f0-9d37f5f49591">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font isBold="true"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="293" width="190" height="15" uuid="48c2c63a-c2fc-46c4-8f15-5d3ee5fc80ad">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Pengeluaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="258" width="190" height="20" uuid="1b0cc598-44b4-409c-92f9-348c2f1ad726">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[C. Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="308" width="105" height="18" uuid="a28ea9a2-a6da-49fb-aab5-dab3692af0f5">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[23 Kg]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="293" width="70" height="15" uuid="d28c7b97-0c53-427b-9766-08693d74fe0f"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="293" width="120" height="15" uuid="56da7063-f9e7-4a24-b760-740c129dc85b">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="258" width="105" height="20" uuid="277065ec-5b59-4aa2-8159-8e1882022fd7">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Beras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="278" width="105" height="15" uuid="92208312-c155-4ca8-a0e0-7c92f42cc381">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="308" width="70" height="18" uuid="4a9def6c-854f-4473-95c9-c2b39faca5e7"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="258" width="70" height="20" uuid="d0dbd8c5-6712-4c7e-9f91-f104a3e72d72">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mustahiq]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="278" width="190" height="15" uuid="f4ac0a04-3902-47e9-bd9d-87d6513aa1cc">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Penerimaan Zakat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="258" width="70" height="20" uuid="6c57bbdf-851c-47ca-b5fa-b2b187cf90e1">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Muzakki]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="308" width="70" height="18" uuid="2d087b91-d2f2-457a-bb26-5747b0eb65ae"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[468]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="278" width="70" height="15" uuid="66e0aa1a-2fc3-4abc-8864-746098d7c36d"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="293" width="70" height="15" uuid="76b5a05e-b0b7-40ba-8491-0a5a11542a70"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="212" width="90" height="18" uuid="8b57c3da-1b66-4de1-a9bd-c90fc4f7bcb9"/>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="212" width="105" height="18" uuid="c45d3fdf-533c-49f3-9ec1-8ba21dafb569">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="212" width="120" height="18" uuid="f11a6f5b-d66a-4b5f-a7df-58391d8a13bd">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph lineSpacing="Single" lineSpacingSize="2.0" rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Rp 200.000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="212" width="240" height="18" uuid="f83fc349-a80d-4711-9aed-44aceda4385d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Beli Beras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20"/>
+	</columnHeader>
+	<detail>
+		<band height="87"/>
+	</detail>
+	<lastPageFooter>
+		<band height="177">
+			<staticText>
+				<reportElement positionType="Float" x="-1" y="30" width="261" height="101" uuid="1a0d7088-5af7-4865-8be1-41ec5f51fb36"/>
+				<box>
+					<topPen lineWidth="1.1" lineStyle="Dashed"/>
+					<leftPen lineWidth="1.1" lineStyle="Dashed"/>
+					<bottomPen lineWidth="1.1" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.1" lineStyle="Dashed"/>
+				</box>
+				<text><![CDATA[Jaffar AR Rahman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nama Masjid]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -559,14 +559,14 @@ public class MustahiqView extends javax.swing.JFrame {
     // Ambil data dari tabel
     String namaData = jTable1.getValueAt(selectedRow, 0).toString();
     String golonganData = jTable1.getValueAt(selectedRow, 1).toString();
-    String genderData = jTable1.getValueAt(selectedRow, 2).toString();
+    String jenis_kelaminData = jTable1.getValueAt(selectedRow, 2).toString();
     int umurData = Integer.parseInt(jTable1.getValueAt(selectedRow, 3).toString());
     String alamatData = jTable1.getValueAt(selectedRow, 4).toString();
     String hpData = jTable1.getValueAt(selectedRow, 5).toString();
 
     // Buka form edit dan isi dengan data tersebut
     MustahiqCreateForm formEdit = new MustahiqCreateForm();
-    formEdit.setFormData(namaData, golonganData, genderData, umurData, alamatData, hpData);
+    formEdit.setFormData(namaData, golonganData, jenis_kelaminData, umurData, alamatData, hpData);
     formEdit.setVisible(true);
     formEdit.pack();
     formEdit.setLocationRelativeTo(null);

@@ -333,7 +333,7 @@ public class MustahiqCreateForm extends javax.swing.JFrame {
         jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 90, 30));
 
         kategori.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
-        kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fi Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)" }));
+        kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Fakir", "Miskin", "Amil (petugas zakat)", "Muallaf (orang yang dilunakkan hatinya)", "Riqab (hamba sahaya/budak)", "Gharim (orang yang berutang)", "Fii Sabilillah (pejuang di jalan Allah)", "Ibnu Sabil (musafir yang kehabisan bekal)", "Janda", "Duda", "Yatim/Piatu", "Ketua Amil", "Lainnya" }));
         jPanel9.add(kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 170, 30));
 
         jLabel25.setFont(new java.awt.Font("Rockwell", 0, 12)); // NOI18N
